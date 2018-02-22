@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{4d2168c6-aa3e-42b9-a04f-076c9f70424f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFrameWork">
+      <UniqueIdentifier>{191db96e-5cb1-44db-b5c3-06aff020e43b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameMain">
+      <UniqueIdentifier>{4d4d4e59-9b1f-4939-b57b-5f6464dbd586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFrameWork\Manager">
+      <UniqueIdentifier>{4d7f5513-2cf4-4f7d-bbc4-8a529744dfa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFrameWork\Image">
+      <UniqueIdentifier>{eaa86569-d32d-4a3b-97bc-768dfadcf4d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Day26.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonMacroFunction.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomFunction.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>GameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager2.h">
+      <Filter>GameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode2.h">
+      <Filter>GameFrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame7.h">
+      <Filter>GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Image3.h">
+      <Filter>GameFrameWork\Image</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Day26.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager2.cpp">
+      <Filter>GameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode2.cpp">
+      <Filter>GameFrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame7.cpp">
+      <Filter>GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3.cpp">
+      <Filter>GameFrameWork\Image</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Day26.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Day26.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
