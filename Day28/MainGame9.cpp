@@ -153,7 +153,7 @@ void MainGame9::BallMove()
 			m_ball.angle = PI - m_ball.angle;
 		}
 		// 오른쪽 방향
-		if (m_ball.x - m_ball.radius > WINSIZEX) {
+		if (m_ball.x + m_ball.radius > WINSIZEX) {
 			m_ball.x = WINSIZEX - m_ball.radius;
 			m_ball.angle = PI - m_ball.angle;
 		}

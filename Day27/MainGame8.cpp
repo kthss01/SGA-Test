@@ -134,6 +134,7 @@ void MainGame8::Update()
 
 void MainGame8::Render(HDC hdc)
 {
+	//test
 	HDC memDC = this->GetBackBuffer()->GetMemDC();
 	// 배경 화면 흰색으로 칠해주는 함수
 	PatBlt(memDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
