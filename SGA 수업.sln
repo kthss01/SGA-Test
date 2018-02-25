@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day1-주석", "Day1\Day1.vcxproj", "{9945FC16-73E7-456F-8B9A-3C943A575168}"
 EndProject
@@ -67,7 +67,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day26-두더지 게임, 삼
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day27-시계, 원 충돌, 총알발사", "Day27\Day27.vcxproj", "{11CA0668-92C3-4CF8-ACCF-3BF164D5565C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day28", "Day28\Day28.vcxproj", "{1897E225-882F-4FEC-AA8C-F62FC3D1F322}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day28-에어 하키", "Day28\Day28.vcxproj", "{1897E225-882F-4FEC-AA8C-F62FC3D1F322}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day29", "Day29\Day29.vcxproj", "{91527A5B-F5E8-419A-B99F-6F92A344B968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -341,6 +343,14 @@ Global
 		{1897E225-882F-4FEC-AA8C-F62FC3D1F322}.Release|x64.Build.0 = Release|x64
 		{1897E225-882F-4FEC-AA8C-F62FC3D1F322}.Release|x86.ActiveCfg = Release|Win32
 		{1897E225-882F-4FEC-AA8C-F62FC3D1F322}.Release|x86.Build.0 = Release|Win32
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Debug|x64.ActiveCfg = Debug|x64
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Debug|x64.Build.0 = Debug|x64
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Debug|x86.ActiveCfg = Debug|Win32
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Debug|x86.Build.0 = Debug|Win32
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Release|x64.ActiveCfg = Release|x64
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Release|x64.Build.0 = Release|x64
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Release|x86.ActiveCfg = Release|Win32
+		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
