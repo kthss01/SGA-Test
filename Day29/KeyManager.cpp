@@ -35,7 +35,7 @@ bool KeyManager::GetKeyUp(int key) {
 			return true;
 		}
 	}
-	return true;
+	return false;
 }
 
 bool KeyManager::GetKey(int key) {

@@ -34,6 +34,9 @@ inline void RectangleMake2(HDC hdc, int x, int y, int width, int height) {
 inline RECT RectMakeCenter(int x, int y, int width, int height) {
 	RECT rc = { x - width / 2, y - height / 2,
 	x + width / 2, y + height / 2 };
-
 	return rc;
+}
+
+inline void EllipseMakeCenter(HDC hdc, int x, int y, int radius) {
+	Ellipse(hdc, x - radius, y - radius, x + radius, y + radius);
 }
