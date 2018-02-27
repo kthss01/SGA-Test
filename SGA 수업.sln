@@ -69,7 +69,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day27-시계, 원 충돌, �
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day28-에어 하키", "Day28\Day28.vcxproj", "{1897E225-882F-4FEC-AA8C-F62FC3D1F322}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day29", "Day29\Day29.vcxproj", "{91527A5B-F5E8-419A-B99F-6F92A344B968}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day29-지렁이 게임, 원과 사각형 충돌", "Day29\Day29.vcxproj", "{91527A5B-F5E8-419A-B99F-6F92A344B968}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day30", "Day30\Day30.vcxproj", "{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -351,6 +353,14 @@ Global
 		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Release|x64.Build.0 = Release|x64
 		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Release|x86.ActiveCfg = Release|Win32
 		{91527A5B-F5E8-419A-B99F-6F92A344B968}.Release|x86.Build.0 = Release|Win32
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Debug|x64.ActiveCfg = Debug|x64
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Debug|x64.Build.0 = Debug|x64
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Debug|x86.ActiveCfg = Debug|Win32
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Debug|x86.Build.0 = Debug|Win32
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Release|x64.ActiveCfg = Release|x64
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Release|x64.Build.0 = Release|x64
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Release|x86.ActiveCfg = Release|Win32
+		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
