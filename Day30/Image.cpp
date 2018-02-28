@@ -187,3 +187,41 @@ void Image::Render(HDC hdc, int destX, int destY)
 			m_imageInfo->hMemDC, 0, 0, SRCCOPY);
 	}
 }
+
+void Image::Render(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight)
+{
+	// 특정 색상을 빼고 그리겠다면
+	if (isTrans) {
+		//GdiTransparentBlt : 비트맵 출력시 특정 색상을 제외 하고 출력
+		// transparent : 투명한
+		/*
+		bitmap은 alpha값이 없음 투명하게 만들 수가 없음
+		내가 출력하는 캐릭터하고 배경하고 동시에 띄우려면 캐릭터 외부색상 지워야함
+		*/
+
+		GdiTransparentBlt
+		(
+			// 화면 부분
+			hdc,					// 복사될 장소의 DC
+			destX,					// 복사될 좌표의 시작점 X
+			destY,					// 복사될 좌표의 시작점 Y
+			sourWidth,				// 복사될 이미지의 가로 크기
+			sourHeight,				// 복사될 이미지의 세로 크기
+
+									// 이미지 부분
+			m_imageInfo->hMemDC,	// 복사될 대상의 DC
+									// 여기부분 수정하면 원하는 부분만 그릴 수 있음
+			sourX,					// 복사될 이미지 시작점 X
+			sourY,					// 복사될 이미지 시작점 Y
+									// 이게 이미지 원본보다 크면 나머지 부분 흰색으로 채워짐
+			sourWidth,				// 복사될 이미지 가로크기
+			sourHeight,				// 복사될 이미지 세로크기
+			transColor				// 복사할때 제외할 색상(기본적으로 마젠타 씀)
+		);
+	}
+	// 원본 이미지 그대로 그냥 그리겠다면
+	else {
+		BitBlt(hdc, destX, destY, sourWidth, sourHeight,
+			m_imageInfo->hMemDC, sourX, sourY, SRCCOPY);
+	}
+}

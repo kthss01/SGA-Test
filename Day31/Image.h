@@ -39,6 +39,9 @@ private:
 								// 딱 마젠타 값만큼만 지워짐 비슷한 색은 안지워짐
 								// 마젠타 범위로 할수도 있긴함
 								// 다른 dc에 저장하고 제외하는 식으로 하면 할 수 있음
+
+	BLENDFUNCTION blendFunc;	// 알파 블렌드를 위한 정보
+	LPIMAGE_INFO blendImage;	// 알파 블렌드를 사용하기 위한 이미지 정보
 public:
 	Image();
 	~Image();
@@ -50,9 +53,17 @@ public:
 
 	void Release();
 
+	// 일반 렌더
 	void Render(HDC hdc);
 	// 화면에서의 x ,y 값 만큼 이미지 렌더 시켜주는거
 	void Render(HDC hdc, int destX, int destY);
+
+	void Render(HDC hdc, int destX, int destY, int sourX, int sourY,
+		int sourWidth, int sourHeight);
+
+	// 알파 렌더
+	// alpha가 alpha값 이라고 생각 byte이므로 0 ~ 255 
+	void AlphaRender(HDC hdc, BYTE alpha); 
 
 	inline HDC GetMemDC() { return m_imageInfo->hMemDC; }
 };

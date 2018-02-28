@@ -54,5 +54,8 @@ public:
 	// 화면에서의 x ,y 값 만큼 이미지 렌더 시켜주는거
 	void Render(HDC hdc, int destX, int destY);
 
+	void Render(HDC hdc, int destX, int destY, int sourX, int sourY,
+		int sourWidth, int sourHeight);
+
 	inline HDC GetMemDC() { return m_imageInfo->hMemDC; }
 };
