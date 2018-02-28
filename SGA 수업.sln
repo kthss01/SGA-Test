@@ -71,7 +71,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day28-에어 하키", "Day2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day29-지렁이 게임, 원과 사각형 충돌", "Day29\Day29.vcxproj", "{91527A5B-F5E8-419A-B99F-6F92A344B968}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day30", "Day30\Day30.vcxproj", "{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day30-비트맵 읽기, 총알 게이지 발사", "Day30\Day30.vcxproj", "{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day31", "Day31\Day31.vcxproj", "{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -361,6 +363,14 @@ Global
 		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Release|x64.Build.0 = Release|x64
 		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Release|x86.ActiveCfg = Release|Win32
 		{E38E8BE4-ADB8-4C84-BD65-64B5485C6F6A}.Release|x86.Build.0 = Release|Win32
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Debug|x64.ActiveCfg = Debug|x64
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Debug|x64.Build.0 = Debug|x64
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Debug|x86.ActiveCfg = Debug|Win32
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Debug|x86.Build.0 = Debug|Win32
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Release|x64.ActiveCfg = Release|x64
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Release|x64.Build.0 = Release|x64
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Release|x86.ActiveCfg = Release|Win32
+		{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
