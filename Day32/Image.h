@@ -81,7 +81,10 @@ public:
 		int width, int height, int frameX, int frameY,
 		bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 
-	void SetTransColor(bool isTrans, COLORREF transColor);
+	void SetTransColor(bool isTrans, COLORREF transColor) {
+		this->isTrans = isTrans;
+		this->transColor = transColor;
+	}
 
 	void Release();
 
@@ -117,10 +120,21 @@ public:
 	inline float GetX() { return m_imageInfo->x; }
 	inline void SetX(float x) { m_imageInfo->x = x; }
 	// 이미지의 좌표 y get set
-
+	inline float GetY() { return m_imageInfo->y; }
+	inline void SetY(float y) { m_imageInfo->y = y; }
 	// 이미지 센터 좌표 셋팅 get set
+	inline POINT GetCenter() {
+		POINT pt = { m_imageInfo->x, m_imageInfo->y };
+		return pt;
+	}
+	inline POINT SetCenter(float x, float y) {
+		m_imageInfo->x = x;
+		m_imageInfo->y = y;
+	}
 	
 	// 이미지 가로, 세로 얻기 Get
+	inline int GetWidth() { return m_imageInfo->width; }
+	inline int GetHeight() { return m_imageInfo->height; }
 
 	// 바운딩 박스 (충돌용 렉트 만들기) Get
 	// 렉트 크기로 되어있는 박스
@@ -134,8 +148,23 @@ public:
 
 	// 프레임 바운딩 박스 (프레임 이미지용 충돌 렉트) Get
 	// 좌표값은 프레임 x,y와 너비랑 높이 
+	inline RECT GetFrameBoundingBox() {
+		RECT rc = RectMakeCenter(
+			m_imageInfo->currentFrameX, m_imageInfo->currentFrameY,
+			m_imageInfo->frameWidth, m_imageInfo->frameHeight);
+		return rc;
+	}
 
 	// 프레임 X get set
+	inline int GetFrameX() { return m_imageInfo->currentFrameX; }
+	inline void SetFrameX(int frameX) { m_imageInfo->currentFrameX = frameX; }
+	// 프레임 Y get set
+	inline int GetFrameY() { return m_imageInfo->currentFrameY; }
+	inline void SetFrameY(int frameY) { m_imageInfo->currentFrameY = frameY; }
 	// 프레임 가로 세로 크기 Get
+	inline int GetFrameWidth() { return m_imageInfo->frameWidth; }
+	inline int GetFrameHeight() { return m_imageInfo->frameHeight; }
 	// 맥스 프레임 x, y, Get
+	inline int GetMaxFrameX() { return m_imageInfo->maxFrameX; }
+	inline int GetMaxFrameY() { return m_imageInfo->maxFrameY; }
 };
