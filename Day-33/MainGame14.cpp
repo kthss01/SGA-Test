@@ -23,7 +23,7 @@ HRESULT MainGame14::Init()
 	// 문제가 없도록 하려면 기준점으로 짜야하긴함 
 	box[0] = { 0, 572, WINSIZEX, WINSIZEY };
 	box[1] = { 704, 486, 1025, 510 };
-	box[2] = { 1026, 223, WINSIZEX, 223 };
+	box[2] = { 1026, 223, WINSIZEX, 233 };
 	box[3] = { 960, 190, 1026, 260 };
 
 	for (int i = 0; i < 11; i++) {
@@ -188,18 +188,87 @@ void MainGame14::Update()
 		}
 		break;
 	case STATUS_TOUP:
+		Move();
+		// 이중 점프하고 싶으면
+		//Jump();
+		// 내가 올라가는 애니메이션 상황이면
+		if (moveFrame < 5) moveFrame += 0.15f;
+		if (moveFrame >= 5) moveFrame = 2;
+		y += vy;
+		vy += GRAVITY;
+		if (vy >= 0) {
+			status = STATUS_TOLOW;
+			moveFrame = 0;
+		}
 		break;
 	case STATUS_TOLOW:
+		Move();
+		if (moveFrame < 5) moveFrame += 0.15f;
+		if (moveFrame >= 5) moveFrame = 1;
+		y += vy;
+		vy += GRAVITY;
+		for (int i = 0; i < 3; i++) {
+			// x, y 이미지 중심점
+			if (IntersectRect(&temp, &box[i],
+				&RectMakeCenter(x, y + SIZEY / 2, SIZEX, 2))
+				// 반 이상 걸치게 되면 떨어지게 (충돌이 되지 않게)
+				&& x > box[i].left && x < box[i].right)
+			{
+				boxNum = i;
+				y = box[i].top - SIZEY / 2;
+				moveFrame = 0;
+				status = STATUS_LANDING;
+			}
+		}
+		// 벽잡는 거
+		// box[3]은 box[2]보다 살짝 크게 되어있음 그래서 걸리는건 box[2]로 하는거
+		if (IntersectRect(&temp, &box[3], &RectMakeCenter(x, y, 2, 2))
+			// 오른쪽 바라보고 있을 때
+			&& vector == 1) {
+			x = box[2].left - 35;
+			y = box[2].top + 35;
+			moveFrame = 0;
+			status = STATUS_WALL;
+		}
 		break;
+	// 땅에 닿자마자 실행되는 녀석
+	// 닿은 순간 몇 프레임만 하고 STATUS_NORMAL로 변경
 	case STATUS_LANDING:
+		moveFrame += 0.5f;
+		if (moveFrame >= 2)
+			status = STATUS_NORMAL;
 		break;
 	case STATUS_WALL:
+		Jump();
+		if (INPUT->GetKeyDown(VK_UP))
+			status = STATUS_CLIMB;
 		break;
 	case STATUS_CLIMB:
+		moveFrame += 0.1;
+		// moveFrame이 0이면
+		if (moveFrame < 1) {
+			y -= 10;
+		}
+		else if (moveFrame <= 2) {
+			y -= 5;
+			x += 5;
+		}
+		else {
+			moveFrame = 0;
+			// Low로 바꿔준 이유 : Low에서 바닥에 닿으면 Normal로 바뀔 수 있으니
+			status = STATUS_TOLOW;
+		}
 		break;
 	default:
 		break;
 	}
+
+	// 필요하면 나중에 써도 좋음
+	//====================== Debug =====================//
+	if (INPUT->GetKeyDown(VK_F11)) {
+		isDebug = !isDebug;
+	}
+	//==================================================//
 }
 
 void MainGame14::Render(HDC hdc)
@@ -207,8 +276,24 @@ void MainGame14::Render(HDC hdc)
 	HDC memDC = GetBackBuffer()->GetMemDC();
 	PatBlt(memDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=================================================
-	character[vector][status][(int)moveFrame]->
-		Render(memDC, x - SIZEX / 2, y - SIZEY / 2);
+	{
+		//bg->Render(memDC);
+
+		bg->Render(memDC, 0, 0, WINSIZEX / 2, 0, WINSIZEX, WINSIZEY);
+		bg->Render(memDC, WINSIZEX / 2, 0, 
+			0, 0, WINSIZEX / 2, WINSIZEY);
+
+		character[vector][status][(int)moveFrame]->
+			Render(memDC, x - SIZEX / 2, y - SIZEY / 2);
+	}
+	//==================   Debug   ====================
+	if (isDebug)
+	{
+		for (int i = 0; i < 4; i++) {
+			Rectangle(memDC, box[i].left, box[i].top, box[i].right,
+				box[i].bottom);
+		}
+	}
 	//=================================================
 	this->GetBackBuffer()->Render(hdc);
 }
@@ -248,4 +333,11 @@ void MainGame14::Move()
 
 void MainGame14::Jump()
 {
+	if (INPUT->GetKeyDown(VK_SPACE)) {
+		moveFrame = 0;
+		vy = JUMP;
+		// 한번 점프만 하기 위해서 상태 바꾸고 거기서는 Jump() 함수 호출 안하게
+		// 이중 점프하고 싶으면 거기서도 Jump() 호출하면됨
+		status = STATUS_TOUP;
+	}
 }

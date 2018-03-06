@@ -42,9 +42,6 @@
     <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Day34.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CommonMacroFunction.h">
       <Filter>Util</Filter>
     </ClInclude>
@@ -69,12 +66,12 @@
     <ClInclude Include="MainGame15.h">
       <Filter>GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="Day35.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Day34.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
@@ -92,18 +89,21 @@
     <ClCompile Include="MainGame15.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
+    <ClCompile Include="Day35.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Day34.rc">
-      <Filter>리소스 파일</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Day34.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="small.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Day35.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Day35.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

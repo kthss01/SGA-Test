@@ -112,6 +112,13 @@ public:
 	void FrameRender(HDC hdc, int destX, int destY,
 		int currentFrameX, int currentFrameY, BYTE alpha);
 
+	// 루프 렌더
+	// LPRECT == RECT*
+	void LoopRender(HDC hdc, const LPRECT drawArea,
+		int offsetX, int offsetY);
+	void LoopAlphaRender(HDC hdc, const LPRECT drawArea,
+		int offsetX, int offsetY, BYTE alpha);
+
 	inline HDC GetMemDC() { return m_imageInfo->hMemDC; }
 
 	// Get, Set 함수들 (나중에)
@@ -122,14 +129,10 @@ public:
 	// 이미지의 좌표 y get set
 	inline float GetY() { return m_imageInfo->y; }
 	inline void SetY(float y) { m_imageInfo->y = y; }
-	// 이미지 센터 좌표 셋팅 get set
-	inline POINT GetCenter() {
-		POINT pt = { m_imageInfo->x, m_imageInfo->y };
-		return pt;
-	}
-	inline POINT SetCenter(float x, float y) {
-		m_imageInfo->x = x;
-		m_imageInfo->y = y;
+	// 이미지 센터 좌표 셋팅 set
+	inline void SetCenter(float x, float y) {
+		m_imageInfo->x = x - m_imageInfo->width / 2;
+		m_imageInfo->y = y - m_imageInfo->height / 2;
 	}
 
 	// 이미지 가로, 세로 얻기 Get
@@ -150,7 +153,7 @@ public:
 	// 좌표값은 프레임 x,y와 너비랑 높이 
 	inline RECT GetFrameBoundingBox() {
 		RECT rc = RectMakeCenter(
-			m_imageInfo->currentFrameX, m_imageInfo->currentFrameY,
+			m_imageInfo->x, m_imageInfo->y,
 			m_imageInfo->frameWidth, m_imageInfo->frameHeight);
 		return rc;
 	}

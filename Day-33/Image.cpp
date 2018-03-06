@@ -160,8 +160,8 @@ HRESULT Image::Init(const char * fileName, float x, float y, int width, int heig
 	m_imageInfo->hOBit = (HBITMAP)SelectObject(
 		m_imageInfo->hMemDC, m_imageInfo->hBit);
 
-	m_imageInfo->x = x - width / 2;
-	m_imageInfo->y = y - height / 2;
+	m_imageInfo->x = x - (width / width / 2);
+	m_imageInfo->y = y - (height / height / 2);
 
 	m_imageInfo->width = width;
 	m_imageInfo->height = height;
@@ -578,7 +578,7 @@ void Image::AlphaRender(HDC hdc, int destX, int destY, BYTE alpha)
 
 		// 1. 출력 해야될 DC에 그려져 있는 내용을 블렌드 이미지에 그려준다
 		BitBlt(blendImage->hMemDC, 0, 0, blendImage->width, blendImage->height,
-			hdc, WINSIZEX, WINSIZEY, SRCCOPY); // 고속 복사 SRCCOPY
+			hdc, destX, destY, SRCCOPY); // 고속 복사 SRCCOPY
 
 											   // 2. 출력 해야될 이미지를 블렌드에 그려준다. (마젠타 값을 제거)
 		GdiTransparentBlt(
@@ -628,28 +628,28 @@ void Image::AlphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
 
 		// 1. 출력 해야될 DC에 그려져 있는 내용을 블렌드 이미지에 그려준다
 		BitBlt(blendImage->hMemDC, 0, 0, blendImage->width, blendImage->height,
-			hdc, WINSIZEX, WINSIZEY, SRCCOPY); // 고속 복사 SRCCOPY
+			hdc, destX, destY, SRCCOPY); // 고속 복사 SRCCOPY
 
 											   // 2. 출력 해야될 이미지를 블렌드에 그려준다. (마젠타 값을 제거)
 		GdiTransparentBlt(
 			blendImage->hMemDC,
 			0,
 			0,
-			m_imageInfo->width,
-			m_imageInfo->height,
+			sourWidth,
+			sourHeight,
 			m_imageInfo->hMemDC,
-			0,
-			0,
-			m_imageInfo->width,
-			m_imageInfo->height,
+			sourX,
+			sourY,
+			sourWidth,
+			sourHeight,
 			transColor);
 		// 3. 블랜드 DC를 출력해야될 DC에 그린다.
 		AlphaBlend(
 			hdc,
 			destX,
 			destY,
-			m_imageInfo->width,
-			m_imageInfo->height,
+			sourWidth,
+			sourHeight,
 			m_imageInfo->hMemDC,
 			//blendImage->hMemDC, 
 			sourX,
@@ -662,7 +662,7 @@ void Image::AlphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
 	}
 	else {
 		AlphaBlend(
-			hdc, destX, destY, m_imageInfo->width, m_imageInfo->height,
+			hdc, destX, destY, sourWidth, sourHeight,
 			m_imageInfo->hMemDC, sourX, sourY, sourWidth, sourHeight,
 			blendFunc);
 	}
@@ -774,54 +774,8 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int currentFrameX, int cu
 	if (currentFrameY > m_imageInfo->maxFrameY)
 		m_imageInfo->currentFrameY = m_imageInfo->maxFrameY;
 
-	// 투명도를 얼마만큼 주겠느냐 설정
-	blendFunc.SourceConstantAlpha = alpha;
-	// 마젠타 지우고 할 꺼면
-	if (isTrans) {
-		// AlphaBlend() 특정색을 뺄 수 없이 투명도만 조절
-
-		// 1. 출력 해야될 DC에 그려져 있는 내용을 블렌드 이미지에 그려준다
-		BitBlt(blendImage->hMemDC, 0, 0, blendImage->width, blendImage->height,
-			hdc, WINSIZEX, WINSIZEY, SRCCOPY); // 고속 복사 SRCCOPY
-
-											   // 2. 출력 해야될 이미지를 블렌드에 그려준다. (마젠타 값을 제거)
-		GdiTransparentBlt(
-			blendImage->hMemDC,
-			0,
-			0,
-			m_imageInfo->width,
-			m_imageInfo->height,
-			m_imageInfo->hMemDC,
-			0,
-			0,
-			m_imageInfo->width,
-			m_imageInfo->height,
-			transColor);
-		// 3. 블랜드 DC를 출력해야될 DC에 그린다.
-		AlphaBlend(
-			hdc,
-			destX,
-			destY,
-			m_imageInfo->width,
-			m_imageInfo->height,
-			m_imageInfo->hMemDC,
-			//blendImage->hMemDC, 
-			m_imageInfo->currentFrameX * m_imageInfo->frameWidth,
-			m_imageInfo->currentFrameY * m_imageInfo->frameHeight,
-			m_imageInfo->frameWidth,
-			m_imageInfo->frameHeight,
-			//blendImage->width,
-			//blendImage->height,
-			blendFunc);
-	}
-	else {
-		AlphaBlend(
-			hdc, destX, destY, m_imageInfo->width, m_imageInfo->height,
-			m_imageInfo->hMemDC,
-			m_imageInfo->currentFrameX * m_imageInfo->frameWidth,
-			m_imageInfo->currentFrameY * m_imageInfo->frameHeight,
-			m_imageInfo->frameWidth,
-			m_imageInfo->frameHeight,
-			blendFunc);
-	}
+	AlphaRender(hdc, destX, destY,
+		currentFrameX * m_imageInfo->frameWidth,
+		currentFrameY * m_imageInfo->frameHeight,
+		m_imageInfo->frameWidth, m_imageInfo->frameHeight, alpha);
 }
