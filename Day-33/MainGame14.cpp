@@ -18,6 +18,9 @@ HRESULT MainGame14::Init()
 	bg = new Image;
 	bg->Init("images/메가맨배경.bmp", WINSIZEX, WINSIZEY);
 
+	offsetX = 0;
+	offsetY = 0;
+
 	// 이런식으로 설정시 문제가 될 수 있음
 	// 화면 창 크기가 변화가 되었을 때 문제가 발생함
 	// 문제가 없도록 하려면 기준점으로 짜야하긴함 
@@ -107,6 +110,8 @@ HRESULT MainGame14::Init()
 		SIZEX, SIZEY, true, RGB(255, 0, 255));
 
 	status = STATUS_NORMAL;
+
+//	y = 1000 - SIZEY / 2;
 
 	return S_OK;
 }
@@ -263,6 +268,9 @@ void MainGame14::Update()
 		break;
 	}
 
+	offsetX++;
+	offsetY++;
+
 	// 필요하면 나중에 써도 좋음
 	//====================== Debug =====================//
 	if (INPUT->GetKeyDown(VK_F11)) {
@@ -278,10 +286,12 @@ void MainGame14::Render(HDC hdc)
 	//=================================================
 	{
 		//bg->Render(memDC);
+		//bg->Render(memDC, 0, 0, WINSIZEX / 2, 0, WINSIZEX, WINSIZEY);
+		//bg->Render(memDC, WINSIZEX / 2, 0, 
+		//	0, 0, WINSIZEX / 2, WINSIZEY);
 
-		bg->Render(memDC, 0, 0, WINSIZEX / 2, 0, WINSIZEX, WINSIZEY);
-		bg->Render(memDC, WINSIZEX / 2, 0, 
-			0, 0, WINSIZEX / 2, WINSIZEY);
+		bg->LoopRender(memDC, 
+			&RectMake(0, 0, WINSIZEX/2, WINSIZEY/2), offsetX, offsetY);
 
 		character[vector][status][(int)moveFrame]->
 			Render(memDC, x - SIZEX / 2, y - SIZEY / 2);

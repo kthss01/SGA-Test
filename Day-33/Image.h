@@ -114,6 +114,7 @@ public:
 
 	// ∑Á«¡ ∑ª¥ı
 	// LPRECT == RECT*
+	// LPTSTR == char*
 	void LoopRender(HDC hdc, const LPRECT drawArea,
 		int offsetX, int offsetY);
 	void LoopAlphaRender(HDC hdc, const LPRECT drawArea,
