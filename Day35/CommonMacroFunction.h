@@ -11,7 +11,7 @@ inline void LineMake(HDC hdc, POINT p1, POINT p2) {
 
 inline void LineMake(HDC hdc, int x1, int y1, int x2, int y2) {
 	MoveToEx(hdc, x1, y1, NULL);
-	LineTo(hdc, x1, y2);
+	LineTo(hdc, x2, y2);
 }
 
 inline RECT RectMake(int x, int y, int width, int height) {
