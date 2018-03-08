@@ -779,3 +779,126 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int currentFrameX, int cu
 		currentFrameY * m_imageInfo->frameHeight,
 		m_imageInfo->frameWidth, m_imageInfo->frameHeight, alpha);
 }
+
+// drawArea 그려줄 부분
+void Image::LoopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
+{
+	// offset 값 음수가 나오면 안되서 보정 하기
+	if (offsetX < 0)
+		offsetX = m_imageInfo->width + (offsetX % m_imageInfo->width);
+	if (offsetY < 0)
+		offsetY = m_imageInfo->height + (offsetY % m_imageInfo->height);
+
+	// 그려지는 영역(이미지)를 셋팅할 변수
+	RECT rcSour;
+	int sourWidth;
+	int sourHeight;
+
+	// 그려지는 DC의 영역
+	RECT rcDest;
+	int drawAreaX = drawArea->left;
+	int drawAreaY = drawArea->top;
+	int drawAreaW = drawArea->right - drawArea->left;
+	int drawAreaH = drawArea->bottom - drawArea->top;
+
+	// 세로 루프 영역 구하기
+	for (int y = 0; y < drawAreaH; y += sourHeight) {
+		// 영역의 높이 계산
+		rcSour.top = (y + offsetY) % m_imageInfo->height;
+		rcSour.bottom = m_imageInfo->height;
+		sourHeight = rcSour.bottom - rcSour.top;
+
+		// sour영역이 그리는 화면을 넘어 갔다면
+		if (y + sourHeight > drawAreaH) {
+			// 넘어간 그림의 값만큼 bottom의 값을 올려준다
+			rcSour.bottom -= (y + sourHeight) - drawAreaH;
+			sourHeight = rcSour.bottom - rcSour.top;
+		}
+		// 그려지는 영역
+		rcDest.top = y + drawAreaY;
+		rcDest.bottom = rcDest.top + sourHeight;
+
+		// 가로 루프 영역
+		for (int x = 0; x < drawAreaW; x += sourWidth) {
+			rcSour.left = (x + offsetX) % m_imageInfo->width;
+			rcSour.right = m_imageInfo->width;
+			sourWidth = rcSour.right - rcSour.left;
+
+			// sour영역이 그리는 화면을 넘어가면
+			if (x + sourWidth > drawAreaW) {
+				rcSour.right -= (x + sourWidth) - drawAreaW;
+				sourWidth = rcSour.right - rcSour.left;
+			}
+
+			rcDest.left = x + drawAreaX;
+			rcDest.right = rcDest.left + sourWidth;
+
+			// 그리기
+			Render(hdc, rcDest.left, rcDest.top,
+				rcSour.left, rcSour.top,
+				rcSour.right - rcSour.left,
+				rcSour.bottom - rcSour.top);
+		}
+	}
+}
+
+void Image::LoopAlphaRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY, BYTE alpha)
+{
+	// offset 값 음수가 나오면 안되서 보정 하기
+	if (offsetX < 0)
+		offsetX = m_imageInfo->width + (offsetX % m_imageInfo->width);
+	if (offsetY < 0)
+		offsetY = m_imageInfo->height + (offsetY % m_imageInfo->height);
+
+	// 그려지는 영역(이미지)를 셋팅할 변수
+	RECT rcSour;
+	int sourWidth;
+	int sourHeight;
+
+	// 그려지는 DC의 영역
+	RECT rcDest = {};
+	int drawAreaX = drawArea->left;
+	int drawAreaY = drawArea->top;
+	int drawAreaW = drawArea->right - drawArea->left;
+	int drawAreaH = drawArea->bottom - drawArea->top;
+
+	// 세로 루프 영역 구하기
+	for (int y = 0; y < drawAreaH; y += sourHeight) {
+		// 영역의 높이 계산
+		rcSour.top = (y + offsetY) % m_imageInfo->height;
+		rcSour.bottom = m_imageInfo->height;
+		sourHeight = rcSour.bottom - rcSour.top;
+
+		// sour영역이 그리는 화면을 넘어 갔다면
+		if (y + sourHeight > drawAreaH) {
+			// 넘어간 그림의 값만큼 bottom의 값을 올려준다
+			rcSour.bottom -= (y + sourHeight) - drawAreaH;
+			sourHeight = rcSour.bottom - rcSour.top;
+		}
+		// 그려지는 영역
+		rcDest.top = y + drawAreaY;
+		rcDest.bottom = rcDest.top + sourHeight;
+
+		// 가로 루프 영역
+		for (int x = 0; x < drawAreaW; x += sourWidth) {
+			rcSour.left = (x + offsetX) % m_imageInfo->width;
+			rcSour.right = m_imageInfo->width;
+			sourWidth = rcSour.right - rcSour.left;
+
+			// sour영역이 그리는 화면을 넘어가면
+			if (x + sourWidth > drawAreaW) {
+				rcSour.right -= (x + sourWidth) - drawAreaW;
+				sourWidth = rcSour.right - rcSour.left;
+			}
+
+			rcDest.left = x + drawAreaX;
+			rcDest.right = rcDest.left + sourWidth;
+
+			// 그리기
+			AlphaRender(hdc, rcDest.left, rcDest.top,
+				rcSour.left, rcSour.top,
+				rcSour.right - rcSour.left,
+				rcSour.bottom - rcSour.top, alpha);
+		}
+	}
+}

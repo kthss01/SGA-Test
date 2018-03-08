@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameNode.h"
+#include "Image.h"
 
 // 과제 풀이
 

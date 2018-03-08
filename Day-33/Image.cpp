@@ -795,7 +795,7 @@ void Image::LoopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
 	int sourHeight;
 
 	// 그려지는 DC의 영역
-	RECT rcDest = {};
+	RECT rcDest;
 	int drawAreaX = drawArea->left;
 	int drawAreaY = drawArea->top;
 	int drawAreaW = drawArea->right - drawArea->left;
@@ -831,7 +831,7 @@ void Image::LoopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
 			}
 
 			rcDest.left = x + drawAreaX;
-			rcDest.right = rcDest.right - rcDest.left;
+			rcDest.right = rcDest.left + sourWidth;
 
 			// 그리기
 			Render(hdc, rcDest.left, rcDest.top,
@@ -892,7 +892,7 @@ void Image::LoopAlphaRender(HDC hdc, const LPRECT drawArea, int offsetX, int off
 			}
 
 			rcDest.left = x + drawAreaX;
-			rcDest.right = rcDest.right - rcDest.left;
+			rcDest.right = rcDest.left + sourWidth;
 
 			// 그리기
 			AlphaRender(hdc, rcDest.left, rcDest.top,
