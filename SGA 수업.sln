@@ -79,9 +79,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day32", "Day32\Day32.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day33,34,35-록맨, 디버그, 루프렌더", "Day-33\Day-33.vcxproj", "{50646B3E-5735-4B42-9F50-8D9B01A56758}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day35-픽셀", "Day35\Day34.vcxproj", "{F226F329-C77D-4237-8AFC-3DD14689D172}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day35,36-픽셀 충돌", "Day35\Day34.vcxproj", "{F226F329-C77D-4237-8AFC-3DD14689D172}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day36", "Day36\Day36.vcxproj", "{8ABA99E3-2373-4564-9F78-3DF0F0C838CA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day36-레이싱 풀이", "Day36\Day36.vcxproj", "{8ABA99E3-2373-4564-9F78-3DF0F0C838CA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day37", "Day37\Day37.vcxproj", "{8DA720B6-124A-4349-ABDA-5FB9183590EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -411,6 +413,14 @@ Global
 		{8ABA99E3-2373-4564-9F78-3DF0F0C838CA}.Release|x64.Build.0 = Release|x64
 		{8ABA99E3-2373-4564-9F78-3DF0F0C838CA}.Release|x86.ActiveCfg = Release|Win32
 		{8ABA99E3-2373-4564-9F78-3DF0F0C838CA}.Release|x86.Build.0 = Release|Win32
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Debug|x64.ActiveCfg = Debug|x64
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Debug|x64.Build.0 = Debug|x64
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Debug|x86.ActiveCfg = Debug|Win32
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Debug|x86.Build.0 = Debug|Win32
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Release|x64.ActiveCfg = Release|x64
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Release|x64.Build.0 = Release|x64
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Release|x86.ActiveCfg = Release|Win32
+		{8DA720B6-124A-4349-ABDA-5FB9183590EE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
