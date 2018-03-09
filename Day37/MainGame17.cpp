@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "MainGame17.h"
 
+#include "TestScene1.h"
+#include "TestScene2.h"
 
 MainGame17::MainGame17()
 {
@@ -16,17 +18,25 @@ HRESULT MainGame17::Init()
 	GameNode::Init();
 	isDebug = false;
 
+	SCENE->AddScene("Test1", new TestScene1);
+	SCENE->AddScene("Test2", new TestScene2);
+
+	SCENE->ChangeScene("Test1");
+
 	return S_OK;
 }
 
 void MainGame17::Release()
 {
 	GameNode::Release();
+	SCENE->Release();
 }
 
 void MainGame17::Update()
 {
 	GameNode::Update();
+
+	SCENE->Update();
 
 	//====================== Debug =====================//
 	if (INPUT->GetKeyDown(VK_F11)) {
@@ -35,13 +45,12 @@ void MainGame17::Update()
 	//==================================================//
 }
 
-void MainGame17::Render(HDC hdc)
+void MainGame17::Render()
 {
-	HDC memDC = GetBackBuffer()->GetMemDC();
-	PatBlt(memDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
+	PatBlt(GetMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=================================================
 	{
-
+		SCENE->Render();
 	}
 	//==================   Debug   ====================
 	if (isDebug)
@@ -49,5 +58,5 @@ void MainGame17::Render(HDC hdc)
 
 	}
 	//=================================================
-	this->GetBackBuffer()->Render(hdc);
+	this->SetBackBuffer()->Render(GetHDC());
 }

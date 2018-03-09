@@ -2,19 +2,27 @@
 #include "GameNode.h"
 
 GameNode::GameNode() {
-	SetBackBuffer();
+
 }
 
 GameNode::~GameNode() {}
 
-void GameNode::SetBackBuffer() {
-	m_backBuffer = new Image;
-	m_backBuffer->Init(WINSIZEX, WINSIZEY);
+Image* GameNode::m_backBuffer = NULL;
+
+Image* GameNode::SetBackBuffer() {
+	// ÀÌ ¹®ÀåÀÌ ½Ì±ÛÅæ
+	if (m_backBuffer == NULL) {
+		m_backBuffer = new Image;
+		m_backBuffer->Init(WINSIZEX, WINSIZEY);
+	}
+
+	return m_backBuffer;
 }
 
 HRESULT GameNode::Init() {
+	SetBackBuffer();
+	_hdc = GetDC(g_hWnd);
 	SetTimer(g_hWnd, 1, 10, NULL);
-
 	return S_OK;
 }
 
@@ -30,7 +38,7 @@ void GameNode::Update() {
 	InvalidateRect(g_hWnd, NULL, FALSE);
 }
 
-void GameNode::Render(HDC hdc) {}
+void GameNode::Render() {}
 
 LRESULT GameNode::MainProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	HDC hdc;
@@ -42,7 +50,7 @@ LRESULT GameNode::MainProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		this->Render(hdc);
+		this->Render();
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_MOUSEMOVE:

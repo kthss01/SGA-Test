@@ -5,8 +5,8 @@
 class GameNode
 {
 private:
-	Image * m_backBuffer;
-	void SetBackBuffer();
+	static Image* m_backBuffer;
+	HDC _hdc;
 public:
 	GameNode();
 	~GameNode();
@@ -14,9 +14,10 @@ public:
 	virtual HRESULT Init();
 	virtual void Release();
 	virtual void Update();
-	virtual void Render(HDC hdc);
+	virtual void Render();
 
-	Image* GetBackBuffer() { return m_backBuffer; }
-
+	HDC GetMemDC() { return m_backBuffer->GetMemDC(); }
+	HDC GetHDC() { return _hdc; }
+	static Image* SetBackBuffer();
 	LRESULT MainProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 };

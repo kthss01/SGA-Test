@@ -69,6 +69,15 @@
     <ClInclude Include="MainGame17.h">
       <Filter>GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>GameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene1.h">
+      <Filter>GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene2.h">
+      <Filter>GameMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -90,6 +99,15 @@
       <Filter>GameFrameWork</Filter>
     </ClCompile>
     <ClCompile Include="MainGame17.cpp">
+      <Filter>GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>GameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene1.cpp">
+      <Filter>GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene2.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
   </ItemGroup>
