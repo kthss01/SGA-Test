@@ -37,6 +37,13 @@ inline RECT RectMakeCenter(int x, int y, int width, int height) {
 	return rc;
 }
 
+// DrawRect 대신 RectangleMake함수 오버로링 했음
+
+inline void BeginSolidColor(HDC hdc, HBRUSH* brush, COLORREF color) {
+	*brush = CreateSolidBrush(color);
+	*brush = (HBRUSH)SelectObject(hdc, *brush);
+}
+
 inline void EllipseMakeCenter(HDC hdc, int x, int y, int radius) {
 	Ellipse(hdc, x - radius, y - radius, x + radius, y + radius);
 }

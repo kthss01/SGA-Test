@@ -3,6 +3,8 @@
 
 #include "TestScene3.h"
 #include "TestScene4.h"
+#include "MineGame.h"
+
 
 MainGame18::MainGame18()
 {
@@ -20,8 +22,9 @@ HRESULT MainGame18::Init()
 
 	SCENE->AddScene("Test1", new TestScene3);
 	SCENE->AddScene("Test2", new TestScene4);
+	SCENE->AddScene("MineGame", new MineGame);
 
-	SCENE->ChangeScene("Test1");
+	SCENE->ChangeScene("MineGame");
 
 	return S_OK;
 }
