@@ -28,8 +28,6 @@ public:
 
 	GameNode* AddScene(string sceneName, GameNode* scene);
 	HRESULT ChangeScene(string sceneName);
-
-	GameNode* FindScene(string sceneName);
 };
 
 #define SCENE SceneManager::GetSingleton()

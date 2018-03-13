@@ -2,23 +2,17 @@
 
 #include "GameNode.h"
 
-class TestScene3;
-
-class TestScene4 : public GameNode
+class TestScene5 : public GameNode
 {
 private:
-
-	TestScene3 * test;
-	int data;
+	Image * charactor;
 public:
-	TestScene4();
-	~TestScene4();
+	TestScene5();
+	~TestScene5();
 
 	virtual HRESULT Init() override;
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
-
-	void SetSceneLink(TestScene3* test) { this->test = test; }
 };
 

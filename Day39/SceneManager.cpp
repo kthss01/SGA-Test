@@ -68,19 +68,11 @@ HRESULT SceneManager::ChangeScene(string sceneName)
 	// 여기까지 왔으면 씬 변경
 	if (SUCCEEDED(_mSceneList[sceneName]->Init())) {
 		// 기존 씬이 존재 하면 기존 씬 릴리즈
-		//if (_currentScene) _currentScene->Release();
+		if (_currentScene) _currentScene->Release();
 		_currentScene = _mSceneList[sceneName];
 
 		return S_OK;
 	}
 
 	return E_FAIL;
-}
-
-GameNode * SceneManager::FindScene(string sceneName)
-{
-	if (_mSceneList.count(sceneName) < 1
-		|| _mSceneList[sceneName] == _currentScene) return NULL;
-
-	return _mSceneList[sceneName];
 }

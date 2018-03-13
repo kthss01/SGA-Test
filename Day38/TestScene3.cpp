@@ -22,6 +22,9 @@ void TestScene3::Release()
 
 void TestScene3::Update()
 {
+	if (INPUT->GetKeyDown(VK_SPACE)) {
+		SCENE->ChangeScene("Test2");
+	}
 }
 
 void TestScene3::Render()

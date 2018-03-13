@@ -75,7 +75,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day30-비트맵 읽기, 총
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day31-지렁이 게임2 이미지, 알파 블렌딩", "Day31\Day31.vcxproj", "{78CA042B-3395-4EF5-A5CD-4FBC7C80E061}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day32", "Day32\Day32.vcxproj", "{FE5D370A-20F2-4DD1-8335-E7DA1AF00632}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day32-록맨, 프레임 렌더링", "Day32\Day32.vcxproj", "{FE5D370A-20F2-4DD1-8335-E7DA1AF00632}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day33,34,35-록맨, 디버그, 루프렌더", "Day-33\Day-33.vcxproj", "{50646B3E-5735-4B42-9F50-8D9B01A56758}"
 EndProject
@@ -85,7 +85,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day36-레이싱 풀이", "D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day37-씬 매니저", "Day37\Day37.vcxproj", "{8DA720B6-124A-4349-ABDA-5FB9183590EE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day38", "Day38\Day38.vcxproj", "{C2D81A28-E30E-4F3D-B623-9B590CF78F62}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day38-지뢰찾기", "Day38\Day38.vcxproj", "{C2D81A28-E30E-4F3D-B623-9B590CF78F62}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day39", "Day39\Day39.vcxproj", "{F0C3040A-2163-42A7-B049-5369C0266C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -431,6 +433,14 @@ Global
 		{C2D81A28-E30E-4F3D-B623-9B590CF78F62}.Release|x64.Build.0 = Release|x64
 		{C2D81A28-E30E-4F3D-B623-9B590CF78F62}.Release|x86.ActiveCfg = Release|Win32
 		{C2D81A28-E30E-4F3D-B623-9B590CF78F62}.Release|x86.Build.0 = Release|Win32
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Debug|x64.ActiveCfg = Debug|x64
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Debug|x64.Build.0 = Debug|x64
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Debug|x86.ActiveCfg = Debug|Win32
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Debug|x86.Build.0 = Debug|Win32
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Release|x64.ActiveCfg = Release|x64
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Release|x64.Build.0 = Release|x64
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Release|x86.ActiveCfg = Release|Win32
+		{F0C3040A-2163-42A7-B049-5369C0266C5B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
