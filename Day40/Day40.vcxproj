@@ -20,11 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F0C3040A-2163-42A7-B049-5369C0266C5B}</ProjectGuid>
+    <ProjectGuid>{1C7B008F-FCE3-4091-90A3-DA15C704F751}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Day39</RootNamespace>
+    <RootNamespace>Day40</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day39-이미지 매니저</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -149,28 +148,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonMacroFunction.h" />
-    <ClInclude Include="Day39.h" />
+    <ClInclude Include="Day40.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="KeyManager.h" />
-    <ClInclude Include="MainGame19.h" />
+    <ClInclude Include="MainGame20.h" />
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TestScene5.h" />
+    <ClInclude Include="TestScene6.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Day39.cpp" />
+    <ClCompile Include="Day40.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
-    <ClCompile Include="MainGame19.cpp" />
+    <ClCompile Include="MainGame20.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -178,14 +177,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestScene5.cpp" />
+    <ClCompile Include="TestScene6.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Day39.rc" />
+    <ResourceCompile Include="Day40.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Day39.ico" />
+    <Image Include="Day40.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
