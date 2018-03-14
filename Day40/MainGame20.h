@@ -16,3 +16,7 @@ public:
 	void Render() override;
 };
 
+/*
+	2D 이미지는 타일로 다 짤려있음
+*/
+

@@ -2,6 +2,7 @@
 #include "MainGame20.h"
 
 #include "TestScene6.h"
+#include "Omok.h"
 
 MainGame20::MainGame20()
 {
@@ -18,7 +19,9 @@ HRESULT MainGame20::Init()
 	isDebug = false;
 
 	SCENE->AddScene("Test1", new TestScene6);
-	SCENE->ChangeScene("Test1");
+	SCENE->AddScene("Omok", new Omok);
+	
+	SCENE->ChangeScene("Omok");
 
 	return S_OK;
 }
