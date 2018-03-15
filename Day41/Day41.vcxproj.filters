@@ -14,22 +14,22 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Util">
-      <UniqueIdentifier>{f1d29662-ba89-4bc3-9176-da0e2da81fa4}</UniqueIdentifier>
+      <UniqueIdentifier>{7ec50a29-7eac-49cf-ab2b-cd01cb17ecc5}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameFrameWork">
-      <UniqueIdentifier>{29372e61-beb1-45b0-8776-14b00a434622}</UniqueIdentifier>
+      <UniqueIdentifier>{5218ff00-adda-4f5b-94c1-ae2983cadc53}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameMain">
-      <UniqueIdentifier>{4f0e2bd6-e9bf-4891-a1ee-db35d8f0b459}</UniqueIdentifier>
+      <UniqueIdentifier>{4b12a99b-6d0c-4374-bec7-2bd594de6527}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameFrameWork\Util">
-      <UniqueIdentifier>{9830edbe-4a86-490d-8f35-f434acc72070}</UniqueIdentifier>
+      <UniqueIdentifier>{e99ef090-53ad-4475-b995-0c39e3081c1d}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameFrameWork\Image">
-      <UniqueIdentifier>{d25ff1fc-c679-4c62-bd10-0d889b29d6a9}</UniqueIdentifier>
+      <UniqueIdentifier>{82346bf3-3db6-4fc8-8d2a-89a31fef98a9}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameFrameWork\Manager">
-      <UniqueIdentifier>{1575906b-dc1b-4956-a186-8e582e35d955}</UniqueIdentifier>
+      <UniqueIdentifier>{16d397e4-5ffe-4169-af13-ccef31203d32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +42,7 @@
     <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Day40.h">
+    <ClInclude Include="Day41.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CommonMacroFunction.h">
@@ -66,19 +66,16 @@
     <ClInclude Include="ImageManager.h">
       <Filter>GameFrameWork\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>GameFrameWork\Image</Filter>
-    </ClInclude>
     <ClInclude Include="GameNode.h">
       <Filter>GameFrameWork</Filter>
     </ClInclude>
-    <ClInclude Include="MainGame20.h">
+    <ClInclude Include="Image.h">
+      <Filter>GameFrameWork\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame21.h">
       <Filter>GameMain</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene6.h">
-      <Filter>GameMain</Filter>
-    </ClInclude>
-    <ClInclude Include="Omok.h">
+    <ClInclude Include="TestScene7.h">
       <Filter>GameMain</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,7 +83,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Day40.cpp">
+    <ClCompile Include="Day41.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
@@ -101,24 +98,21 @@
     <ClCompile Include="ImageManager.cpp">
       <Filter>GameFrameWork\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>GameFrameWork\Image</Filter>
-    </ClCompile>
     <ClCompile Include="GameNode.cpp">
       <Filter>GameFrameWork</Filter>
     </ClCompile>
-    <ClCompile Include="MainGame20.cpp">
+    <ClCompile Include="Imgae.cpp">
+      <Filter>GameFrameWork\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame21.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene6.cpp">
-      <Filter>GameMain</Filter>
-    </ClCompile>
-    <ClCompile Include="Omok.cpp">
+    <ClCompile Include="TestScene7.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Day40.rc">
+    <ResourceCompile Include="Day41.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -126,11 +120,8 @@
     <Image Include="small.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Day40.ico">
+    <Image Include="Day41.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

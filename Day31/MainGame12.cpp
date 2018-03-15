@@ -81,11 +81,11 @@ void MainGame12::Render(HDC hdc)
 	PatBlt(memDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=================================================
 
-	//bg->Render(memDC, 100, 100, 200 + x, 200 + y, 300, 300);
+	bg->Render(memDC, 100, 100, 200 + x, 200 + y, 300, 300);
 	//bg->AlphaRender(memDC, alpha); // 0 이 투명 255 불투명
 	
 	//image[0]->Render(memDC);
-	image[0]->AlphaRender(memDC, 128);
+	//image[0]->AlphaRender(memDC, 128);
 
 	//for (int i = 0; i < BEADMAX; i++) {
 	//	//EllipseMakeCenter(memDC, _bead[i].x, _bead[i].y, _bead[i].radius);

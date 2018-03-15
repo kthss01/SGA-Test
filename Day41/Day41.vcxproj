@@ -20,11 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{1C7B008F-FCE3-4091-90A3-DA15C704F751}</ProjectGuid>
+    <ProjectGuid>{5B38A7B6-3B57-4AD8-BB59-6D620739A9A6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Day40</RootNamespace>
+    <RootNamespace>Day41</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day40, 41-오목</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -149,30 +148,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonMacroFunction.h" />
-    <ClInclude Include="Day40.h" />
+    <ClInclude Include="Day41.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="KeyManager.h" />
-    <ClInclude Include="MainGame20.h" />
-    <ClInclude Include="Omok.h" />
+    <ClInclude Include="MainGame21.h" />
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TestScene6.h" />
+    <ClInclude Include="TestScene7.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Day40.cpp" />
+    <ClCompile Include="Day41.cpp" />
     <ClCompile Include="GameNode.cpp" />
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Imgae.cpp" />
     <ClCompile Include="KeyManager.cpp" />
-    <ClCompile Include="MainGame20.cpp" />
-    <ClCompile Include="Omok.cpp" />
+    <ClCompile Include="MainGame21.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -180,18 +177,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestScene6.cpp" />
+    <ClCompile Include="TestScene7.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Day40.rc" />
+    <ResourceCompile Include="Day41.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Day40.ico" />
+    <Image Include="Day41.ico" />
     <Image Include="small.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
