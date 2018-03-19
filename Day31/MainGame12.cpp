@@ -81,6 +81,7 @@ void MainGame12::Render(HDC hdc)
 	PatBlt(memDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=================================================
 
+	// 일정 부분 렌더 하는 방법
 	bg->Render(memDC, 100, 100, 200 + x, 200 + y, 300, 300);
 	//bg->AlphaRender(memDC, alpha); // 0 이 투명 255 불투명
 	

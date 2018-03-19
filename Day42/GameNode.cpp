@@ -23,6 +23,7 @@ HRESULT GameNode::Init() {
 	SetBackBuffer();
 	_hdc = GetDC(g_hWnd);
 	SetTimer(g_hWnd, 1, 10, NULL);
+	TWEAKBAR->Init(GetMemDC());
 	return S_OK;
 }
 

@@ -78,6 +78,9 @@
     <ClInclude Include="TestScene7.h">
       <Filter>GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="TweakBar.h">
+      <Filter>GameFrameWork\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -109,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="TestScene7.cpp">
       <Filter>GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="TweakBar.cpp">
+      <Filter>GameFrameWork\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
