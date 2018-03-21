@@ -119,6 +119,11 @@ public:
 	void LoopAlphaRender(HDC hdc, const LPRECT drawArea,
 		int offsetX, int offsetY, BYTE alpha);
 
+	// pivot 이미지에 대한 상대좌표라고 생각하면됨, 회전을 시키는 중점
+	// 문제는 회전이 메모리를 많이 잡아먹음
+	void RotateRender(HDC hdc, float angle,
+		int destX, int destY, float pivotX = 0, float pivotY = 0);
+
 	inline HDC GetMemDC() { return m_imageInfo->hMemDC; }
 
 	// Get, Set 함수들 (나중에)

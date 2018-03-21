@@ -6,6 +6,10 @@ class TestScene : public GameNode
 {
 private:
 	bool isDebug;
+
+	float sour;
+
+	Image* test;
 public:
 	TestScene();
 	~TestScene();

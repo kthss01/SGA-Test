@@ -52,3 +52,17 @@ inline void BeginCreateFont(HDC hdc, HFONT* font, int size, string style = "궁서
 inline void EllipseMakeCenter(HDC hdc, int x, int y, int radius) {
 	Ellipse(hdc, x - radius, y - radius, x + radius, y + radius);
 }
+
+// 어떠한 인자값 들어오면 0~1사이로 잘라주는 함수
+inline float Clamp01(float value) {
+	float result;
+
+	if (value < 0)
+		result = 0;
+	else if (value > 1)
+		result = 1;
+	else
+		result = value;
+
+	return result;
+}

@@ -902,3 +902,89 @@ void Image::LoopAlphaRender(HDC hdc, const LPRECT drawArea, int offsetX, int off
 		}
 	}
 }
+
+// pivot 0~1 비율로 바꿀 꺼
+void Image::RotateRender(HDC hdc, float angle, int destX, int destY, 
+	float pivotX, float pivotY)
+{
+	// 모서리점 3개
+	POINT apt[3] = { 0 };
+
+	float radian = angle * PI / 180;
+
+	float fCos = cos(radian);
+	float fSin = sin(radian);
+	float sizeRatioX = Clamp01(pivotX) * m_imageInfo->width;
+	float sizeRatioY = Clamp01(pivotY) * m_imageInfo->height;
+
+	float tempX, tempY, tempDestX, tempDestY;
+
+	// 회전된 평면 만들려고하는데 가장 적게 드는 게 3점이라 3점을 구할꺼
+	for (int i = 0; i < 3; i++) {
+		if (i == 0) { 
+			tempX = -sizeRatioX;
+			tempY = -sizeRatioY;
+		}
+		if (i == 1) {
+			tempX = this->m_imageInfo->width - sizeRatioX;
+			tempY = -sizeRatioY;
+		}
+		if (i == 2) {
+			tempX = -sizeRatioX;
+			tempY = this->m_imageInfo->height - sizeRatioY;
+		}
+		tempDestX = tempX * fCos - tempY * fSin;
+		tempDestY = tempX * fSin + tempY * fCos;
+
+		tempDestX += sizeRatioX;
+		tempDestY += sizeRatioY;
+		apt[i].x = destX - sizeRatioX + tempDestX;
+		apt[i].y = destY - sizeRatioY + tempDestY;
+	}
+
+	if (isTrans) {
+
+		BitBlt(
+			blendImage->hMemDC,
+			0, 0,
+			blendImage->width,
+			blendImage->height,
+			hdc,
+			destX,
+			destY,
+			SRCCOPY);
+
+		PlgBlt(blendImage->hMemDC, apt, m_imageInfo->hMemDC,
+			0, 0, m_imageInfo->width, m_imageInfo->height,
+			NULL, 0, 0);
+
+		GdiTransparentBlt
+		(
+			// 화면 부분
+			hdc,						// 복사될 장소의 DC
+			0,						// 복사될 좌표의 시작점 X
+			0,						// 복사될 좌표의 시작점 Y
+			m_imageInfo->width,	// 복사될 이미지의 가로 크기
+			m_imageInfo->height,	// 복사될 이미지의 세로 크기
+
+										// 이미지 부분
+			blendImage->hMemDC,		// 복사될 대상의 DC
+										// 여기부분 수정하면 원하는 부분만 그릴 수 있음
+										// 복사될 이미지 시작점 X
+			0,
+			// 복사될 이미지 시작점 Y
+			0,
+			// 이게 이미지 원본보다 크면 나머지 부분 흰색으로 채워짐
+			blendImage->width,	// 복사될 이미지 가로크기
+			blendImage->height,	// 복사될 이미지 세로크기
+			transColor					// 복사할때 제외할 색상(기본적으로 마젠타 씀)
+		);
+
+
+	}
+	else {
+		PlgBlt(hdc, apt, m_imageInfo->hMemDC,
+			0, 0, m_imageInfo->width, m_imageInfo->height,
+			NULL, 0, 0);
+	}
+}
