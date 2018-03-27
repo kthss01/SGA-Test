@@ -18,6 +18,9 @@ public:
 	// init은 들어갈 내용없어서 설정 안함
 	void Release();
 	Image* AddImage(string strKey, const char* fileName,
+		float x, float y, int width, int height, 
+		bool isTrans, COLORREF transColor);
+	Image* AddImage(string strKey, const char* fileName,
 		float x, float y, int width, int height,
 		int frameX, int frameY, bool isTrans, COLORREF transColor);
 

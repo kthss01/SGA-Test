@@ -2,6 +2,7 @@
 #include "MainGame.h"
 
 #include "TestScene.h"
+#include "Rocket.h"
 
 MainGame::MainGame()
 {
@@ -17,9 +18,14 @@ HRESULT MainGame::Init()
 	GameNode::Init();
 	isDebug = false;
 
-	SCENE->AddScene("Test", new TestScene);
+	IMAGE->AddImage("bg", "images/background.bmp", 0, -WINSIZEY,
+		WINSIZEX, WINSIZEY * 2, false, RGB(255, 0, 255));
 
-	SCENE->ChangeScene("Test");
+	SCENE->AddScene("Test", new TestScene);
+	SCENE->AddScene("Rocket", new Rocket);
+
+	//SCENE->ChangeScene("Test");
+	SCENE->ChangeScene("Rocket");
 
 	return S_OK;
 }
@@ -47,6 +53,8 @@ void MainGame::Render()
 	PatBlt(GetMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=================================================
 	{
+		IMAGE->FindImage("bg")->Render(GetMemDC(), 0, -WINSIZEY);
+
 		SCENE->Render();
 	}
 	//==================   Debug   ====================

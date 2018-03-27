@@ -31,6 +31,21 @@
     <Filter Include="GameFrameWork\Image">
       <UniqueIdentifier>{335315f4-caca-4fbf-b95b-7f6ce47666df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameMain\ShootingGame">
+      <UniqueIdentifier>{3e8d656d-196a-423f-a418-d6f684deeac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFrameWork\Scene">
+      <UniqueIdentifier>{a2702691-6709-4fd1-9b6d-7b8332380a4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameMain\Unit">
+      <UniqueIdentifier>{c4d05220-af6b-44d4-a2c5-647d2ad30448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameMain\Map">
+      <UniqueIdentifier>{1c15956d-4dca-4f95-adf7-7d1ce5f062af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFrameWork\Bullet">
+      <UniqueIdentifier>{2ed4dcc1-1f67-4ac5-ac74-dcc14e8b4b81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -76,7 +91,13 @@
       <Filter>GameMain</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
-      <Filter>GameMain</Filter>
+      <Filter>GameFrameWork\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Rocket.h">
+      <Filter>GameMain\ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>GameFrameWork\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +129,13 @@
       <Filter>GameMain</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>GameFrameWork\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Rocket.cpp">
+      <Filter>GameMain\ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>GameFrameWork\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

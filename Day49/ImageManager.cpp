@@ -16,6 +16,24 @@ void ImageManager::Release()
 	DeleteAll();
 }
 
+Image * ImageManager::AddImage(string strKey, const char * fileName, float x, float y, int width, int height, bool isTrans, COLORREF transColor)
+{
+	Image* img = FindImage(strKey);
+
+	if (img) return img;
+
+	img = new Image;
+	
+	if (FAILED(img->Init(fileName, x, y, width, height, isTrans, transColor))) {
+		SAFE_DELETE(img);
+		return NULL;
+	}
+
+	_mImageList[strKey] = img;
+
+	return img;
+}
+
 Image * ImageManager::AddImage(string strKey, const char * fileName, float x, float y, int width, int height, int frameX, int frameY, bool isTrans, COLORREF transColor)
 {
 	// 검색해서 이미 있으면 추가하지 않고 그냥 리턴
