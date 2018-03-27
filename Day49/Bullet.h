@@ -53,6 +53,7 @@ public:
 
 	void Fire(float x, float  y);
 	void Move();
+	void Bomb();
 };
 
 // 생성자 소멸자 안쓰면 자동으로 만들어짐

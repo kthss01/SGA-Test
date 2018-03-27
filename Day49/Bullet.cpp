@@ -118,3 +118,14 @@ void Missile::Move()
 		}
 	}
 }
+
+void Missile::Bomb()
+{
+	_viBullet = _vBullet.begin();
+	for (; _viBullet != _vBullet.end(); ++_viBullet)
+	{
+		if (!_viBullet->fire) continue;
+
+		_viBullet->fire = false;
+	}
+}
