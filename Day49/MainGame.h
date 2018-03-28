@@ -1,11 +1,17 @@
 #pragma once
 
 #include "GameNode.h"
+#include "Rocket.h"
+#include "EnemyManager.h"
+
+// 원래대로 하려면 플레이가 되는 씬이 필요하고 거기다 enemy랑 player 넣는거
 
 class MainGame : public GameNode
 {
 private:
 	bool isDebug;
+	EnemyManager * _em;
+	Rocket* _rocket;
 public:
 	MainGame();
 	~MainGame();
@@ -35,4 +41,17 @@ public:
 	Bullet(각도)
 	32마리 에너미 캐릭터에게 발사
 	유도탄 x 총알은 그 캐릭터와의 각도로 나가게
+*/
+
+/*
+	과제
+
+	충돌 
+		-> 내가 쏘면 적이 사라짐 총알도 사라지고
+		-> 적이 쏘면 적의 총알 사라지고
+			체력바 깍기게
+	내 로켓 위에 체력바
+
+	로켓의 그림자 만들기
+
 */

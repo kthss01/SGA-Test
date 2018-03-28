@@ -2,14 +2,14 @@
 #include "Bullet.h"
 
 
-Bullet::Bullet()
-{
-}
-
-
-Bullet::~Bullet()
-{
-}
+//Bullet::Bullet()
+//{
+//}
+//
+//
+//Bullet::~Bullet()
+//{
+//}
 
 Missile::Missile()
 {
@@ -127,5 +127,74 @@ void Missile::Bomb()
 		if (!_viBullet->fire) continue;
 
 		_viBullet->fire = false;
+	}
+}
+
+HRESULT Bullet::Init(char * imageName, int bulletMax, float range)
+{
+	_imageName = imageName;
+	_bulletMax = bulletMax;
+	_range = range;
+
+	return S_OK;
+}
+
+void Bullet::Release()
+{
+}
+
+void Bullet::Update()
+{
+	Move();
+}
+
+void Bullet::Render()
+{
+	for (int i = 0; i < _vBullet.size(); i++) {
+		_vBullet[i].bulletImage->
+			Render(GetMemDC(), _vBullet[i].rc.left, _vBullet[i].rc.top);
+	}
+}
+
+void Bullet::Fire(float x, float y, float angle, float speed)
+{
+	if (_bulletMax < _vBullet.size()) return;
+	tagBullet bullet;
+	ZeroMemory(&bullet, sizeof(tagBullet));
+	bullet.bulletImage = new Image;
+	bullet.bulletImage = IMAGE->FindImage(_imageName);
+	bullet.angle = angle;
+	bullet.speed = speed;
+	bullet.fireX = bullet.x = x;
+	bullet.fireY = bullet.y = y;
+	bullet.rc = RectMakeCenter(
+		bullet.x, bullet.y, 
+		bullet.bulletImage->GetWidth(), 
+		bullet.bulletImage->GetHeight());
+
+	_vBullet.push_back(bullet);
+}
+
+void Bullet::Move()
+{
+	_viBullet = _vBullet.begin();
+
+	for (_viBullet; _viBullet != _vBullet.end();) {
+		_viBullet->x += cosf(_viBullet->angle) * _viBullet->speed;
+		_viBullet->y -= sinf(_viBullet->angle) * _viBullet->speed;
+
+		_viBullet->rc = RectMakeCenter(
+			_viBullet->x, _viBullet->y,
+			_viBullet->bulletImage->GetWidth(),
+			_viBullet->bulletImage->GetHeight());
+
+		if (_range < GetDistance(
+			_viBullet->fireX, _viBullet->fireY,
+			_viBullet->x, _viBullet->y)) {
+			_viBullet = _vBullet.erase(_viBullet);
+		}
+		else {
+			++_viBullet;
+		}
 	}
 }

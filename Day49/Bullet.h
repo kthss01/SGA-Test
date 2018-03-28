@@ -26,13 +26,25 @@ struct tagBullet {
 };
 
 // 공용 총알 (각도를 가지고 움직이는 녀석)
-class Bullet
+class Bullet : public GameNode
 {
 private:
+	vector<tagBullet> _vBullet;
+	vector<tagBullet>::iterator _viBullet;
 
+	char * _imageName;
+	float _range;	// 일정 사거리 넘어가면 총알 리셋되는거
+	int _bulletMax;
 public:
-	Bullet();
-	~Bullet();
+	~Bullet() { Release(); }
+
+	HRESULT Init(char* imageName, int bulletMax, float range);
+	void Release() override;
+	void Update() override;
+	void Render() override;
+
+	void Fire(float x, float  y, float angle, float speed);
+	void Move();
 };
 
 class Missile : public GameNode

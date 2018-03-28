@@ -29,5 +29,7 @@ public:
 	void Release() override;
 	void Update() override;
 	void Render() override;
+
+	Image* GetImage() { return m_player; }
 };
 

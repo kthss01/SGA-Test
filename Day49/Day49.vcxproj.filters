@@ -46,6 +46,9 @@
     <Filter Include="GameFrameWork\Bullet">
       <UniqueIdentifier>{2ed4dcc1-1f67-4ac5-ac74-dcc14e8b4b81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameMain\ShootingGame\Enemy">
+      <UniqueIdentifier>{de5ad4ed-292f-42f5-a053-dc57a1979b59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -99,6 +102,15 @@
     <ClInclude Include="Bullet.h">
       <Filter>GameFrameWork\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy2.h">
+      <Filter>GameMain\ShootingGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Minion.h">
+      <Filter>GameMain\ShootingGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>GameMain\ShootingGame\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -136,6 +148,15 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>GameFrameWork\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy2.cpp">
+      <Filter>GameMain\ShootingGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.cpp">
+      <Filter>GameMain\ShootingGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>GameMain\ShootingGame\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
