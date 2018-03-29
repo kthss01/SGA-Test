@@ -33,9 +33,10 @@ HRESULT Missile::Init(int bulletMax, float range)
 		ZeroMemory(&bullet, sizeof(tagBullet));
 		bullet.bulletImage = new Image;
 		bullet.bulletImage
-			->Init("images/missile.bmp", 26, 124,
+			->Init("images/missile.bmp", 416, 64, 13, 1,
 				true, RGB(255, 0, 255));
 		bullet.speed = 5.0f;
+		bullet.count = 0;
 		bullet.fire = false;
 
 		_vBullet.push_back(bullet);
@@ -71,7 +72,16 @@ void Missile::Render()
 		if (!iter.fire) continue;
 
 		// 렉트 충돌을 할꺼기 때문에 확실하게 하기 위해 렉트 left top으로 렌더
-		iter.bulletImage->Render(GetMemDC(), iter.rc.left, iter.rc.top);
+		//iter.bulletImage->Render(GetMemDC(), iter.rc.left, iter.rc.top);
+		iter.count++;
+		if (iter.count % 10) {
+			iter.bulletImage->SetFrameX(
+				iter.bulletImage->GetFrameX() + 1
+				% iter.bulletImage->GetMaxFrameX()
+			);
+			iter.bulletImage->FrameRender(
+				GetMemDC(), iter.rc.left, iter.rc.top);
+		}
 	}
 }
 
@@ -89,8 +99,8 @@ void Missile::Fire(float x, float y)
 		_viBullet->rc = RectMakeCenter(
 			_viBullet->x,
 			_viBullet->y,
-			_viBullet->bulletImage->GetWidth(),
-			_viBullet->bulletImage->GetHeight());
+			_viBullet->bulletImage->GetFrameWidth(),
+			_viBullet->bulletImage->GetFrameHeight());
 		break;
 	}
 }
@@ -108,8 +118,8 @@ void Missile::Move()
 		_viBullet->rc = RectMakeCenter(
 			_viBullet->x,
 			_viBullet->y,
-			_viBullet->bulletImage->GetWidth(),
-			_viBullet->bulletImage->GetHeight());
+			_viBullet->bulletImage->GetFrameWidth(),
+			_viBullet->bulletImage->GetFrameHeight());
 
 		if (_range < GetDistance(
 			_viBullet->fireX, _viBullet->fireY,

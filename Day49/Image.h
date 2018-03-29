@@ -143,7 +143,7 @@ public:
 	// 렉트 크기로 되어있는 박스
 	// x, y는 중심점으로 되어 있음
 	inline RECT GetBoundingBox() {
-		RECT rc = RectMakeCenter(
+		RECT rc = RectMake(
 			m_imageInfo->x, m_imageInfo->y,
 			m_imageInfo->width, m_imageInfo->height);
 		return rc;
@@ -152,7 +152,7 @@ public:
 	// 프레임 바운딩 박스 (프레임 이미지용 충돌 렉트) Get
 	// 좌표값은 프레임 x,y와 너비랑 높이 
 	inline RECT GetFrameBoundingBox() {
-		RECT rc = RectMakeCenter(
+		RECT rc = RectMake(
 			m_imageInfo->x, m_imageInfo->y,
 			m_imageInfo->frameWidth, m_imageInfo->frameHeight);
 		return rc;

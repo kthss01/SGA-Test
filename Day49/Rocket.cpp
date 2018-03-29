@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Rocket.h"
-
+#include "EnemyManager.h"
 
 Rocket::Rocket()
 {
@@ -69,4 +69,28 @@ void Rocket::Render()
 {
 	m_missile->Render();
 	m_player->Render(GetMemDC(), m_player->GetX(), m_player->GetY());
+}
+
+void Rocket::RemoveMissile(int arrNum)
+{
+}
+
+void Rocket::Collision()
+{
+	for (int i = 0; i < m_missile->GetVBullet().size(); i++) {
+		for (int j = 0; j < m_em->GetVMinion().size(); j++) {
+			RECT temp;
+			if (IntersectRect(&temp,
+				&m_missile->GetVBullet()[i].rc,
+				&m_em->GetVMinion()[j]->GetRect())) {
+				m_missile->GetVBullet()[i].fire = false;
+				//m_em->GetVMinion()[j]->
+				break;
+			}
+		}
+	}
+}
+
+void Rocket::HitDamage(float damage)
+{
 }

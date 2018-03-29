@@ -23,6 +23,7 @@ struct tagBullet {
 	float speed;
 	float angle;
 	bool fire;
+	int count;
 };
 
 // 공용 총알 (각도를 가지고 움직이는 녀석)
@@ -45,6 +46,9 @@ public:
 
 	void Fire(float x, float  y, float angle, float speed);
 	void Move();
+
+	vector<tagBullet> GetVBullet() { return _vBullet; }
+	vector<tagBullet>::iterator GetViBullet() { return _viBullet; }
 };
 
 class Missile : public GameNode
@@ -65,6 +69,10 @@ public:
 
 	void Fire(float x, float  y);
 	void Move();
+
+	vector<tagBullet> GetVBullet() { return _vBullet; }
+	vector<tagBullet>::iterator GetViBullet() { return _viBullet; }
+
 	void Bomb();
 };
 

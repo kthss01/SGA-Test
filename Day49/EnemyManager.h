@@ -11,6 +11,8 @@
 
 // Enemy 삭제 후 애들 이용하는건 여기서 관리해야됨
 
+class Rocket;
+
 class EnemyManager : public GameNode
 {
 private:
@@ -36,5 +38,11 @@ public:
 	void MinionBulletFire();
 
 	void SetRocket(Rocket* rocket) { _rocket = rocket; }
+
+	void RemoveMinion(int arrNum);
+	void Collision();
+
+	vEnemy GetVMinion() { return _vMinion; }
+	viEnemy GetViMinion() { return _viMinion; }
 };
 

@@ -13,6 +13,9 @@
 #include "GameNode.h"
 #include "Bullet.h"
 
+// 클래스 전방 선언
+class EnemyManager;
+
 class Rocket : public GameNode
 {
 private:
@@ -21,6 +24,8 @@ private:
 	Missile* m_missile;
 
 	float m_speed;
+
+	EnemyManager * m_em;
 public:
 	Rocket();
 	~Rocket();
@@ -30,6 +35,12 @@ public:
 	void Update() override;
 	void Render() override;
 
+	void RemoveMissile(int arrNum);
+	void Collision();
+	void HitDamage(float damage);
+
 	Image* GetImage() { return m_player; }
+
+	void SetEnemyManager(EnemyManager* em) { m_em = em; }
 };
 

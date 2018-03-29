@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "EnemyManager.h"
 
+#include "Rocket.h"
+
 EnemyManager::EnemyManager()
 {
 }
@@ -73,6 +75,23 @@ void EnemyManager::MinionBulletFire()
 			_bullet->Fire(
 				rc.left + (rc.right - rc.left) / 2,
 				rc.bottom + 30,	angle, 5.0f);
+		}
+	}
+}
+
+void EnemyManager::RemoveMinion(int arrNum)
+{
+}
+
+void EnemyManager::Collision()
+{
+	for (int i = 0; i < _bullet->GetVBullet().size(); i++) {
+		RECT temp;
+		
+		if (IntersectRect(&temp, &_bullet->GetVBullet()[i].rc,
+			&_rocket->GetImage()->GetBoundingBox())) {
+			_bullet->GetVBullet()[i].fire = false;
+			_rocket->HitDamage(10);
 		}
 	}
 }

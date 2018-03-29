@@ -21,8 +21,7 @@ HRESULT MainGame::Init()
 	IMAGE->AddImage("bg", "images/background.bmp", 0, -WINSIZEY,
 		WINSIZEX, WINSIZEY * 2, false, RGB(255, 0, 255));
 	IMAGE->AddImage(
-		"bullet", "images/bullet.bmp", 0, 0, 21, 21, true, 
-		RGB(255, 0, 255));
+		"bullet", "images/bullet.bmp", 0, 0, 21, 21, true, RGB(255, 0, 255));
 	IMAGE->AddImage(
 		"ufo", "images/ufo.bmp", 0, 0, 530, 32, 10, 1, true,
 		RGB(255, 0, 255));
