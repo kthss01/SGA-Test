@@ -99,6 +99,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day49,50,51-슈팅 게임",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day50_Iterator", "Day50_Iterator\Day50_Iterator.vcxproj", "{03D73497-1BD5-497E-9ACB-63B9AE0183AD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day52", "Day52\Day52.vcxproj", "{80499D42-EB59-421D-845D-6388C4551717}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -491,6 +493,14 @@ Global
 		{03D73497-1BD5-497E-9ACB-63B9AE0183AD}.Release|x64.Build.0 = Release|x64
 		{03D73497-1BD5-497E-9ACB-63B9AE0183AD}.Release|x86.ActiveCfg = Release|Win32
 		{03D73497-1BD5-497E-9ACB-63B9AE0183AD}.Release|x86.Build.0 = Release|Win32
+		{80499D42-EB59-421D-845D-6388C4551717}.Debug|x64.ActiveCfg = Debug|x64
+		{80499D42-EB59-421D-845D-6388C4551717}.Debug|x64.Build.0 = Debug|x64
+		{80499D42-EB59-421D-845D-6388C4551717}.Debug|x86.ActiveCfg = Debug|Win32
+		{80499D42-EB59-421D-845D-6388C4551717}.Debug|x86.Build.0 = Debug|Win32
+		{80499D42-EB59-421D-845D-6388C4551717}.Release|x64.ActiveCfg = Release|x64
+		{80499D42-EB59-421D-845D-6388C4551717}.Release|x64.Build.0 = Release|x64
+		{80499D42-EB59-421D-845D-6388C4551717}.Release|x86.ActiveCfg = Release|Win32
+		{80499D42-EB59-421D-845D-6388C4551717}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
