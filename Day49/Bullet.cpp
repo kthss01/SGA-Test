@@ -35,7 +35,7 @@ HRESULT Missile::Init(int bulletMax, float range)
 		bullet.bulletImage
 			->Init("images/missile.bmp", 416, 64, 13, 1,
 				true, RGB(255, 0, 255));
-		bullet.speed = 5.0f;
+		bullet.speed = 100.0f;
 		bullet.count = 0;
 		bullet.fire = false;
 
@@ -59,6 +59,30 @@ void Missile::Update()
 	Move();
 }
 
+void Missile::Update(float timeDelta)
+{
+	_viBullet = _vBullet.begin();
+
+	// 조건 안넣어주면 무한 반복문이 됨 while(true)
+	for (; _viBullet != _vBullet.end(); ++_viBullet) {
+		if (!_viBullet->fire) continue;
+
+		_viBullet->y -= _viBullet->speed * timeDelta;
+
+		_viBullet->rc = RectMakeCenter(
+			_viBullet->x,
+			_viBullet->y,
+			_viBullet->bulletImage->GetFrameWidth(),
+			_viBullet->bulletImage->GetFrameHeight());
+
+		if (_range < GetDistance(
+			_viBullet->fireX, _viBullet->fireY,
+			_viBullet->x, _viBullet->y)) {
+ 			_viBullet->fire = false;
+		}
+	}
+}
+
 void Missile::Render()
 {
 	// c# 에선 foreach 하면 되고
@@ -76,7 +100,7 @@ void Missile::Render()
 		iter.count++;
 		if (iter.count % 10) {
 			iter.bulletImage->SetFrameX(
-				iter.bulletImage->GetFrameX() + 1
+				(iter.bulletImage->GetFrameX() + 1)
 				% iter.bulletImage->GetMaxFrameX()
 			);
 			iter.bulletImage->FrameRender(
@@ -154,6 +178,11 @@ void Bullet::Release()
 }
 
 void Bullet::Update()
+{
+	Move();
+}
+
+void Bullet::Update(float timeDelta)
 {
 	Move();
 }

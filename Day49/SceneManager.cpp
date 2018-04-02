@@ -41,6 +41,11 @@ void SceneManager::Update()
 	if (_currentScene) _currentScene->Update();
 }
 
+void SceneManager::Update(float timeDelta)
+{
+	if (_currentScene) _currentScene->Update(timeDelta);
+}
+
 void SceneManager::Render()
 {
 	// hdc 필요한데 뺄 거

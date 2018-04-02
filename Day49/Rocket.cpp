@@ -17,7 +17,8 @@ HRESULT Rocket::Init()
 	m_player = IMAGE->AddImage(
 		"rocket", "images/rocket.bmp", WINSIZEX / 2, WINSIZEY - 200,
 		52, 64, true, RGB(255, 0, 255));
-	m_speed = 5.0f;
+	// 내가 초당 100만큼 이동한다는거라 얼마 안이동함
+	m_speed = 100.0f * FRAME->GetElapsedTime(); 
 
 	m_missile = new Missile;
 	m_missile->Init(100, 500);
@@ -62,7 +63,23 @@ void Rocket::Update()
 			m_player->GetY() - m_player->GetHeight() / 2);
 	}
 
+	if (INPUT->GetKey('B')) {
+		m_speed = 10.0f * FRAME->GetElapsedTime();
+	}
+	else {
+		m_speed = 100.0f * FRAME->GetElapsedTime();
+	}
 	m_missile->Update();
+}
+
+void Rocket::Update(float timeDelta) {
+	if (INPUT->GetKeyDown(VK_SPACE)) {
+		m_missile->Fire(
+			m_player->GetX() + m_player->GetWidth() / 2,
+			m_player->GetY() - m_player->GetHeight() / 2);
+	}
+
+	m_missile->Update(timeDelta);
 }
 
 void Rocket::Render()

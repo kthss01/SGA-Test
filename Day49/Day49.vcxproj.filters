@@ -49,8 +49,8 @@
     <Filter Include="GameMain\ShootingGame\Enemy">
       <UniqueIdentifier>{de5ad4ed-292f-42f5-a053-dc57a1979b59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameMain\Bar">
-      <UniqueIdentifier>{238c0421-903c-4718-b1b1-55abb5a54e8b}</UniqueIdentifier>
+    <Filter Include="GameFrameWork\Manager\Timer">
+      <UniqueIdentifier>{b95c0ba0-eeb9-4505-96e9-33cf9e276afd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,8 +114,14 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>GameMain\ShootingGame\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
+    </ClInclude>
     <ClInclude Include="ProgressBar.h">
-      <Filter>GameMain\Bar</Filter>
+      <Filter>GameFrameWork\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -164,8 +170,14 @@
     <ClCompile Include="EnemyManager.cpp">
       <Filter>GameMain\ShootingGame\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
+    </ClCompile>
     <ClCompile Include="ProgressBar.cpp">
-      <Filter>GameMain\Bar</Filter>
+      <Filter>GameFrameWork\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

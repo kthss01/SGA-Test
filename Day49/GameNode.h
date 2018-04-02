@@ -14,6 +14,7 @@ public:
 	virtual HRESULT Init();
 	virtual void Release();
 	virtual void Update();
+	virtual void Update(float timeDelta);
 	virtual void Render();
 
 	HDC GetMemDC() { return m_backBuffer->GetMemDC(); }

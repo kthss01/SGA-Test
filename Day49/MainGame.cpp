@@ -50,7 +50,18 @@ void MainGame::Update()
 {
 	GameNode::Update();
 
-	SCENE->Update();
+	//SCENE->Update();
+
+	float timeDelta = 0.0f;
+	if (INPUT->GetKey('B')) {
+		timeDelta = FRAME->GetElapsedTime() / 10;
+
+	}
+	else {
+		timeDelta = FRAME->GetElapsedTime();
+	}
+
+	SCENE->Update(timeDelta);
 
 	_em->Update();
 
@@ -78,5 +89,6 @@ void MainGame::Render()
 
 	}
 	//=================================================
+	FRAME->Render(GetMemDC());
 	this->SetBackBuffer()->Render(GetHDC());
 }

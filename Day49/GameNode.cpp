@@ -23,6 +23,9 @@ HRESULT GameNode::Init() {
 	SetBackBuffer();
 	_hdc = GetDC(g_hWnd);
 	SetTimer(g_hWnd, 1, 10, NULL);
+
+	FRAME->Init();
+
 	return S_OK;
 }
 
@@ -44,6 +47,9 @@ void GameNode::Update() {
 	InvalidateRect(g_hWnd, NULL, FALSE);
 }
 
+void GameNode::Update(float timeDelta) {
+	InvalidateRect(g_hWnd, NULL, FALSE);
+}
 void GameNode::Render() {}
 
 LRESULT GameNode::MainProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {

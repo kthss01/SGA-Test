@@ -24,6 +24,7 @@ public:
 	void Init();
 	void Release();
 	void Update();
+	void Update(float timeDelta);
 	void Render();
 
 	GameNode* AddScene(string sceneName, GameNode* scene);

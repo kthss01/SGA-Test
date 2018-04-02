@@ -42,6 +42,7 @@ public:
 	HRESULT Init(char* imageName, int bulletMax, float range);
 	void Release() override;
 	void Update() override;
+	void Update(float timeDelta);
 	void Render() override;
 
 	void Fire(float x, float  y, float angle, float speed);
@@ -65,6 +66,7 @@ public:
 	HRESULT Init(int bulletMax, float range);
 	void Release() override;
 	void Update() override;
+	void Update(float timeDelta);
 	void Render() override;
 
 	void Fire(float x, float  y);
