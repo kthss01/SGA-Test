@@ -55,5 +55,6 @@ void MainGame::Render()
 
 	}
 	//=================================================
+	FRAME->Render(GetMemDC());
 	this->SetBackBuffer()->Render(GetHDC());
 }

@@ -52,3 +52,7 @@ inline void BeginCreateFont(HDC hdc, HFONT* font, int size, string style = "±Ã¼­
 inline void EllipseMakeCenter(HDC hdc, int x, int y, int radius) {
 	Ellipse(hdc, x - radius, y - radius, x + radius, y + radius);
 }
+
+inline void EllipseMake(HDC hdc, RECT rc) {
+	Ellipse(hdc, rc.left, rc.top, rc.right, rc.bottom);
+}

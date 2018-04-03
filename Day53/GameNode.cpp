@@ -23,6 +23,9 @@ HRESULT GameNode::Init() {
 	SetBackBuffer();
 	_hdc = GetDC(g_hWnd);
 	SetTimer(g_hWnd, 1, 10, NULL);
+
+	FRAME->Init();
+
 	return S_OK;
 }
 
@@ -38,6 +41,9 @@ void GameNode::Release() {
 
 	IMAGE->Release();
 	IMAGE->ReleaseSingleton();
+
+	FRAME->Release();
+	FRAME->ReleaseSingleton();
 }
 
 void GameNode::Update() {

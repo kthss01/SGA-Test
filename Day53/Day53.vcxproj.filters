@@ -31,6 +31,12 @@
     <Filter Include="GameFrameWork\Image">
       <UniqueIdentifier>{335315f4-caca-4fbf-b95b-7f6ce47666df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameFrameWork\Manager\Timer">
+      <UniqueIdentifier>{1da45c4c-f4b5-4e8c-b685-b56abf3f8efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFrameWork\Scene">
+      <UniqueIdentifier>{94d2c6e8-577f-48b8-8232-c4c3cd5c2c55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -75,8 +81,17 @@
     <ClInclude Include="MainGame.h">
       <Filter>GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>GameFrameWork\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
+    </ClInclude>
     <ClInclude Include="TestScene.h">
-      <Filter>GameMain</Filter>
+      <Filter>GameFrameWork\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,8 +122,17 @@
     <ClCompile Include="MainGame.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>GameFrameWork\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>GameFrameWork\Manager\Timer</Filter>
+    </ClCompile>
     <ClCompile Include="TestScene.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>GameFrameWork\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

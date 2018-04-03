@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{80499D42-EB59-421D-845D-6388C4551717}</ProjectGuid>
+    <ProjectGuid>{8AEFE638-F2AA-4F30-9D45-CE5E8177413B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WinAPI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
@@ -148,11 +148,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonMacroFunction.h" />
+    <ClInclude Include="Frame.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SceneManager.h" />
@@ -160,15 +162,18 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="WinAPI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -177,6 +182,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="WinAPI.cpp" />
   </ItemGroup>
