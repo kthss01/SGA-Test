@@ -159,6 +159,7 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Minion.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="resource.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Minion.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="SceneManager.cpp" />
