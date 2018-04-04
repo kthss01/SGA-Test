@@ -21,6 +21,10 @@ HRESULT MainGame::Init()
 
 	SCENE->ChangeScene("Test");
 
+	SOUND->Init();
+	SOUND->AddSound("bgm", "sounds/¿µÀü3.wav", true, true);
+	SOUND->Play("bgm", 0.5f);
+
 	return S_OK;
 }
 
@@ -34,6 +38,8 @@ void MainGame::Update()
 	GameNode::Update();
 
 	SCENE->Update();
+
+	SOUND->Update();
 
 	//====================== Debug =====================//
 	if (INPUT->GetKeyDown(VK_F11)) {

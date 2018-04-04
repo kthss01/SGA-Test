@@ -93,6 +93,9 @@
     <ClInclude Include="TestScene.h">
       <Filter>GameFrameWork\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>GameFrameWork\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>GameFrameWork\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>GameFrameWork\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

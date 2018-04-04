@@ -44,6 +44,9 @@ void GameNode::Release() {
 
 	FRAME->Release();
 	FRAME->ReleaseSingleton();
+
+	SOUND->Release();
+	SOUND->ReleaseSingleton();
 }
 
 void GameNode::Update() {

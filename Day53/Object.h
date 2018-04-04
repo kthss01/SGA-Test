@@ -23,8 +23,6 @@
 
 #endif // !1
 
-
-
 class Object : public GameNode
 {
 private:
@@ -32,9 +30,12 @@ private:
 	Image* _player;
 
 	float deltaTime;
-	float _respwanTime;
+	float _respawnTime;
 
 	int _playerID;
+	POINT position;
+
+	int currentFrameX;
 private:
 	void ObjectEnable();			// 비활성화 -> 활성화
 	void ObjectDisable();			// 활성화 -> 비활성화
@@ -56,6 +57,7 @@ public:
 	void Render() override;
 
 	void SetActive(bool bActive);
+	bool GetActive() { return bActive; }
 
 	void SetImage(Image* image) { _player = image; }
 	void SetID(int id) { _playerID = id; }

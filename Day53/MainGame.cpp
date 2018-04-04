@@ -52,6 +52,16 @@ void MainGame::Update()
 		object[i]->Update();
 	}
 
+	if (INPUT->GetKeyDown(VK_SPACE))
+	{
+		
+		removeObject = RND->GetInt(10);
+		// 이렇게 안해도 SetActive()에서 처리함
+		// 스페이스 씹히는건 반복문으로 처리
+		if(object[removeObject]->GetActive())
+			object[removeObject]->SetActive(false);
+	}
+
 	//====================== Debug =====================//
 	if (INPUT->GetKeyDown(VK_F11)) {
 		isDebug = !isDebug;
