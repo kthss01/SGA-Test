@@ -101,9 +101,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day50_Iterator", "Day50_Ite
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day53-몬스터 리스폰 풀이", "Day53\Day53.vcxproj", "{8AEFE638-F2AA-4F30-9D45-CE5E8177413B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day54", "Day54\Day54.vcxproj", "{1D14F097-1D76-423B-BCFF-C248BF45CED8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day54-사운드", "Day54\Day54.vcxproj", "{1D14F097-1D76-423B-BCFF-C248BF45CED8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day54-StackOverFlow", "Day54-StackOverFlow\Day54-StackOverFlow.vcxproj", "{E4457662-EAA4-4883-928F-2D1CEAEA3237}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day55", "Day55\Day55.vcxproj", "{D35A5F87-C090-4C76-AF83-A64FCA165203}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -521,6 +523,14 @@ Global
 		{E4457662-EAA4-4883-928F-2D1CEAEA3237}.Release|x64.Build.0 = Release|x64
 		{E4457662-EAA4-4883-928F-2D1CEAEA3237}.Release|x86.ActiveCfg = Release|Win32
 		{E4457662-EAA4-4883-928F-2D1CEAEA3237}.Release|x86.Build.0 = Release|Win32
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Debug|x64.ActiveCfg = Debug|x64
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Debug|x64.Build.0 = Debug|x64
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Debug|x86.ActiveCfg = Debug|Win32
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Debug|x86.Build.0 = Debug|Win32
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Release|x64.ActiveCfg = Release|x64
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Release|x64.Build.0 = Release|x64
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Release|x86.ActiveCfg = Release|Win32
+		{D35A5F87-C090-4C76-AF83-A64FCA165203}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
