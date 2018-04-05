@@ -37,6 +37,9 @@
     <Filter Include="GameFrameWork\Scene">
       <UniqueIdentifier>{94d2c6e8-577f-48b8-8232-c4c3cd5c2c55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SaveFile">
+      <UniqueIdentifier>{84743284-c0f8-4cb5-9af1-53b04a794415}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -96,6 +99,15 @@
     <ClInclude Include="SoundManager.h">
       <Filter>GameFrameWork\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="TxtData.h">
+      <Filter>SaveFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="IniData.h">
+      <Filter>SaveFile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -139,6 +151,15 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>GameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TxtData.cpp">
+      <Filter>SaveFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="IniData.cpp">
+      <Filter>SaveFile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

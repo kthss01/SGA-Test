@@ -24,6 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WinAPI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>Day55-SaveFile</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -152,8 +153,10 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="IniData.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="resource.h" />
@@ -164,6 +167,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TxtData.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="WinAPI.h" />
   </ItemGroup>
@@ -172,8 +176,10 @@
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="IniData.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -185,6 +191,7 @@
     </ClCompile>
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TxtData.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="WinAPI.cpp" />
   </ItemGroup>

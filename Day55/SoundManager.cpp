@@ -26,14 +26,14 @@ HRESULT SoundManager::Init()
 	// ZeroMemory로 해도됨
 	/// memset ZeroMemory로 초기화시 문제 발생함
 	/// 그냥 반복문 돌려서 초기화 시킴
-	//memset(m_sound, 0, sizeof(Sound*) * TOTALSOUNDBUFFER);
-	//memset(m_channel, 0, sizeof(Channel*) * TOTALSOUNDBUFFER);
+	memset(m_sound, 0, sizeof(Sound*) * TOTALSOUNDBUFFER);
+	memset(m_channel, 0, sizeof(Channel*) * TOTALSOUNDBUFFER);
 	//ZeroMemory(m_sound, sizeof(Sound*) * TOTALSOUNDBUFFER);
 	//ZeroMemory(m_channel, sizeof(Channel*) * TOTALSOUNDBUFFER);
-	for (int i = 0; i < TOTALSOUNDBUFFER; i++) {
-		m_sound[i] = NULL;
-		m_channel[i] = NULL;
-	}
+	//for (int i = 0; i < TOTALSOUNDBUFFER; i++) {
+	//	m_sound[i] = NULL;
+	//	m_channel[i] = NULL;
+	//}
 
 	return S_OK;
 }

@@ -26,7 +26,7 @@ using namespace FMOD;
 #define EXTRACHANNELBUFFER 5
 #define SOUNDBUFFER 20
 
-#define TOTALSOUNDBUFFER SOUNDBUFFER + EXTRACHANNELBUFFER
+#define TOTALSOUNDBUFFER (SOUNDBUFFER + EXTRACHANNELBUFFER)
 
 class SoundManager : public SingletonBase<SoundManager>
 {

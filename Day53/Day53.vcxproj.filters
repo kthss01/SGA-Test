@@ -94,7 +94,7 @@
       <Filter>GameFrameWork\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>GameMain</Filter>
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,7 @@
       <Filter>GameFrameWork\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>GameMain</Filter>
+      <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
