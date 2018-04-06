@@ -39,8 +39,8 @@ HRESULT MainGame::Init()
 	TXTDATA->TxTSave((char*)"texts/TxTSave.txt", str);
 
 	INIDATA->AddData("Test", "KeyTest", "1000");
-	INIDATA->AddData("Test", "KeyTest2", "1000");
-	INIDATA->AddData("Test2", "KeyTest3", "1000");
+	INIDATA->AddData("Test", "KeyTest2", "3.141592f");
+	INIDATA->AddData("Test2", "KeyTest3", "1234");
 	INIDATA->AddData("Test3", "KeyTest4", "1000");
 	INIDATA->AddData("Test", "KeyTest5", "1000");
 	INIDATA->SaveData("IniSave");
@@ -73,13 +73,22 @@ void MainGame::Render()
 	{
 		SCENE->Render();
 	
-		// 문제 있음
-		vector<string> str = TXTDATA->TxTLoad((char*)"texts/TxTSave.txt");
-		for (int i = 0; i < str.size(); i++) {
-			TextOut(GetMemDC(), WINSIZEX / 2, i * 20, 
-				str[i].c_str(), strlen(str[i].c_str()));
-		}
+		//// 문제 있음 -> 해결
+		//vector<string> str = TXTDATA->TxTLoad((char*)"texts/TxTSave.txt");
+		//for (int i = 0; i < str.size(); i++) {
+		//	TextOut(GetMemDC(), WINSIZEX / 2, i * 20, 
+		//		str[i].c_str(), strlen(str[i].c_str()));
+		//}
 
+		char str[128];
+		// 파일이 존재하지 않거나 잘못된 값인 경우 0이 나옴
+		sprintf_s(str, "%d", 
+			INIDATA->LoadDataInteger("IniSave", "Test3", "KeyTest4"));
+		TextOut(GetMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
+
+		float data = atof(INIDATA->LoadDataString("IniSave", "Test", "KeyTest2"));
+		sprintf_s(str, "%f", data);
+		TextOut(GetMemDC(), WINSIZEX / 2, WINSIZEY / 2 + 50, str, strlen(str));
 	}
 	//==================   Debug   ====================
 	if (isDebug)

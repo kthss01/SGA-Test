@@ -93,6 +93,24 @@ bool ImageManager::DeleteAll()
 	return true;
 }
 
+void ImageManager::Render(string strKey, HDC hdc, int destX, int destY)
+{
+	Image* img = FindImage(strKey);
+	if (img) img->Render(hdc, destX, destY);
+}
+
+void ImageManager::Render(string strKey, HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight)
+{
+	Image* img = FindImage(strKey);
+	if (img) img->Render(hdc, destX, destY, sourX, sourY, sourWidth, sourHeight);
+}
+
+void ImageManager::AlphaRender(string strKey, HDC hdc, int destX, int destY, BYTE alpha)
+{
+	Image* img = FindImage(strKey);
+	if (img) img->AlphaRender(hdc, destX, destY, alpha);
+}
+
 void ImageManager::FrameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY)
 {
 	Image* img = FindImage(strKey);

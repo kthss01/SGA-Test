@@ -2,6 +2,7 @@
 #include "MainGame.h"
 
 #include "TestScene.h"
+#include "MiniMap.h"
 
 MainGame::MainGame()
 {
@@ -18,13 +19,14 @@ HRESULT MainGame::Init()
 	isDebug = false;
 
 	SCENE->AddScene("Test", new TestScene);
+	SCENE->AddScene("MiniMap", new MiniMap);
 
 	SOUND->Init();
 	SOUND->AddSound("Test", "sounds/¿µÀü3.wav", true, true);
 
-	SCENE->ChangeScene("Test");
+	//SCENE->ChangeScene("Test");
 
-
+	SCENE->ChangeScene("MiniMap");
 
 
 	return S_OK;

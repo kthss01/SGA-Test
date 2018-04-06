@@ -2,6 +2,8 @@
 
 #include "SIngletonBase.h"
 
+// Ini 보다 Text가 Binary라 조금더 빠르긴 한데 알아보기 쉬운게 좋음
+
 class TxtData : public SingletonBase<TxtData>
 {
 private:

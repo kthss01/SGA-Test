@@ -72,10 +72,24 @@ char * IniData::LoadDataString(const char * fileName, const char * section, cons
 		str			// 경로
 	);
 
-	return nullptr;
+	return data;
 }
 
 int IniData::LoadDataInteger(const char * fileName, const char * section, const char * key)
 {
-	return 0;
+	char str[256];
+	char dir[256];
+
+	ZeroMemory(str, sizeof(str));
+	ZeroMemory(dir, sizeof(dir));
+
+	// C에서 내 프로젝트까지의 경로 가져오는 함수
+	// 파일이 D에있음 d부터 
+	GetCurrentDirectory(256, str);
+	// save 폴더는 만들어줘야함
+	sprintf_s(dir, "/save/%s.ini", fileName);
+	strcat_s(str, dir);
+
+	// 실수형은 스트링으로 읽어와서 변경을 해야함
+	return GetPrivateProfileInt(section, key, 0, str);
 }

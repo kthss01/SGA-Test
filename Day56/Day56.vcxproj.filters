@@ -105,6 +105,9 @@
     <ClInclude Include="TextData.h">
       <Filter>SaveFile</Filter>
     </ClInclude>
+    <ClInclude Include="MiniMap.h">
+      <Filter>GameMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="TextData.cpp">
       <Filter>SaveFile</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>GameMain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -28,6 +28,13 @@ public:
 	bool DeleteImage(string strKey);
 	bool DeleteAll();
 
+	// ¿œπ› ∑ª¥ı
+	void Render(string strKey, HDC hdc, int destX, int destY);
+	void Render(string strKey, HDC hdc, int destX, int destY, 
+		int sourX, int sourY, int sourWidth, int sourHeight);
+
+	void AlphaRender(string strKey, HDC hdc, int destX, int destY, BYTE alpha);
+
 	// «¡∑°¿” ∑ª¥ı
 	void FrameRender(string strKey, HDC hdc, int destX, int destY,
 		int currentFrameX, int currentFrameY);
