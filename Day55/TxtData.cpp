@@ -57,6 +57,11 @@ char * TxtData::VectorArrayCombine(vector<string> vArray)
 		if ((i + 1) < vArray.size()) {
 			strcat_s(str, ",");
 		}
+		
+		//// 이거 추가하면 좋음 -> 이렇게 하면 안될듯
+		//// 읽어올 때 문제 생김
+		//if (i == vArray.size() - 1)
+		//	strcat_s(str, "\r\n\0");
 	}
 
 	return str;
@@ -101,5 +106,32 @@ vector<string> TxtData::CharArraySeparation(char charArray[])
 			vArray.push_back(token);
 	}
 
-	return vArray;;
+	return vArray;
+}
+
+void TxtData::TextWrite(vector<string> vStr)
+{
+	char str[256];
+	DWORD write;
+
+	strncpy_s(str, 256, VectorArrayCombine(vStr), 256);
+	WriteFile(file, str, 256, &write, NULL);
+}
+
+vector<vector<string>> TxtData::TextRead()
+{
+	vector< vector<string> > vvStr;
+
+	char str[256];
+	DWORD read = 0;
+
+	int cnt = 0;
+	while(true) {
+		ReadFile(file, str, 256, &read, NULL);
+		if (read <= 0) break;
+		vvStr.push_back(CharArraySeparation(str));
+	};
+
+
+	return vvStr;
 }
