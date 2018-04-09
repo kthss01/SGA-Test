@@ -38,13 +38,13 @@ HRESULT MainGame::Init()
 	// 폴더는 만들어지지 않음
 	//TXTDATA->TxTSave((char*)"texts/TxTSave.txt", str);
 
-	TXTDATA->CreateWriteTextDataHandle((char*)"texts/TxTSave2.txt");
+	//TXTDATA->CreateWriteTextDataHandle((char*)"texts/TxTSave2.txt");
 
-	for (int i = 0; i < 3; i++) {
-		TXTDATA->TextWrite(str);
-	}
+	//for (int i = 0; i < 3; i++) {
+	//	TXTDATA->TextWrite(str);
+	//}
 
-	TXTDATA->CloseTextDataHandle();
+	//TXTDATA->CloseTextDataHandle();
 
 	INIDATA->AddData("Test", "KeyTest", "1000");
 	INIDATA->AddData("Test", "KeyTest2", "3.141592f");
@@ -88,15 +88,15 @@ void MainGame::Render()
 		//		str[i].c_str(), strlen(str[i].c_str()));
 		//}
 		
-		TXTDATA->CreateReadTextDataHandle((char*)"texts/TxTSave2.txt");
-		vector< vector<string> > sstr = TXTDATA->TextRead();
-		for (int i = 0; i < sstr.size(); i++) {
-			for (int j = 0; j < sstr[i].size(); j++) {
-				TextOut(GetMemDC(), 200 + i * 150, j * 20,
-					sstr[i][j].c_str(), strlen(sstr[i][j].c_str()));
-			}
-		}
-		TXTDATA->CloseTextDataHandle();
+		//TXTDATA->CreateReadTextDataHandle((char*)"texts/TxTSave2.txt");
+		//vector< vector<string> > sstr = TXTDATA->TextRead();
+		//for (int i = 0; i < sstr.size(); i++) {
+		//	for (int j = 0; j < sstr[i].size(); j++) {
+		//		TextOut(GetMemDC(), 200 + i * 150, j * 20,
+		//			sstr[i][j].c_str(), strlen(sstr[i][j].c_str()));
+		//	}
+		//}
+		//TXTDATA->CloseTextDataHandle();
 
 		//char str[128];
 		//// 파일이 존재하지 않거나 잘못된 값인 경우 0이 나옴

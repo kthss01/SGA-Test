@@ -105,9 +105,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day54-사운드", "Day54\Da
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day54-StackOverFlow", "Day54-StackOverFlow\Day54-StackOverFlow.vcxproj", "{E4457662-EAA4-4883-928F-2D1CEAEA3237}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day55-SaveFile", "Day55\Day55.vcxproj", "{D35A5F87-C090-4C76-AF83-A64FCA165203}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day55,56-SaveLoad Text Ini", "Day55\Day55.vcxproj", "{D35A5F87-C090-4C76-AF83-A64FCA165203}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day56", "Day56\Day56.vcxproj", "{6583E907-B4F5-449C-8E8D-C1C96AEE24E7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day56-미니맵", "Day56\Day56.vcxproj", "{6583E907-B4F5-449C-8E8D-C1C96AEE24E7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day57", "Day57\Day57.vcxproj", "{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -541,6 +543,14 @@ Global
 		{6583E907-B4F5-449C-8E8D-C1C96AEE24E7}.Release|x64.Build.0 = Release|x64
 		{6583E907-B4F5-449C-8E8D-C1C96AEE24E7}.Release|x86.ActiveCfg = Release|Win32
 		{6583E907-B4F5-449C-8E8D-C1C96AEE24E7}.Release|x86.Build.0 = Release|Win32
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Debug|x64.ActiveCfg = Debug|x64
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Debug|x64.Build.0 = Debug|x64
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Debug|x86.ActiveCfg = Debug|Win32
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Debug|x86.Build.0 = Debug|Win32
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Release|x64.ActiveCfg = Release|x64
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Release|x64.Build.0 = Release|x64
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Release|x86.ActiveCfg = Release|Win32
+		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
