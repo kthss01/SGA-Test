@@ -38,6 +38,8 @@ public:
 	// «¡∑°¿” ∑ª¥ı
 	void FrameRender(string strKey, HDC hdc, int destX, int destY,
 		int currentFrameX, int currentFrameY);
+	void FrameRender(string strKey, HDC hdc, int destX, int destY,
+		int currentFrameX, int currentFrameY, BYTE alpha);
 };
 
 #define IMAGE ImageManager::GetSingleton()

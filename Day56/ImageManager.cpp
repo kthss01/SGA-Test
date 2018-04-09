@@ -116,3 +116,9 @@ void ImageManager::FrameRender(string strKey, HDC hdc, int destX, int destY, int
 	Image* img = FindImage(strKey);
 	if (img) img->FrameRender(hdc, destX, destY, currentFrameX, currentFrameY);
 }
+
+void ImageManager::FrameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha)
+{
+	Image* img = FindImage(strKey);
+	if (img) img->FrameRender(hdc, destX, destY, currentFrameX, currentFrameY, alpha);
+}

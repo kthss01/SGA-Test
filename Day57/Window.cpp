@@ -59,7 +59,12 @@ Window::~Window()
 
 void Window::Init()
 {
-
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 20; j++) {
+			rc[i][j] = RectMake(i * 32, j * 32, 32, 32);
+		}
+	}
+	clickFrame = { 0,0 };
 }
 
 void Window::Release()
@@ -69,17 +74,33 @@ void Window::Release()
 
 void Window::Update()
 {
+	if (INPUT->GetKeyDown(VK_RBUTTON)) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 20; j++) {
+				if (PtInRect(&rc[i][j], ptMouse)) {
+					clickFrame = { i, j };
+				}
+			}
+		}
+	}
+
+	/////////////////////////////////////
 	int x, y, cx, cy;
 
 	RECT rcWin;
 	GetWindowRect(g_hWnd, &rcWin);
 
 	cx = SUBWINSIZEX;
-	cy = 600;
+	cy = SUBWINSIZEY;
 	x = rcWin.right;
 	y = rcWin.top;
 
 	SetWindowPos(hWnd, NULL, x, y, cx, cy, 0);
+
+	//AdjustWindowRect(&rcWin, WINSTYLE, FALSE);
+
+	//SetWindowPos(hWnd, NULL, x, y,
+	//	(rcWin.right - rcWin.left), (rcWin.bottom - rcWin.top), SWP_NOZORDER | SWP_NOMOVE);
 
 	if (currentScene != NULL)
 	{
@@ -96,6 +117,10 @@ void Window::Render()
 	{
 		currentScene->Render(m_backBuffer->GetMemDC());
 	}
+	IMAGE->Render("tileMap", m_backBuffer->GetMemDC(), 0, 0);
+
+
+
 	//=============================
 	m_backBuffer->Render(hdc);
 	ReleaseDC(hWnd, hdc);
@@ -112,7 +137,7 @@ LRESULT Window::WndLogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg) {
 	case WM_MOUSEMOVE:
 		ptMouse.x = LOWORD(lParam);
-		g_ptMouse.y = HIWORD(lParam);
+		ptMouse.y = HIWORD(lParam);
 		break;
 	case WM_PAINT:
 	{
@@ -133,4 +158,18 @@ LRESULT Window::WndLogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+}
+
+void Window::SetWindowSize(int x, int y, int width, int height)
+{
+	RECT rc;
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = SUBWINSIZEX;
+	rc.bottom = SUBWINSIZEY;
+
+	AdjustWindowRect(&rc, WINSTYLE, FALSE);
+
+	SetWindowPos(hWnd, NULL, x, y,
+		(rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE);
 }
