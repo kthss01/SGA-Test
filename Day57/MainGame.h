@@ -79,8 +79,8 @@ private:
 	//vector<RenderImage> images;
 	//Image * bg;
 	//
-	//OPENFILENAME OFN;
-	//char filePath[MAX_PATH];	// 최대 경로 길이
+	OPENFILENAME OFN;
+	char filePath[MAX_PATH];	// 최대 경로 길이
 public:
 	MainGame();
 	~MainGame();
