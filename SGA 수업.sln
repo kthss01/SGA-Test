@@ -109,7 +109,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day55,56-SaveLoad Text Ini"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day56-미니맵", "Day56\Day56.vcxproj", "{6583E907-B4F5-449C-8E8D-C1C96AEE24E7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day57", "Day57\Day57.vcxproj", "{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day57,58-맵툴, commdlg", "Day57\Day57.vcxproj", "{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day59-툴", "Day59\Day59.vcxproj", "{113D0B91-4B1E-4ABC-8A55-50FF479657D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -551,6 +553,14 @@ Global
 		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Release|x64.Build.0 = Release|x64
 		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Release|x86.ActiveCfg = Release|Win32
 		{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}.Release|x86.Build.0 = Release|Win32
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Debug|x64.ActiveCfg = Debug|x64
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Debug|x64.Build.0 = Debug|x64
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Debug|x86.ActiveCfg = Debug|Win32
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Debug|x86.Build.0 = Debug|Win32
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Release|x64.ActiveCfg = Release|x64
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Release|x64.Build.0 = Release|x64
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Release|x86.ActiveCfg = Release|Win32
+		{113D0B91-4B1E-4ABC-8A55-50FF479657D8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
