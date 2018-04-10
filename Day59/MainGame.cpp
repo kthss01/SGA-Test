@@ -5,7 +5,8 @@
 
 MainGame::MainGame()
 {
-	SUBWIN->Init();
+	// 이거 때문에 한동안 MainGame의 Render가 안된거 같음
+	//SUBWIN->Init();
 }
 
 
@@ -73,7 +74,7 @@ void MainGame::Render()
 	PatBlt(GetMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=================================================
 	{
-		SCENE->Render();
+		//SCENE->Render();
 		SUBWIN->Render();
 
 		for (int i = 0; i < TILEX * TILEY; i++) {

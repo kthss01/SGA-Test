@@ -44,6 +44,9 @@ Window::Window()
 	HWND		hParenthWnd = NULL;
 	HINSTANCE	hInst = NULL;
 
+	hParenthWnd = g_hWnd;
+	hInst = GetModuleHandle(NULL);
+
 	hWnd = CreateWindow(
 		"sub",
 		"sub",
