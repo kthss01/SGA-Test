@@ -2,8 +2,13 @@
 
 #include "SIngletonBase.h"
 
-#define SUBWINSIZEX 256
-#define SUBWINSIZEY 640
+enum CTRL
+{
+	CTRL_TERRAINDRAW,
+	CTRL_OBJECTDRAW,
+	CTRL_ERASER,
+	CTRL_END
+};
 
 class Window : public SingletonBase<Window>
 {
@@ -16,6 +21,13 @@ private:
 
 	RECT rc[8][20];
 	POINT clickFrame;
+
+	// 버튼을 만들어서 사용할 녀석
+	HWND _btnTerrainDraw;
+	HWND _btnObjectDraw;
+	HWND _btnEraser;
+
+	static CTRL _currentCTRL;
 public:
 	Window();
 	~Window();
@@ -30,8 +42,7 @@ public:
 
 	POINT GetFramePoint() { return clickFrame; }
 	static POINT GetMousePos() { return ptMouse; }
-
-	void SetWindowSize(int x, int y, int width, int height);
+	static CTRL GetCTRL() { return _currentCTRL; }
 };
 
 #define SUBWIN Window::GetSingleton()

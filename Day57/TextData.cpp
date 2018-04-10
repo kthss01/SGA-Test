@@ -29,6 +29,7 @@ void TextData::TextSave(char * saveFileName, vector<string> vStr)
 	// CreateFile Binary 형식으로 들어감
 	// Binary 16진수 데이터 형식으로 들어감
 	// Binary 한글 관련으로 문제가 있었음
+	// binary라 일반적인 fopen 보다 빠름 대신 한줄로 쭉 써짐
 	file = CreateFile(
 		saveFileName,	// 생성할 파일 또는 로드할 파일의 이름
 		GENERIC_WRITE,	// 파일이나 장치를 만들거나 열때의 권한

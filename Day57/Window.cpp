@@ -3,6 +3,12 @@
 #include "GameNode.h"
 
 POINT Window::ptMouse = POINT{ 0,0 };
+CTRL Window::_currentCTRL = CTRL_TERRAINDRAW;
+
+// define cpp에 하면 여기만 사용 가능하게 됨 include 할때
+
+#define SUBWINSIZEX 400
+#define SUBWINSIZEY 600
 
 Window::Window()
 {
@@ -48,7 +54,7 @@ Window::Window()
 	Init();
 
 	m_backBuffer = new Image();
-	m_backBuffer->Init(250, 600);
+	m_backBuffer->Init(SUBWINSIZEX, SUBWINSIZEY);
 }
 
 
@@ -65,6 +71,26 @@ void Window::Init()
 		}
 	}
 	clickFrame = { 0,0 };
+
+	// 버튼도 조그만한 윈도우라고 생각하면 됨
+	// MFC 문법임 색깔을 바꾸거나 이러긴 힘듬
+	// 클릭시 HMENU 메시지 발생
+	_btnTerrainDraw = CreateWindow("button", "Terrain",
+		// 자식으로 생성하면 안쪽에 만들어짐
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+		// 클릭했을때 어떤 값을 반환할지 hMenu
+		280, 50, 100, 20, hWnd, HMENU(0), g_hInstance, NULL);
+	_btnObjectDraw = CreateWindow("button", "Object",
+		// 자식으로 생성하면 안쪽에 만들어짐
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+		// 클릭했을때 어떤 값을 반환할지 hMenu
+		280, 80, 100, 20, hWnd, HMENU(1), g_hInstance, NULL);
+	_btnEraser = CreateWindow("button", "Eraser",
+		// 자식으로 생성하면 안쪽에 만들어짐
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+		// 클릭했을때 어떤 값을 반환할지 hMenu
+		280, 110, 100, 20, hWnd, HMENU(2), g_hInstance, NULL);
+
 }
 
 void Window::Release()
@@ -95,7 +121,18 @@ void Window::Update()
 	x = rcWin.right;
 	y = rcWin.top;
 
-	SetWindowPos(hWnd, NULL, x, y, cx, cy, 0);
+	RECT rc;
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = cx;
+	rc.bottom = cy;
+
+	AdjustWindowRect(&rc, WINSTYLE, FALSE);
+
+	SetWindowPos(hWnd, NULL, x, y,
+		(rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER);
+
+	//SetWindowPos(hWnd, NULL, x, y, cx, cy, 0);
 
 	//AdjustWindowRect(&rcWin, WINSTYLE, FALSE);
 
@@ -146,6 +183,16 @@ LRESULT Window::WndLogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//ReleaseDC(hWnd, hdc);
 	}
 	break;
+	case WM_COMMAND:
+		// 프로그램 실행 중 사용자가 메뉴 항목을 선택하면 발생하는 메세지
+		switch (LOWORD(wParam))
+		{
+		default:
+			// 클릭했을 때 0,1,2 값 중 하나가 들어옴 
+			_currentCTRL = (CTRL)(LOWORD(wParam));
+			break;
+		}
+		break;
 	case WM_KEYDOWN:
 		switch (wParam) {
 		case VK_ESCAPE:
@@ -158,18 +205,4 @@ LRESULT Window::WndLogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
-}
-
-void Window::SetWindowSize(int x, int y, int width, int height)
-{
-	RECT rc;
-	rc.left = 0;
-	rc.top = 0;
-	rc.right = SUBWINSIZEX;
-	rc.bottom = SUBWINSIZEY;
-
-	AdjustWindowRect(&rc, WINSTYLE, FALSE);
-
-	SetWindowPos(hWnd, NULL, x, y,
-		(rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE);
 }
