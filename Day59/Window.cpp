@@ -14,50 +14,6 @@ CTRL Window::_currentCTRL = CTRL_TERRAINDRAW;
 
 Window::Window()
 {
-	// 로그 윈도우 생성
-	int x, y, cx, cy;
-	WNDCLASS wc;
-	RECT rc;
-
-	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-	wc.lpfnWndProc = (WNDPROC)Window::WndLogProc;
-	wc.cbClsExtra = 0;
-	wc.cbWndExtra = 0;
-	wc.hInstance = GetModuleHandle(NULL);
-	wc.hIcon = LoadIcon(NULL, IDI_WINLOGO);
-	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wc.lpszMenuName = NULL;
-	wc.lpszClassName = "sub";
-
-	RegisterClass(&wc);
-
-	// 부모 윈도우 오른쪽에 위치하게
-	RECT rcWin;
-	GetWindowRect(g_hWnd, &rcWin);
-
-	cx = 250;
-	cy = 600;
-	x = rcWin.right;
-	y = rcWin.top;
-
-	HWND		hParenthWnd = NULL;
-	HINSTANCE	hInst = NULL;
-
-	hParenthWnd = g_hWnd;
-	hInst = GetModuleHandle(NULL);
-
-	hWnd = CreateWindow(
-		"sub",
-		"sub",
-		WS_POPUP | WS_CAPTION | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
-		x, y, cx, cy, hParenthWnd, NULL,
-		hInst, NULL);
-
-	ShowWindow(hWnd, SW_SHOW);
-
-	Init();
-
 	m_backBuffer = new Image();
 	m_backBuffer->Init(SUBWINSIZEX, SUBWINSIZEY);
 }
@@ -70,6 +26,8 @@ Window::~Window()
 
 void Window::Init()
 {
+	CreateSubWindow();
+
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 20; j++) {
 			rc[i][j] = RectMake(i * 32, j * 32, 32, 32);
@@ -125,26 +83,26 @@ void Window::Update()
 	}
 
 	/////////////////////////////////////
-	int x, y, cx, cy;
+	//int x, y, cx, cy;
 
-	RECT rcWin;
-	GetWindowRect(g_hWnd, &rcWin);
+	//RECT rcWin;
+	//GetWindowRect(g_hWnd, &rcWin);
 
-	cx = SUBWINSIZEX;
-	cy = SUBWINSIZEY;
-	x = rcWin.right;
-	y = rcWin.top;
+	//cx = SUBWINSIZEX;
+	//cy = SUBWINSIZEY;
+	//x = rcWin.right;
+	//y = rcWin.top;
 
-	RECT rc;
-	rc.left = 0;
-	rc.top = 0;
-	rc.right = cx;
-	rc.bottom = cy;
+	//RECT rc;
+	//rc.left = 0;
+	//rc.top = 0;
+	//rc.right = cx;
+	//rc.bottom = cy;
 
-	AdjustWindowRect(&rc, WINSTYLE, FALSE);
+	//AdjustWindowRect(&rc, WINSTYLE, FALSE);
 
-	SetWindowPos(hWnd, NULL, x, y,
-		(rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER);
+	//SetWindowPos(hWnd, NULL, x, y,
+	//	(rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER);
 
 	if (currentScene != NULL)
 	{
@@ -224,4 +182,59 @@ LRESULT Window::WndLogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+}
+
+void Window::CreateSubWindow()
+{
+	// 로그 윈도우 생성
+	int x, y, cx, cy;
+	WNDCLASS wc;
+	RECT rc;
+
+	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+	wc.lpfnWndProc = (WNDPROC)Window::WndLogProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = GetModuleHandle(NULL);
+	wc.hIcon = LoadIcon(NULL, IDI_WINLOGO);
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	wc.lpszMenuName = NULL;
+	wc.lpszClassName = "sub";
+
+	RegisterClass(&wc);
+
+	// 부모 윈도우 오른쪽에 위치하게
+	RECT rcWin;
+	GetWindowRect(g_hWnd, &rcWin);
+
+	cx = SUBWINSIZEX;
+	cy = SUBWINSIZEY;
+	x = rcWin.right;
+	y = rcWin.top;
+
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = cx;
+	rc.bottom = cy;
+
+	HWND		hParenthWnd = NULL;
+	HINSTANCE	hInst = NULL;
+
+	hParenthWnd = g_hWnd;
+	hInst = GetModuleHandle(NULL);
+
+	hWnd = CreateWindow(
+		"sub",
+		"sub",
+		WS_POPUP | WS_CAPTION | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+		x, y, cx, cy, hParenthWnd, NULL,
+		hInst, NULL);
+
+	AdjustWindowRect(&rc, WINSTYLE, FALSE);
+
+	SetWindowPos(hWnd, NULL, x, y,
+		(rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER);
+
+	ShowWindow(hWnd, SW_SHOW);
 }

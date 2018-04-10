@@ -17,6 +17,9 @@ MainGame::~MainGame()
 HRESULT MainGame::Init()
 {
 	GameNode::Init();
+	SOUND->Init();
+	SUBWIN->Init();
+
 	isDebug = false;
 
 	SUBWIN->SetMainGame(this);
@@ -24,7 +27,6 @@ HRESULT MainGame::Init()
 	TestScene * test = new TestScene;
 	SCENE->AddScene("Test", test);
 
-	SOUND->Init();
 	SOUND->AddSound("Test", "sounds/¿µÀü3.wav", true, true);
 
 	SUBWIN->SetScene(test);

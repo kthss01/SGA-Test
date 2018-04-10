@@ -59,6 +59,8 @@ public:
 
 	void SetMainGame(MainGame * mg) { this->mg = mg; }
 	MainGame * GetMainGame() { return mg; }
+
+	void CreateSubWindow();
 };
 
 #define SUBWIN Window::GetSingleton()
