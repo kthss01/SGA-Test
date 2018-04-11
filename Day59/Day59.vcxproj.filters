@@ -40,6 +40,9 @@
     <Filter Include="SaveFile">
       <UniqueIdentifier>{00ce1dc5-6825-424a-bc36-d5cbe091fea5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameMain\TankGame">
+      <UniqueIdentifier>{7842b735-986a-4ed9-ade7-35b9e5a662c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -111,6 +114,18 @@
     <ClInclude Include="IniData.h">
       <Filter>SaveFile</Filter>
     </ClInclude>
+    <ClInclude Include="TankMap.h">
+      <Filter>GameMain\TankGame</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>GameMain\TankGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>GameMain\TankGame</Filter>
+    </ClInclude>
+    <ClInclude Include="TankGameScene.h">
+      <Filter>GameMain\TankGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -166,6 +181,15 @@
     </ClCompile>
     <ClCompile Include="IniData.cpp">
       <Filter>SaveFile</Filter>
+    </ClCompile>
+    <ClCompile Include="TankMap.cpp">
+      <Filter>GameMain\TankGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>GameMain\TankGame</Filter>
+    </ClCompile>
+    <ClCompile Include="TankGameScene.cpp">
+      <Filter>GameMain\TankGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

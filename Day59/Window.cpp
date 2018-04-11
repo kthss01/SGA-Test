@@ -161,10 +161,10 @@ LRESULT Window::WndLogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				_currentCTRL = (CTRL)(LOWORD(wParam));
 				break;
 			case CTRL_SAVE:
-				SUBWIN->GetMainGame()->Save();
+				//SUBWIN->GetMainGame()->Save();
 				break;
 			case CTRL_LOAD:
-				SUBWIN->GetMainGame()->Load();
+				//SUBWIN->GetMainGame()->Load();
 				break;
 			}
 			break;
