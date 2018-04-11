@@ -115,7 +115,6 @@ void Tank::TankMove()
 	// 현태 탱크가 어느 타일 위치에 있는지 계산
 	// 탱크 위치가 1, 40 이면 1 / 32 -> 0 , 40 / 32 -> 1이라 (0,1) 타일 위치
 	// 원래대로 따지면 중앙이 정확한데 left, top으로 설정하신거
-	// 중점으로 바꿈
 	tileX = (rcCollision.left + (rcCollision.right - rcCollision.left) / 2) / TILESIZE;
 	tileY = (rcCollision.top + (rcCollision.bottom - rcCollision.top) / 2) / TILESIZE;
 
@@ -177,6 +176,90 @@ void Tank::TankMove()
 
 void Tank::TankFire()
 {
+	int tileX = (_rc.left + (_rc.right - _rc.left) / 2) / TILESIZE;
+	int tileY = (_rc.top + (_rc.bottom - _rc.top) / 2) / TILESIZE;
+
+	POINT pos;
+
+	switch (_direction)
+	{
+	case TANKDIRECTION_LEFT:
+		for (int i = tileX - 1; i > 0; i--) {
+			if (_tankMap->GetTiles()[i + tileY * TILEX].obj <= OBJ_BLOCK3) {
+				if (_tankMap->GetTiles()[i + tileY * TILEX].obj == OBJ_BLOCK1) {
+					_tankMap->GetTiles()[i + tileY * TILEX].obj = OBJ_NONE;
+					_tankMap->GetAttribute()[i + tileY * TILEX] = 0;
+				}
+				else {
+					_tankMap->GetTiles()[i + tileY * TILEX].obj =
+						(OBJECT)(_tankMap->GetTiles()[i + tileY * TILEX].obj - 1);
+					pos = _tankMap->
+						GetOBJECTFrame(_tankMap->GetTiles()[i + tileY * TILEX].obj);
+					_tankMap->GetTiles()[i + tileY * TILEX].objFrameX = pos.x;
+					_tankMap->GetTiles()[i + tileY * TILEX].objFrameY = pos.y;
+				}
+				break;
+			}
+		}
+		break;
+	case TANKDIRECTION_RIGHT:
+		for (int i = tileX + 1; i < TILEX; i++) {
+			if (_tankMap->GetTiles()[i + tileY * TILEX].obj <= OBJ_BLOCK3) {
+				if (_tankMap->GetTiles()[i + tileY * TILEX].obj == OBJ_BLOCK1) {
+					_tankMap->GetTiles()[i + tileY * TILEX].obj = OBJ_NONE;
+					_tankMap->GetAttribute()[i + tileY * TILEX] = 0;
+				}
+				else {
+					_tankMap->GetTiles()[i + tileY * TILEX].obj =
+						(OBJECT)(_tankMap->GetTiles()[i + tileY * TILEX].obj - 1);
+					pos = _tankMap->
+						GetOBJECTFrame(_tankMap->GetTiles()[i + tileY * TILEX].obj);
+					_tankMap->GetTiles()[i + tileY * TILEX].objFrameX = pos.x;
+					_tankMap->GetTiles()[i + tileY * TILEX].objFrameY = pos.y;
+				}
+				break;
+			}
+		}
+		break;
+	case TANKDIRECTION_UP:
+		for (int i = tileY - 1; i > 0; i--) {
+			if (_tankMap->GetTiles()[tileX + i * TILEX].obj <= OBJ_BLOCK3) {
+				if (_tankMap->GetTiles()[tileX + i * TILEX].obj == OBJ_BLOCK1) {
+					_tankMap->GetTiles()[tileX + i * TILEX].obj = OBJ_NONE;
+					_tankMap->GetAttribute()[tileX + i * TILEX] = 0;
+				}
+				else {
+					_tankMap->GetTiles()[tileX + i * TILEX].obj =
+						(OBJECT)(_tankMap->GetTiles()[tileX + i * TILEX].obj - 1);
+					pos = _tankMap->
+						GetOBJECTFrame(_tankMap->GetTiles()[tileX + i * TILEX].obj);
+					_tankMap->GetTiles()[tileX + i * TILEX].objFrameX = pos.x;
+					_tankMap->GetTiles()[tileX + i * TILEX].objFrameY = pos.y;
+				}
+				break;
+			}
+		}
+		break;
+	case TANKDIRECTION_DOWN:
+		for (int i = tileY + 1; i < TILEY; i++) {
+			if (_tankMap->GetTiles()[tileX + i * TILEX].obj <= OBJ_BLOCK3) {
+				if (_tankMap->GetTiles()[tileX + i * TILEX].obj == OBJ_BLOCK1) {
+					_tankMap->GetTiles()[tileX + i * TILEX].obj = OBJ_NONE;
+					_tankMap->GetAttribute()[tileX + i * TILEX] = 0;
+				}
+				else {
+					_tankMap->GetTiles()[tileX + i * TILEX].obj =
+						(OBJECT)(_tankMap->GetTiles()[tileX + i * TILEX].obj - 1);
+					pos = _tankMap->
+						GetOBJECTFrame(_tankMap->GetTiles()[tileX + i * TILEX].obj);
+					_tankMap->GetTiles()[tileX + i * TILEX].objFrameX = pos.x;
+					_tankMap->GetTiles()[tileX + i * TILEX].objFrameY = pos.y;
+				}
+				break;
+			}
+		}
+		break;
+	}
 }
 
 void Tank::SetTankPosition()

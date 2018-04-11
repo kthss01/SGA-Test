@@ -111,9 +111,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day56-미니맵", "Day56\Da
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day57,58-맵툴, commdlg", "Day57\Day57.vcxproj", "{E63A2DA5-9027-4331-AD0C-76F91A07DF8A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day59-맵툴", "Day59\Day59.vcxproj", "{113D0B91-4B1E-4ABC-8A55-50FF479657D8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day59-맵툴,탱크게임", "Day59\Day59.vcxproj", "{113D0B91-4B1E-4ABC-8A55-50FF479657D8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day59-구조체 크기", "Day59-구조체 저장\Day59-구조체 저장.vcxproj", "{351EC142-57FA-4DB1-9F56-F6C294F6DCBF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day60-탱크게임2", "Day60\Day60.vcxproj", "{B75F86C1-F845-4398-9B86-3D991943DED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -571,6 +573,14 @@ Global
 		{351EC142-57FA-4DB1-9F56-F6C294F6DCBF}.Release|x64.Build.0 = Release|x64
 		{351EC142-57FA-4DB1-9F56-F6C294F6DCBF}.Release|x86.ActiveCfg = Release|Win32
 		{351EC142-57FA-4DB1-9F56-F6C294F6DCBF}.Release|x86.Build.0 = Release|Win32
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Debug|x64.ActiveCfg = Debug|x64
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Debug|x64.Build.0 = Debug|x64
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Debug|x86.Build.0 = Debug|Win32
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Release|x64.ActiveCfg = Release|x64
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Release|x64.Build.0 = Release|x64
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Release|x86.ActiveCfg = Release|Win32
+		{B75F86C1-F845-4398-9B86-3D991943DED3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,11 +20,11 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{113D0B91-4B1E-4ABC-8A55-50FF479657D8}</ProjectGuid>
+    <ProjectGuid>{B75F86C1-F845-4398-9B86-3D991943DED3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WinAPI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day59-맵툴,탱크게임</ProjectName>
+    <ProjectName>Day60-탱크게임2</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
