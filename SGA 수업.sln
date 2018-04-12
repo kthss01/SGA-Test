@@ -117,6 +117,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day59-구조체 크기", "D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day60-탱크게임2", "Day60\Day60.vcxproj", "{B75F86C1-F845-4398-9B86-3D991943DED3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day60-탱크게임 풀이", "Day60-풀이\Day60-풀이.vcxproj", "{587FBD97-4ADA-45B0-9484-1E066BCA6471}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -581,6 +583,14 @@ Global
 		{B75F86C1-F845-4398-9B86-3D991943DED3}.Release|x64.Build.0 = Release|x64
 		{B75F86C1-F845-4398-9B86-3D991943DED3}.Release|x86.ActiveCfg = Release|Win32
 		{B75F86C1-F845-4398-9B86-3D991943DED3}.Release|x86.Build.0 = Release|Win32
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Debug|x64.ActiveCfg = Debug|x64
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Debug|x64.Build.0 = Debug|x64
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Debug|x86.ActiveCfg = Debug|Win32
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Debug|x86.Build.0 = Debug|Win32
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Release|x64.ActiveCfg = Release|x64
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Release|x64.Build.0 = Release|x64
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Release|x86.ActiveCfg = Release|Win32
+		{587FBD97-4ADA-45B0-9484-1E066BCA6471}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
