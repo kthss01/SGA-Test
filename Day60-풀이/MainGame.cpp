@@ -28,6 +28,7 @@ HRESULT MainGame::Init()
 	SCENE->AddScene("Test", test);
 
 	SOUND->AddSound("Test", "sounds/¿µÀü3.wav", true, true);
+	SOUND->AddSound("Fire", "sounds/fire.wav", false, false);
 
 	SUBWIN->SetScene(test);
 
@@ -91,6 +92,8 @@ void MainGame::Render()
 	{
 		SCENE->Render();
 		SUBWIN->Render();
+
+		TextOut(GetMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
 
 		if (!isStart) {
 			for (int i = 0; i < TILEX * TILEY; i++) {

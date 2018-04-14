@@ -32,35 +32,79 @@ void Tank::Update()
 	// Left Move
 	if (INPUT->GetKey(VK_LEFT) && _x - (_rc.right - _rc.left) / 2 > 0) {
 		_direction = TANKDIRECTION_LEFT;
+		ray = Ray(_x, _y, -1 * WINSIZEX, 0 + _y);
 		TankMove();
 	}
 	// Right Move
 	if (INPUT->GetKey(VK_RIGHT) && _x + (_rc.right - _rc.left) / 2 < WINSIZEX) {
 		_direction = TANKDIRECTION_RIGHT;
+		ray = Ray(_x, _y, 1 * WINSIZEX, 0 + _y);
 		TankMove();
 	}
 	// Up Move
 	if (INPUT->GetKey(VK_UP) && _y - (_rc.bottom - _rc.top) / 2 > 0) {
 		_direction = TANKDIRECTION_UP;
+		ray = Ray(_x, _y, 0 + _x, -1 * WINSIZEY);
 		TankMove();
 	}
 	// Down Move
 	if (INPUT->GetKey(VK_DOWN) && _y + (_rc.bottom - _rc.top) / 2 < WINSIZEY) {
 		_direction = TANKDIRECTION_DOWN;
+		ray = Ray(_x, _y, 0 + _x, 1 * WINSIZEY);
 		TankMove();
 	}
 
-	if (INPUT->GetKeyDown(VK_SPACE)) {
-		TankFire();
-	}
+	//if (INPUT->GetKeyDown(VK_SPACE)) {
+	//	SOUND->Play("Fire", 0.5f);
+	//	TankFire();
+	//}
 
 	_rc = RectMakeCenter(_x, _y, _image->GetFrameWidth(), _image->GetFrameHeight());
+
+
+	vTile.clear();
+	
+	for (int i = 0; i < TILEX*TILEY; i++) {
+		if (ray.CollisionRect(_tankMap->GetTiles()[i].rc)
+			/*&& _tankMap->GetTiles()[i].obj != OBJ_NONE*/) {
+			pair<int, tagTile> temp = make_pair(i, _tankMap->GetTiles()[i]);
+			vTile.push_back(temp);
+		}
+
+		if (_direction == TANKDIRECTION_LEFT
+			|| _direction == TANKDIRECTION_UP) {
+			reverse(vTile.begin(), vTile.end());
+		}
+	}
+
+	if (vTile.size() != 0) {
+		int distance = GetDistance(_x, _y,
+			vTile[0].second.rc.left + (vTile[0].second.rc.right - vTile[0].second.rc.left) / 2,
+			vTile[0].second.rc.top + (vTile[0].second.rc.bottom - vTile[0].second.rc.top) / 2);
+		int index = vTile[0].first;
+		for (int i = 1; i < vTile.size(); i++) {
+			int temp = GetDistance(_x, _y,
+				vTile[i].second.rc.left + (vTile[i].second.rc.right - vTile[i].second.rc.left) / 2,
+				vTile[i].second.rc.top + (vTile[i].second.rc.bottom - vTile[i].second.rc.top) / 2);
+			if (temp < distance) {
+				distance = temp;
+				index = vTile[i].first;
+			}
+		}
+		if (INPUT->GetKeyDown(VK_SPACE)) {
+			_tankMap->SetTerrainTile(index, 2, 0);
+		}
+	}
+
+
+
 }
 
 void Tank::Render()
 {
 	_image->FrameRender(GetMemDC(), _rc.left, _rc.top);
 	//_image->Render(GetMemDC());
+	ray.DrawRay(GetMemDC());
 }
 
 void Tank::TankMove()
@@ -184,7 +228,7 @@ void Tank::TankFire()
 	switch (_direction)
 	{
 	case TANKDIRECTION_LEFT:
-		for (int i = tileX - 1; i > 0; i--) {
+		for (int i = tileX - 1; i >= 0; i--) {
 			if (_tankMap->GetTiles()[i + tileY * TILEX].obj <= OBJ_BLOCK3) {
 				if (_tankMap->GetTiles()[i + tileY * TILEX].obj == OBJ_BLOCK1) {
 					_tankMap->GetTiles()[i + tileY * TILEX].obj = OBJ_NONE;
@@ -222,7 +266,7 @@ void Tank::TankFire()
 		}
 		break;
 	case TANKDIRECTION_UP:
-		for (int i = tileY - 1; i > 0; i--) {
+		for (int i = tileY - 1; i >= 0; i--) {
 			if (_tankMap->GetTiles()[tileX + i * TILEX].obj <= OBJ_BLOCK3) {
 				if (_tankMap->GetTiles()[tileX + i * TILEX].obj == OBJ_BLOCK1) {
 					_tankMap->GetTiles()[tileX + i * TILEX].obj = OBJ_NONE;

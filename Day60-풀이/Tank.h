@@ -20,6 +20,10 @@ private:
 	float _speed;
 
 	TankMap * _tankMap;
+
+	Ray ray;
+
+	vector< pair<int, tagTile> > vTile;
 public:
 	Tank();
 	~Tank();

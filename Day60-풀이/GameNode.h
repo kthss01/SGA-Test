@@ -7,6 +7,9 @@ class GameNode
 private:
 	static Image* m_backBuffer;
 	HDC _hdc;
+protected:
+	char str[128];
+
 public:
 	GameNode();
 	~GameNode();

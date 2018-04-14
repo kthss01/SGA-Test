@@ -24,6 +24,9 @@ HRESULT GameNode::Init() {
 	_hdc = GetDC(g_hWnd);
 	//SetTimer(g_hWnd, 1, 10, NULL);
 
+	// strlen은 거기 안에 들어있는 문자 길이만큼 나옴
+	ZeroMemory(str, sizeof(str));
+
 	FRAME->Init();
 	SUBWIN;
 
@@ -93,6 +96,13 @@ LRESULT GameNode::MainProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			PostQuitMessage(0);
 			break;
 		}
+		break;
+	case WM_CHAR:
+	{
+		int len = strlen(str);
+		str[len] = (char)wParam;
+		str[len + 1] = 0;
+	}
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);

@@ -81,6 +81,16 @@ void TankMap::Load()
 	}
 }
 
+void TankMap::SetTerrainTile(int tileID, int terrainX, int terrainY)
+{
+	// 오브젝트도 마찬가지로 짜주면ㄷ ㅚㅁ
+
+	_tiles[tileID].terrainFrameX = terrainX;
+	_tiles[tileID].terrainFrameY = terrainY;
+	// 함수이용해서 값을 찾아주면 됨
+	//_tiles[tileID].terrain = 
+}
+
 POINT TankMap::GetOBJECTFrame(OBJECT obj)
 {
 	POINT pos = {};

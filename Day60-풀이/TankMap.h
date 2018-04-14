@@ -27,7 +27,7 @@ public:
 	int GetPosFirst() { return 0; }
 	//int GetPosSecond() { return _pos[1]; }
 	DWORD* GetAttribute() { return _attributes; }
-
+	void SetTerrainTile(int tileID, int terrainX, int terrainY);
 
 	POINT GetOBJECTFrame(OBJECT obj);
 };
