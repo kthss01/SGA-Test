@@ -2,6 +2,7 @@
 #include "MainGame.h"
 
 #include "TestScene.h"
+#include "AStar.h"
 
 MainGame::MainGame()
 {
@@ -21,6 +22,7 @@ HRESULT MainGame::Init()
 
 	TestScene * test = new TestScene;
 	SCENE->AddScene("Test", test);
+	SCENE->AddScene("AStar", new AStar);
 
 	SOUND->Init();
 	SOUND->AddSound("Test", "sounds/영전3.wav", true, true);
@@ -29,7 +31,8 @@ HRESULT MainGame::Init()
 	SUBWIN->SetScene(test);
 #endif // SUBWINDOW 필요시 MainGame.h 주석 제거
 
-	SCENE->ChangeScene("Test");
+	//SCENE->ChangeScene("Test");
+	SCENE->ChangeScene("AStar");
 
 	return S_OK;
 }

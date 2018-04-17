@@ -40,6 +40,9 @@ HRESULT AStar::Init()
 		}
 	}
 
+	_openList.clear();
+	_closeList.clear();
+
 	return S_OK;
 }
 
@@ -59,6 +62,13 @@ void AStar::Update()
 		&& _aStarState == ASTAR_STATE_END) {
 		// star, end, wall, empty 각각 해주어야하는 부분 초기화
 		TileInitializing();
+	}
+
+	if (INPUT->GetKeyDown(VK_RETURN)) {
+		if (_aStarState == ASTAR_STATE_FOUND ||
+			_aStarState == ASTAR_STATE_NOWAY) {
+			this->Init();
+		}
 	}
 
 	// 종료가 되었을 때
@@ -149,6 +159,21 @@ void AStar::Render()
 					_tile[i][j].rc.top + 22,
 					_tile[i][j].str, strlen(_tile[i][j].str));
 			} // end of if(F < BIGNUM)
+
+			if (_tile[i][j].parent == NULL) continue;
+
+			int length = 15;
+			// 시작지점 도형의 중심좌표, 도착지점 부모의 중심좌표
+			LineMake(GetMemDC(),
+				(_tile[i][j].rc.left + _tile[i][j].rc.right) / 2,
+				(_tile[i][j].rc.top + _tile[i][j].rc.bottom) / 2,
+
+				(_tile[i][j].parent->j - _tile[i][j].j) * length
+				+ (_tile[i][j].rc.left +_tile[i][j].rc.right) / 2,
+				(_tile[i][j].parent->i - _tile[i][j].i) * length
+				+ (_tile[i][j].rc.top + _tile[i][j].rc.bottom) / 2
+				);
+
 		} // end of for(j)
 	} // end of for(i)
 
@@ -246,6 +271,182 @@ void AStar::TileInitializing()
 
 void AStar::AddOpenList()
 {
+	Ci = _closeList[_lastIndex]->i;
+	Cj = _closeList[_lastIndex]->j;
+	Cg = _closeList[_lastIndex]->G;
+
+	// 윗공간을 계산할 수 있을 때 맨 위 타일이 아닐 때
+	if (Ci != 0) { /// 상단
+		// 걸어 갈 수 있을 때
+		if (_tile[Ci - 1][Cj].walkable) {
+			// OpenList에 있지 않을 때
+			if (!_tile[Ci - 1][Cj].listOn) {
+				_tile[Ci - 1][Cj].listOn = true;
+				_tile[Ci - 1][Cj].color = RGB(220, 255, 220);	// 연녹색
+				_tile[Ci - 1][Cj].G = Cg + 10;
+				_tile[Ci - 1][Cj].parent = _closeList[_lastIndex];
+				_openList.push_back(&_tile[Ci - 1][Cj]);
+			}
+			else {
+				// 가중치가 더 작으면 변경
+				if (Cg + 10 < _tile[Ci - 1][Cj].G) {
+					_tile[Ci - 1][Cj].G = Cg + 10;
+					_tile[Ci - 1][Cj].parent = _closeList[_lastIndex];
+				}
+			}
+		} // end of if(_tile[Ci-1][Cj].walkable)
+
+		// 맨 왼 타일이 아닐 때
+		if (Cj != 0) { /// 좌상단
+			// 걸어 갈 수 있을 때
+			if (_tile[Ci - 1][Cj - 1].walkable &&
+				_tile[Ci - 1][Cj].walkable &&
+				_tile[Ci][Cj - 1].walkable) {
+				// OpenList에 있지 않을 때
+				if (!_tile[Ci - 1][Cj - 1].listOn) {
+					_tile[Ci - 1][Cj - 1].listOn = true;
+					_tile[Ci - 1][Cj - 1].color = RGB(220, 255, 220);	// 연녹색
+					_tile[Ci - 1][Cj - 1].G = Cg + 14;
+					_tile[Ci - 1][Cj - 1].parent = _closeList[_lastIndex];
+					_openList.push_back(&_tile[Ci - 1][Cj - 1]);
+				}
+				else {
+					// 가중치가 더 작으면 변경
+					if (Cg + 14 < _tile[Ci - 1][Cj - 1].G) {
+						_tile[Ci - 1][Cj - 1].G = Cg + 14;
+						_tile[Ci - 1][Cj - 1].parent = _closeList[_lastIndex];
+					}
+				}
+			}
+		} // end of if(Cj != 0)
+
+		if (Cj != TILE_X - 1) { /// 우상단
+			// 걸어 갈 수 있을 때
+			if (_tile[Ci - 1][Cj + 1].walkable &&
+				_tile[Ci - 1][Cj].walkable &&
+				_tile[Ci][Cj + 1].walkable) {
+				// OpenList에 있지 않을 때
+				if (!_tile[Ci - 1][Cj + 1].listOn) {
+					_tile[Ci - 1][Cj + 1].listOn = true;
+					_tile[Ci - 1][Cj + 1].color = RGB(220, 255, 220);	// 연녹색
+					_tile[Ci - 1][Cj + 1].G = Cg + 14;
+					_tile[Ci - 1][Cj + 1].parent = _closeList[_lastIndex];
+					_openList.push_back(&_tile[Ci - 1][Cj + 1]);
+				}
+				else {
+					// 가중치가 더 작으면 변경
+					if (Cg + 14 < _tile[Ci - 1][Cj + 1].G) {
+						_tile[Ci - 1][Cj + 1].G = Cg + 14;
+						_tile[Ci - 1][Cj + 1].parent = _closeList[_lastIndex];
+					}
+				}
+			}
+		} // end of if(Cj != TILE_X -1)
+	} // end of if(Ci != 0)
+
+	if (Cj != 0) { /// 좌측
+		if (_tile[Ci][Cj - 1].walkable) {
+			// OpenList에 있지 않을 때
+			if (!_tile[Ci][Cj - 1].listOn) {
+				_tile[Ci][Cj - 1].listOn = true;
+				_tile[Ci][Cj - 1].color = RGB(220, 255, 220);	// 연녹색
+				_tile[Ci][Cj - 1].G = Cg + 10;
+				_tile[Ci][Cj - 1].parent = _closeList[_lastIndex];
+				_openList.push_back(&_tile[Ci][Cj - 1]);
+			}
+			else {
+				// 가중치가 더 작으면 변경
+				if (Cg + 10 < _tile[Ci][Cj - 1].G) {
+					_tile[Ci][Cj - 1].G = Cg + 10;
+					_tile[Ci][Cj - 1].parent = _closeList[_lastIndex];
+				}
+			}
+		}
+	} // end of if(Cj != 0)
+
+	if (Cj != TILE_X - 1) { /// 우측
+		if (_tile[Ci][Cj + 1].walkable) {
+			// OpenList에 있지 않을 때
+			if (!_tile[Ci][Cj + 1].listOn) {
+				_tile[Ci][Cj + 1].listOn = true;
+				_tile[Ci][Cj + 1].color = RGB(220, 255, 220);	// 연녹색
+				_tile[Ci][Cj + 1].G = Cg + 10;
+				_tile[Ci][Cj + 1].parent = _closeList[_lastIndex];
+				_openList.push_back(&_tile[Ci][Cj + 1]);
+			}
+			else {
+				// 가중치가 더 작으면 변경
+				if (Cg + 10 < _tile[Ci][Cj + 1].G) {
+					_tile[Ci][Cj + 1].G = Cg + 10;
+					_tile[Ci][Cj + 1].parent = _closeList[_lastIndex];
+				}
+			}
+		}
+	} // end of if(Cj != TILE_X - 1)
+
+	if (Ci != TILE_Y - 1) { /// 하단
+		if (_tile[Ci + 1][Cj].walkable) {
+			// OpenList에 있지 않을 때
+			if (!_tile[Ci + 1][Cj].listOn) {
+				_tile[Ci + 1][Cj].listOn = true;
+				_tile[Ci + 1][Cj].color = RGB(220, 255, 220);	// 연녹색
+				_tile[Ci + 1][Cj].G = Cg + 10;
+				_tile[Ci + 1][Cj].parent = _closeList[_lastIndex];
+				_openList.push_back(&_tile[Ci + 1][Cj]);
+			}
+			else {
+				// 가중치가 더 작으면 변경
+				if (Cg + 10 < _tile[Ci + 1][Cj].G) {
+					_tile[Ci + 1][Cj].G = Cg + 10;
+					_tile[Ci + 1][Cj].parent = _closeList[_lastIndex];
+				}
+			}
+		} // end of if(_tile[Ci + 1][Cj].walkable)
+
+		if (Cj != 0) { /// 좌하단
+			if (_tile[Ci + 1][Cj - 1].walkable &&
+				_tile[Ci + 1][Cj].walkable &&
+				_tile[Ci][Cj - 1].walkable) {
+				// OpenList에 있지 않을 때
+				if (!_tile[Ci + 1][Cj - 1].listOn) {
+					_tile[Ci + 1][Cj - 1].listOn = true;
+					_tile[Ci + 1][Cj - 1].color = RGB(220, 255, 220);	// 연녹색
+					_tile[Ci + 1][Cj - 1].G = Cg + 14;
+					_tile[Ci + 1][Cj - 1].parent = _closeList[_lastIndex];
+					_openList.push_back(&_tile[Ci + 1][Cj - 1]);
+				}
+				else {
+					// 가중치가 더 작으면 변경
+					if (Cg + 14 < _tile[Ci + 1][Cj - 1].G) {
+						_tile[Ci + 1][Cj - 1].G = Cg + 14;
+						_tile[Ci + 1][Cj - 1].parent = _closeList[_lastIndex];
+					}
+				}
+			}
+		} // end of if(Cj != 0) 
+
+		if (Cj != TILE_X - 1) { /// 우하단
+			if (_tile[Ci + 1][Cj + 1].walkable &&
+				_tile[Ci + 1][Cj].walkable &&
+				_tile[Ci][Cj + 1].walkable) {
+				// OpenList에 있지 않을 때
+				if (!_tile[Ci + 1][Cj + 1].listOn) {
+					_tile[Ci + 1][Cj + 1].listOn = true;
+					_tile[Ci + 1][Cj + 1].color = RGB(220, 255, 220);	// 연녹색
+					_tile[Ci + 1][Cj + 1].G = Cg + 14;
+					_tile[Ci + 1][Cj + 1].parent = _closeList[_lastIndex];
+					_openList.push_back(&_tile[Ci + 1][Cj + 1]);
+				}
+				else {
+					// 가중치가 더 작으면 변경
+					if (Cg + 14 < _tile[Ci + 1][Cj + 1].G) {
+						_tile[Ci + 1][Cj + 1].G = Cg + 14;
+						_tile[Ci + 1][Cj + 1].parent = _closeList[_lastIndex];
+					}
+				}
+			}
+		} // end of if(Cj != TILE_X - 1) 
+	} // end of if(Ci != TILE_Y - 1)
 }
 
 void AStar::CalculateH()
@@ -271,12 +472,50 @@ void AStar::CalculateF()
 
 void AStar::AddCloseList()
 {
+	if (_openList.size() == 0) {
+		_aStarState = ASTAR_STATE_NOWAY;
+		return;
+	}
+
+	int index = 0; // 오픈 리스트 중 가장 F가 작은 타일의 인덱스
+	int lowest = BIGNUM; // 오픈 리스트 중 가장 작은 F 값
+
+	for (int i = 0; i < _openList.size(); i++) {
+		if (_openList[i]->F < lowest) {
+			lowest = _openList[i]->F;
+			index = i;
+		}
+	}
+	_openList[index]->color = RGB(180, 180, 255); // 연한 파랑색
+	
+	_closeList.push_back(_openList[index]);
+	_openList.erase(_openList.begin() + index);
+
+	// 이렇게 계산해도 됨
+	//_lastIndex = _closeList.size() - 1;
+	_lastIndex++;
 }
 
 void AStar::CheckArrive()
 {
+	if (_closeList[_lastIndex]->i == _endY &&
+		_closeList[_lastIndex]->j == _endX) {
+		_aStarState = ASTAR_STATE_FOUND;
+		_closeList[_lastIndex]->color = RGB(255, 100, 100); // 진한 빨강
+		ShowWay(_closeList[_lastIndex]);
+	}
 }
 
 void AStar::ShowWay(aStarTile * tile)
 {
+	// 도착지점이 아닐 때까지
+	if (!(tile->i == _endY && tile->j == _endX))
+		tile->color = RGB(255, 180, 180); 
+
+	tile = tile->parent;
+
+	if (tile->parent == NULL)
+		return;
+	else
+		ShowWay(tile);
 }
