@@ -37,6 +37,9 @@
     <Filter Include="SaveFile">
       <UniqueIdentifier>{00ce1dc5-6825-424a-bc36-d5cbe091fea5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameFrameWork\IsoMatrix">
+      <UniqueIdentifier>{0b729c24-221e-4f49-9fdb-f9c068df624e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -108,6 +111,9 @@
     <ClInclude Include="RandomFunction.h">
       <Filter>GameFrameWork\Util</Filter>
     </ClInclude>
+    <ClInclude Include="IsoTest.h">
+      <Filter>GameFrameWork\IsoMatrix</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -163,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>GameFrameWork\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="IsoTest.cpp">
+      <Filter>GameFrameWork\IsoMatrix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
