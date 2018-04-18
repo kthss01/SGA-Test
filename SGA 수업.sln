@@ -117,7 +117,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day59-구조체 크기", "D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day60.61-탱크게임", "Day60-풀이\Day60-풀이.vcxproj", "{587FBD97-4ADA-45B0-9484-1E066BCA6471}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day62", "Day62\Day62.vcxproj", "{E3919EA6-D260-4665-983F-BCBE90F8EC72}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day62,63-AStar", "Day62\Day62.vcxproj", "{E3919EA6-D260-4665-983F-BCBE90F8EC72}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day64", "Day64\Day64.vcxproj", "{BFBABEDE-E12F-43B4-9935-A77E670893BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -591,6 +593,14 @@ Global
 		{E3919EA6-D260-4665-983F-BCBE90F8EC72}.Release|x64.Build.0 = Release|x64
 		{E3919EA6-D260-4665-983F-BCBE90F8EC72}.Release|x86.ActiveCfg = Release|Win32
 		{E3919EA6-D260-4665-983F-BCBE90F8EC72}.Release|x86.Build.0 = Release|Win32
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Debug|x64.ActiveCfg = Debug|x64
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Debug|x64.Build.0 = Debug|x64
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Debug|x86.ActiveCfg = Debug|Win32
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Debug|x86.Build.0 = Debug|Win32
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Release|x64.ActiveCfg = Release|x64
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Release|x64.Build.0 = Release|x64
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Release|x86.ActiveCfg = Release|Win32
+		{BFBABEDE-E12F-43B4-9935-A77E670893BB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
