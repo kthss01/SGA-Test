@@ -5,8 +5,8 @@
 #define CELL_WIDTH 100
 #define CELL_HEIGHT 50
 
-#define RADIUS_WIDTH CELL_WIDTH / 2
-#define RADIUS_HEIGHT CELL_HEIGHT / 2
+#define RADIUS_WIDTH (CELL_WIDTH / 2)
+#define RADIUS_HEIGHT (CELL_HEIGHT / 2)
 
 // 초기 좌표
 #define INIT_X 400
@@ -15,10 +15,20 @@
 #define TILE_COUNT_X 100
 #define TILE_COUNT_Y 100
 
+struct IsoTile {
+	int left, top;	// base
+
+	vector<POINT> frameIndex;	// 몇번째 이미지로 쓸건지
+	int height;
+};
+
 class IsoTest : public GameNode
 {
 private:
 	int _tileMap[TILE_COUNT_X][TILE_COUNT_Y];
+
+	IsoTile _tiles[TILE_COUNT_X][TILE_COUNT_Y];
+
 	int _isoX, _isoY;	// 타일에 대한 인덱스 번호
 	// 가운데를 클릭했는지 확인해줘야함(이게 렉트 안 타일) 
 	// 모서리 클릭하면 다른 타일임

@@ -21,6 +21,22 @@ HRESULT IsoTest::Init()
 	_startX = INIT_X;
 	_startY = INIT_Y;
 
+	IMAGE->AddImage("IsoTile", "images/tile_grass.bmp", 0, 0,
+		CELL_WIDTH, CELL_HEIGHT + 15, true, RGB(255, 0, 255));
+
+	ZeroMemory(_tiles, sizeof(IsoTile) * TILE_COUNT_X * TILE_COUNT_Y);
+	for (int i = 0; i < TILE_COUNT_X; i++) {
+		for (int j = 0; j < TILE_COUNT_Y; j++) {
+			// frameRender 할때 쓰는거
+			_tiles[i][j].frameIndex.push_back(PointMake(3,0));
+			_tiles[i][j].height = 15;
+		}
+	}
+
+	for (int i = 0; i < 3; i++) {
+		_tiles[0][0].frameIndex.push_back(PointMake(3, 0));
+	}
+
 	return S_OK;
 }
 
@@ -71,10 +87,6 @@ void IsoTest::Update()
 				corner = 0;
 			}
 
-			_center = corner;
-			_isoX = isoX;
-			_isoY = isoY;
-
 			switch (corner)
 			{
 			case 1:
@@ -91,6 +103,10 @@ void IsoTest::Update()
 				break;
 			}
 			_tileMap[isoX][isoY] = 1;
+
+			_center = corner;
+			_isoX = isoX;
+			_isoY = isoY;
 		}
 	}
 }
@@ -111,6 +127,9 @@ void IsoTest::DrawTileMap()
 			int left = _startX + (i * RADIUS_WIDTH) - (j * RADIUS_WIDTH);
 			int top = _startY + (i * RADIUS_HEIGHT) + (j * RADIUS_HEIGHT);
 
+			_tiles[i][j].left = left;
+			_tiles[i][j].top = top;
+
 			if (left + CELL_WIDTH < 0 || left > WINSIZEX
 				|| top + CELL_HEIGHT < 0 || top > WINSIZEY) 
 				continue;
@@ -127,6 +146,21 @@ void IsoTest::DrawTileMap()
 			else {
 				DrawRhombus(left, top);
 			}
+
+			//IMAGE->Render("IsoTile", GetMemDC(), 
+			//	_tiles[i][j].left, 
+			//	_tiles[i][j].top);
+			//// frame render면 해당 frameIndex[0].x y 값
+
+
+			// z 1번부터 진행한 이유는 이미지 렌더 해야되서
+			for (int z = 0; z < _tiles[i][j].frameIndex.size(); z++) {
+				IMAGE->Render("IsoTile", GetMemDC(),
+					_tiles[i][j].left,
+					_tiles[i][j].top - _tiles[i][j].height * z);
+				// frame Render면 해당 frameIndex[z].x,y 값
+			}
+
 			SetTextColor(GetMemDC(), RGB(0, 0, 0));
 			sprintf_s(str, "(%d,%d)", i, j);
 			TextOut(GetMemDC(), left + 30, top + 15, str, strlen(str));
@@ -157,6 +191,8 @@ void IsoTest::DrawRhombus(int left, int top)
 
 	p[4].x = centerX;
 	p[4].y = centerY - RADIUS_HEIGHT;
+
+	//IMAGE->Render("IsoTile", GetMemDC(), left, top);
 
 	// 4번만 돌리면 됨 0~3 까지 or 1~4 까지
 	for (int i = 1; i < 5; i++) {
@@ -206,16 +242,42 @@ bool IsoTest::IsInRhombus(int corner, int isoX, int isoY)
 	// 2 사분면 righttop
 	else if (corner == 2) {
 		int left = _startX + (isoX * RADIUS_WIDTH) - (isoY * RADIUS_WIDTH);
-		left += RADIUS_WIDTH;
 		int top = _startY + (isoX * RADIUS_HEIGHT) + (isoY * RADIUS_HEIGHT);
+		left += RADIUS_WIDTH;
 
 		// 비율값
 		float dx = (float)(g_ptMouse.x - left) / RADIUS_WIDTH;
 		float dy = (float)(g_ptMouse.y - top) / RADIUS_HEIGHT;
 
-		if (dy > dx) return true;
+		if (dy >= dx) return true;
 		else return false;
 	}
+	// 3 사분면 leftbottom
+	else if (corner == 3) {
+		int left = _startX + (isoX * RADIUS_WIDTH) - (isoY * RADIUS_WIDTH);
+		int top = _startY + (isoX * RADIUS_HEIGHT) + (isoY * RADIUS_HEIGHT);
+		top += RADIUS_HEIGHT;
 
+		// 비율값
+		float dx = (float)(g_ptMouse.x - left) / RADIUS_WIDTH;
+		float dy = (float)(g_ptMouse.y - top) / RADIUS_HEIGHT;
+
+		if (dy <= dx) return true;
+		else return false;
+	}
+	// 4 사분면 rightbottom
+	else if (corner == 4) {
+		int left = _startX + (isoX * RADIUS_WIDTH) - (isoY * RADIUS_WIDTH);
+		int top = _startY + (isoX * RADIUS_HEIGHT) + (isoY * RADIUS_HEIGHT);
+		left += RADIUS_WIDTH;
+		top += RADIUS_HEIGHT;
+
+		// 비율값
+		float dx = (float)(g_ptMouse.x - left) / RADIUS_WIDTH;
+		float dy = (float)(g_ptMouse.y - top) / RADIUS_HEIGHT;
+
+		if ((1.0f - dy) >= dx) return true;
+		else return false;
+	}
 	return false;
 }
