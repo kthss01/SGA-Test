@@ -119,9 +119,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day60.61-탱크게임", "Da
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day62,63-AStar", "Day62\Day62.vcxproj", "{E3919EA6-D260-4665-983F-BCBE90F8EC72}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day64-아이소메트릭스", "Day64\Day64.vcxproj", "{BFBABEDE-E12F-43B4-9935-A77E670893BB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day64,65-아이소메트릭스, 16방향 회전", "Day64\Day64.vcxproj", "{BFBABEDE-E12F-43B4-9935-A77E670893BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day65-vector", "Day65-vector\Day65-vector.vcxproj", "{5EDBF640-98A6-4489-AE25-3BDEAB2211AC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day67-Direct2D", "Day67\Day67.vcxproj", "{71076CF5-59F6-4DC0-99BE-99264335C77D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -611,6 +613,14 @@ Global
 		{5EDBF640-98A6-4489-AE25-3BDEAB2211AC}.Release|x64.Build.0 = Release|x64
 		{5EDBF640-98A6-4489-AE25-3BDEAB2211AC}.Release|x86.ActiveCfg = Release|Win32
 		{5EDBF640-98A6-4489-AE25-3BDEAB2211AC}.Release|x86.Build.0 = Release|Win32
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Debug|x64.ActiveCfg = Debug|x64
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Debug|x64.Build.0 = Debug|x64
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Debug|x86.ActiveCfg = Debug|Win32
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Debug|x86.Build.0 = Debug|Win32
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Release|x64.ActiveCfg = Release|x64
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Release|x64.Build.0 = Release|x64
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Release|x86.ActiveCfg = Release|Win32
+		{71076CF5-59F6-4DC0-99BE-99264335C77D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
