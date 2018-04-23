@@ -43,9 +43,6 @@
     <Filter Include="GameFrameWork\Starcraft">
       <UniqueIdentifier>{cb6325af-f6a4-4a6b-af44-74c0eef00359}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameFrameWork\Math">
-      <UniqueIdentifier>{1becf134-6405-4ad3-bee9-ee1f079f73ac}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -129,12 +126,6 @@
     <ClInclude Include="StarcraftScene.h">
       <Filter>GameFrameWork\Starcraft</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>GameFrameWork\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>GameFrameWork\Math</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,12 +193,6 @@
     </ClCompile>
     <ClCompile Include="StarcraftScene.cpp">
       <Filter>GameFrameWork\Starcraft</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>GameFrameWork\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>GameFrameWork\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

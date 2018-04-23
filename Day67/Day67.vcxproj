@@ -20,18 +20,17 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{BFBABEDE-E12F-43B4-9935-A77E670893BB}</ProjectGuid>
+    <ProjectGuid>{71076CF5-59F6-4DC0-99BE-99264335C77D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WinAPI</RootNamespace>
+    <RootNamespace>Day67</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day64,65-아이소메트릭스, 16방향 회전</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -148,69 +147,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Battle.h" />
-    <ClInclude Include="CommonMacroFunction.h" />
-    <ClInclude Include="Frame.h" />
-    <ClInclude Include="GameNode.h" />
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="ImageManager.h" />
-    <ClInclude Include="IniData.h" />
-    <ClInclude Include="IsoTest.h" />
-    <ClInclude Include="KeyManager.h" />
-    <ClInclude Include="MainGame.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="ProgressBar.h" />
-    <ClInclude Include="RandomFunction.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Ship.h" />
-    <ClInclude Include="SIngletonBase.h" />
-    <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="StarcraftScene.h" />
+    <ClInclude Include="Day67.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TestScene.h" />
-    <ClInclude Include="TextData.h" />
-    <ClInclude Include="TimeManager.h" />
-    <ClInclude Include="Util.h" />
-    <ClInclude Include="WinAPI.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Battle.cpp" />
-    <ClCompile Include="Frame.cpp" />
-    <ClCompile Include="GameNode.cpp" />
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="ImageManager.cpp" />
-    <ClCompile Include="IniData.cpp" />
-    <ClCompile Include="IsoTest.cpp" />
-    <ClCompile Include="KeyManager.cpp" />
-    <ClCompile Include="MainGame.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="ProgressBar.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Ship.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="StarcraftScene.cpp" />
+    <ClCompile Include="Day67.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp" />
-    <ClCompile Include="TextData.cpp" />
-    <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="Util.cpp" />
-    <ClCompile Include="WinAPI.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="WinAPI.rc" />
+    <ResourceCompile Include="Day67.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Day67.ico" />
     <Image Include="small.ico" />
-    <Image Include="WinAPI.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
