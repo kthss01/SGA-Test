@@ -28,6 +28,7 @@ namespace MyDirectX
 		vector<Row> vecRow;
 
 	public:
+		Matrix() {}
 		Matrix(int nDimension);
 
 		Row& operator[](int nIndex);

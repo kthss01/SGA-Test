@@ -12,6 +12,12 @@ namespace MyDirectX
 		this->x = x;
 		this->y = y;
 	}
+	Vector2::Vector2(float x, float y, float z)
+	{
+		this->x = x;
+		this->y = y;
+		this->z = z;
+	}
 	bool Vector2::operator==(const Vector2 & vec)
 	{
 
@@ -27,27 +33,27 @@ namespace MyDirectX
 	}
 	Vector2 Vector2::operator+(const Vector2 & vec)
 	{
-		return Vector2(x + vec.x, y + vec.y);
+		return Vector2(x + vec.x, y + vec.y, z + vec.z);
 	}
 	Vector2 Vector2::operator-(const Vector2 & vec)
 	{
-		return Vector2(x - vec.x, y - vec.y);
+		return Vector2(x - vec.x, y - vec.y, z - vec.z);
 
 	}
 	Vector2 Vector2::operator*(float f)
 	{
-		return Vector2(x * f, y * f);
+		return Vector2(x * f, y * f, z * f);
 
 	}
 	float Vector2::Length()
 	{
-		return sqrtf(x*x + y * y + z * z);
+		return sqrtf(x * x + y * y + z * z);
 
 	}
 	Vector2 Vector2::Normalize()
 	{
 		float len = Length();
-		return Vector2(x / len, y / len);
+		return Vector2(x / len, y / len, z / len);
 	}
 	float Vector2::Dot(Vector2 & v1, Vector2 & v2)
 	{

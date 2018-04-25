@@ -1,5 +1,8 @@
 #pragma once
 class Program;
+
+// 창을 만드는 역할만 할꺼
+
 class Window
 {
 public:

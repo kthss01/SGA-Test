@@ -8,6 +8,8 @@ WPARAM Window::Run()
 {
 	MSG msg = { 0 };
 
+	// 게임용 루프 이렇게 되있는데
+	// 나중에 FPS 적용 할꺼
 	program = new Program();
 	while (true)
 	{

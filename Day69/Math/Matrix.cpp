@@ -254,12 +254,19 @@ namespace MyDirectX
 
 	Matrix Matrix::Ortho(float left, float right, float bottom, float top, float zn, float zf)
 	{
+		// 원래 가운데 중점으로 하려고 했는데 2D에서는 불편함
+		// 현재 만들어진 녀석 left top 기준으로 되어있는데
+		// 왼쪽 하단으로 바꿔줄꺼 위로 올라갈때 +로 할꺼임
+
 		Matrix mat = Matrix::Identity(4);
 		mat[0][0] = 2 / (right - left);
 		mat[1][1] = 2 / (bottom - top);
 		mat[2][2] = 1 / (zf - zn);
 		mat[3][0] = (left + right) / (left - right);
-		mat[3][1] = (bottom + top) / (bottom - top);
+		
+		//mat[3][1] = (bottom + top) / (bottom - top);
+		mat[3][1] = (top + bottom) / (top - bottom);
+		
 		mat[3][2] = zn / (zn - zf);
 		//아이덴티티로 초기화 했으니 [3][3]은 안 해도 됨
 		return mat;

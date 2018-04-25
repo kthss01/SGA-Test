@@ -8,6 +8,7 @@ namespace MyDirectX
 
 		Vector2();
 		Vector2(float x, float y);
+		Vector2(float x, float y, float z);
 
 		bool operator==(const Vector2& vec);
 		bool operator!=(const Vector2& vec);
