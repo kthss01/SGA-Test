@@ -225,6 +225,16 @@ namespace MyDirectX
 		return ret.Transpose();
 	}
 
+	D3DXMATRIX Matrix::ToDXMatrix()
+	{
+		return D3DXMATRIX(
+			(*this)[0][0], (*this)[0][1], (*this)[0][2], (*this)[0][3],
+			(*this)[1][0], (*this)[1][1], (*this)[1][2], (*this)[1][3],
+			(*this)[2][0], (*this)[2][1], (*this)[2][2], (*this)[2][3],
+			(*this)[3][0], (*this)[3][1], (*this)[3][2], (*this)[3][3]
+		);
+	}
+
 
 	Matrix Matrix::Translation(Vector2& v)
 	{
@@ -260,12 +270,13 @@ namespace MyDirectX
 
 		Matrix mat = Matrix::Identity(4);
 		mat[0][0] = 2 / (right - left);
-		mat[1][1] = 2 / (bottom - top);
+		//mat[1][1] = 2 / (bottom - top);
+		mat[1][1] = 2 / (top - bottom);
 		mat[2][2] = 1 / (zf - zn);
-		mat[3][0] = (left + right) / (left - right);
-		
-		//mat[3][1] = (bottom + top) / (bottom - top);
-		mat[3][1] = (top + bottom) / (top - bottom);
+
+		//mat[3][0] = (left + right) / (left - right);
+		////mat[3][1] = (bottom + top) / (bottom - top);
+		//mat[3][1] = (top + bottom) / (top - bottom);
 		
 		mat[3][2] = zn / (zn - zf);
 		//아이덴티티로 초기화 했으니 [3][3]은 안 해도 됨

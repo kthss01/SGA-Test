@@ -8,6 +8,8 @@ WPARAM Window::Run()
 {
 	MSG msg = { 0 };
 
+	D2D::Get();
+
 	// 게임용 루프 이렇게 되있는데
 	// 나중에 FPS 적용 할꺼
 	program = new Program();
@@ -24,12 +26,18 @@ WPARAM Window::Run()
 		else
 		{
 			program->Update();
-			program->Render();
-
+			// DWORD에 컬러값은 ARGB
+			D2D::Get()->BeginScene(0xFF808080);
+			{
+				program->Render();
+			}
+			D2D::Get()->EndScene();
 		}
 	}
 	SAFE_DELETE(program);
 
+	// static이라 바로 함수 쓴거
+	D2D::Delete();
 
 	return msg.wParam;
 }

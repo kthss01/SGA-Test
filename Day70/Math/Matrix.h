@@ -51,6 +51,8 @@ namespace MyDirectX
 		float   Minor(int nRow, int nCol);
 		Matrix Adjoint();
 
+		D3DXMATRIX ToDXMatrix();
+
 		static Matrix Translation(struct Vector2& v);
 		static Matrix View(struct Vector2& eye, struct Vector2& look, struct Vector2& up);
 		static Matrix Ortho(float left, float right, float bottom, float top, float zn, float zf);
