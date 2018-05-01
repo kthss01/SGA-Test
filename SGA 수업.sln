@@ -127,7 +127,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day67,68-Direct2D", "Day67\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day69-Direct2D 구현", "Day69\Direct2D.vcxproj", "{009C2F45-48F6-43E4-BC67-D7947F647DF6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day70,71-버퍼, 인덱스, 렌더", "Day70\Day70.vcxproj", "{E650C124-B442-4A76-9FAA-145CAA5B75C3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day70,71-렌더, 버퍼, 인덱스, 텍스처", "Day70\Day70.vcxproj", "{E650C124-B442-4A76-9FAA-145CAA5B75C3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day72", "Day72\Day72.vcxproj", "{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -641,6 +643,14 @@ Global
 		{E650C124-B442-4A76-9FAA-145CAA5B75C3}.Release|x64.Build.0 = Release|x64
 		{E650C124-B442-4A76-9FAA-145CAA5B75C3}.Release|x86.ActiveCfg = Release|Win32
 		{E650C124-B442-4A76-9FAA-145CAA5B75C3}.Release|x86.Build.0 = Release|Win32
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Debug|x64.ActiveCfg = Debug|x64
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Debug|x64.Build.0 = Debug|x64
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Debug|x86.ActiveCfg = Debug|Win32
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Debug|x86.Build.0 = Debug|Win32
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Release|x64.ActiveCfg = Release|x64
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Release|x64.Build.0 = Release|x64
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Release|x86.ActiveCfg = Release|Win32
+		{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
