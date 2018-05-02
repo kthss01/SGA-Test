@@ -24,7 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Direct2D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day73</ProjectName>
+    <ProjectName>Day73-ray 충돌</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -165,6 +165,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="System\Window.h" />
+    <ClInclude Include="Common\Transform.h" />
     <ClInclude Include="Utilities\Util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="System\Window.cpp" />
+    <ClCompile Include="Common\Transform.cpp" />
     <ClCompile Include="Utilities\Util.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

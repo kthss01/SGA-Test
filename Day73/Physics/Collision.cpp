@@ -93,3 +93,31 @@ bool Collision::IntersectTri(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 mousePo
 
 	return true;
 }
+
+bool Collision::IntersectRayToLine(Ray ray, Vector2 start, Vector2 end, Vector2 * outPos, Vector2 * outNormal)
+{
+	Vector2 normal;
+	normal.x = -(end.y - start.y);
+	normal.y = (end.x - start.x);
+
+	// 각도로 쓸 수도 있고
+	// 벡터의 곱으로도 쓸 수 있음
+	// normal 과 꼭지점과의 최단 거리 구한거
+	float dist = -Vector2::Dot(normal, end);
+	float t1 = -Vector2::Dot(normal, ray.origin);
+	float t2 = Vector2::Dot(normal, ray.direction);
+	float t = (t1 - dist) / t2;
+
+	// 직교와 예각인 상황일 때 (수평, 직교 둘 다 포함)
+	if (t >= 0.0f && t <= 1.0f) {
+		if (outPos != NULL) {
+			*outPos = ray.origin + ray.direction * t;
+
+			if (outNormal != NULL) {
+				*outNormal = normal * -1;
+			}
+		}
+		return true;
+	}
+	return false;
+}

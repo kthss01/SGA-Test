@@ -142,8 +142,8 @@ namespace MyDirectX
 	{
 		fDet = Determinent();
 
-		if (fabs(fDet) < 0.0001f)
-			return Matrix::Identity(Dimension());
+		//if (fabs(fDet) < 0.0001f)
+		//	return Matrix::Identity(Dimension());
 
 		return Adjoint() * (1 / fDet);
 	}
