@@ -30,6 +30,14 @@ private:
 	LPDIRECT3DTEXTURE9 pTex;
 
 	Vector2 vEye;
+
+	LPD3DXFONT font;
+
+	Vector2 mousePos;
+
+	bool check;
+
+	bool subWindow;
 public:
 	Program();
 	~Program();

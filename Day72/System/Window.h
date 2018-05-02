@@ -11,6 +11,7 @@ public:
 
 	WPARAM Run();
 
+	float color[4];
 private:
 	static LRESULT CALLBACK WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam);
 

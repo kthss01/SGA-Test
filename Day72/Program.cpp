@@ -132,6 +132,25 @@ Program::Program()
 	//D3DXCreateTextureFromFileEx();
 
 	vEye = Vector2(0, 0);	// 카메라의 위치
+
+	hr = D3DXCreateFont(
+		D2D::GetDevice(),
+		15,					// 너비
+		0,					// 높이
+		FW_BOLD,			// 두께, 두껍게 쓰겠다는거
+		1,					// 이 둘은 크게 바꿀 꺼 없음
+		FALSE,				// 이탤릭체 사용 여부
+		DEFAULT_CHARSET,	// 이 둘은 크게 바꿀 꺼 없음
+		OUT_DEFAULT_PRECIS,	// 외곽선 처리
+		DEFAULT_QUALITY,	// 퀄리티
+		// FF_DONTCARE 글자 크기 상관없이 큰 녀석 기준으로 잡아주는거 너비랑 높이 중에
+		DEFAULT_PITCH || FF_DONTCARE,		// 옵션, 
+		L"굴림",
+		&font
+	);
+	assert(SUCCEEDED(hr));
+
+	subWindow = false;
 }
 
 Program::~Program()
@@ -159,10 +178,49 @@ void Program::Update()
 	// 너무 뒤로 가도 near far 구역 벗어나서 렌더 안됨
 	if (GetKeyState('Z') & 0x8000) { vEye.z -= 1.0f; }
 	if (GetKeyState('X') & 0x8000) { vEye.z += 1.0f; }
+
+	Util::GetMousePos(&mousePos);
+
+	Vector2 position[7];
+
+	Matrix matViewProj = matView * matProjection;
+
+	for (int i = 0; i < 7; i++) {
+		// world view projection 곱해줘야함 근데 월드는 identity라 안곱해도 됨
+		position[i] = vertices[i].position.TransformCoord(matViewProj);
+	}
+
+	check = false;
+	check |= Collision::IntersectTri(position[0], position[1], position[2], mousePos);
+	check |= Collision::IntersectTri(position[0], position[2], position[3], mousePos);
+	check |= Collision::IntersectTri(position[0], position[3], position[4], mousePos);
+	check |= Collision::IntersectTri(position[0], position[4], position[5], mousePos);
+	check |= Collision::IntersectTri(position[0], position[5], position[6], mousePos);
+	check |= Collision::IntersectTri(position[0], position[6], position[1], mousePos);
+
+	// size는 ImVec2 사용해야함
+	ImGui::Image(pTex, ImVec2(200, 200));
+
+	ImGui::Checkbox("Sub Window", &subWindow);
+	
+	if (subWindow) {
+		ImGui::Begin("Sub Window", &subWindow);
+		ImGui::Text("Hello Sub Window 한글 안됨");
+		if (ImGui::Button("Close"))
+			subWindow = false;
+		ImGui::End();
+	}
 }
 
 void Program::Render()
 {
+	// 월드값을 바꾸면 충돌 계산이 잘 안됨
+	// 이거 해결하려면 transcoord 계산할때 월드값도 계산해줘야함
+	//Matrix matWorld = Matrix::Identity(4);
+	//matWorld[1][1] = 2.0f;
+	//matWorld[2][2] = 2.0f;
+	//D2D::GetDevice()->SetTransform(D3DTS_WORLD, &matWorld.ToDXMatrix());
+
 	// 실질적으로 계산하는건 Device로 넘겨주게됨
 	D2D::GetDevice()->SetTransform(D3DTS_VIEW, &matView.ToDXMatrix());
 	D2D::GetDevice()->SetTransform(D3DTS_PROJECTION, &matProjection.ToDXMatrix());
@@ -193,4 +251,78 @@ void Program::Render()
 		0,	// 시작 index 배열
 		6	// 삼각형의 갯수
 	);
+
+	// RenderText
+	RECT rc = { 10, 10, 0, 0 };
+
+	// 멀티바이트면 DrawTextA
+	font->DrawTextW(
+		// 이미지 2D 좌표에서 띄우는걸 sprite라고 함
+		NULL,
+		L"Render Text Test",
+		-1,	// 전체 띄우려면 -1, 아니면 문자열 길이만큼 하면됨
+		&rc,
+		// DT_NOCLIP이 rc에 상관없이 출력하겠다는거
+		// 이거쓰면 rc의 10,10이 좌표 정도만 되는거
+		DT_LEFT | DT_NOCLIP, // 옵션, 왼쪽 정렬로 하겠다는거
+		// 0x~~ 이거 귀찮으면 함수도 있음
+		//D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)
+		0xFFFF0000
+	);
+
+	rc.top += 20;
+	wstring str;
+
+	str = to_wstring(mousePos.x);
+	str += L" , ";
+	str += to_wstring(mousePos.y);
+
+	// 멀티바이트면 DrawTextA
+	font->DrawTextW(
+		// 이미지 2D 좌표에서 띄우는걸 sprite라고 함
+		NULL,
+		str.c_str(),
+		-1,	// 전체 띄우려면 -1, 아니면 문자열 길이만큼 하면됨
+		&rc,
+		// DT_NOCLIP이 rc에 상관없이 출력하겠다는거
+		// 이거쓰면 rc의 10,10이 좌표 정도만 되는거
+		DT_LEFT | DT_NOCLIP, // 옵션, 왼쪽 정렬로 하겠다는거
+							 // 0x~~ 이거 귀찮으면 함수도 있음
+							 //D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)
+		0xFFFF0000
+	);
+
+	rc.top += 20;
+	if (check) {
+		// 멀티바이트면 DrawTextA
+		font->DrawTextW(
+			// 이미지 2D 좌표에서 띄우는걸 sprite라고 함
+			NULL,
+			L"충돌",
+			-1,	// 전체 띄우려면 -1, 아니면 문자열 길이만큼 하면됨
+			&rc,
+			// DT_NOCLIP이 rc에 상관없이 출력하겠다는거
+			// 이거쓰면 rc의 10,10이 좌표 정도만 되는거
+			DT_LEFT | DT_NOCLIP, // 옵션, 왼쪽 정렬로 하겠다는거
+								 // 0x~~ 이거 귀찮으면 함수도 있음
+								 //D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)
+			0xFFFF0000
+		);
+	}
+	else {
+		// 멀티바이트면 DrawTextA
+		font->DrawTextW(
+			// 이미지 2D 좌표에서 띄우는걸 sprite라고 함
+			NULL,
+			L"안충돌",
+			-1,	// 전체 띄우려면 -1, 아니면 문자열 길이만큼 하면됨
+			&rc,
+			// DT_NOCLIP이 rc에 상관없이 출력하겠다는거
+			// 이거쓰면 rc의 10,10이 좌표 정도만 되는거
+			DT_LEFT | DT_NOCLIP, // 옵션, 왼쪽 정렬로 하겠다는거
+								 // 0x~~ 이거 귀찮으면 함수도 있음
+								 //D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)
+			0xFFFF0000
+		);
+	}
 }

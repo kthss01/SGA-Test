@@ -10,6 +10,10 @@ WPARAM Window::Run()
 
 	D2D::Get();
 
+	ImGui::CreateContext();
+	ImGui_ImplDX9_Init(g_hWnd, D2D::GetDevice());
+	ImGui::StyleColorsDark();
+
 	// 게임용 루프 이렇게 되있는데
 	// 나중에 FPS 적용 할꺼
 	program = new Program();
@@ -25,15 +29,29 @@ WPARAM Window::Run()
 		}
 		else
 		{
-			program->Update();
-			// DWORD에 컬러값은 ARGB
-			D2D::Get()->BeginScene(0xFF808080);
+			ImGui_ImplDX9_NewFrame();
+			// 구분선은 깔끔하게 해주려는거
 			{
+				program->Update();
+				// ImGui 한글은 안됨 좀 뜯어 고쳐야함
+				ImGui::Text("Hello, ImGui");
+				ImGui::ColorEdit3("Clear Color", color);
+			}
+			ImGui::EndFrame();
+
+			// DWORD에 컬러값은 ARGB
+			D2D::Get()->BeginScene(D3DXCOLOR(color));
+			{
+				ImGui::Render();
+				ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 				program->Render();
 			}
 			D2D::Get()->EndScene();
 		}
 	}
+
+	ImGui_ImplDX9_Shutdown();
+
 	SAFE_DELETE(program);
 
 	// static이라 바로 함수 쓴거
@@ -109,6 +127,12 @@ Window::Window()
 	SetFocus(g_hWnd);
 
 	ShowCursor(true);
+
+	// rgba 순
+	color[0] = 0.25f;
+	color[1] = 0.35f;
+	color[2] = 0.45f;
+	color[3] = 1.00f;
 }
 
 Window::~Window()
@@ -120,7 +144,7 @@ Window::~Window()
 
 LRESULT CALLBACK Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-
+	ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam);
 
 	if (message == WM_SIZE)
 	{

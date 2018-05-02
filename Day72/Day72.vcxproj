@@ -24,7 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Direct2D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day72</ProjectName>
+    <ProjectName>Day72-삼각형 점 충돌, ImGUI</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -151,20 +151,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_dx9.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\stb_rect_pack.h" />
+    <ClInclude Include="ImGui\stb_textedit.h" />
+    <ClInclude Include="ImGui\stb_truetype.h" />
+    <ClInclude Include="Physics\Collision.h" />
     <ClInclude Include="System\D2D.h" />
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="System\Window.h" />
+    <ClInclude Include="Utilities\Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_dx9.cpp" />
+    <ClCompile Include="Physics\Collision.cpp" />
     <ClCompile Include="System\D2D.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="System\Window.cpp" />
+    <ClCompile Include="Utilities\Util.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
