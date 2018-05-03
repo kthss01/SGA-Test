@@ -131,7 +131,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day70,71-렌더, 버퍼, �
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day72-삼각형 점 충돌, ImGUI", "Day72\Day72.vcxproj", "{52C00AF6-C3FF-456A-A12B-E3D1DA6FD4C1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day73", "Day73\Day73.vcxproj", "{7E3B7E45-A685-4D27-A647-E52F4C6E1E30}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day73-ray 충돌", "Day73\Day73.vcxproj", "{7E3B7E45-A685-4D27-A647-E52F4C6E1E30}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day74", "Day74\Day74.vcxproj", "{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -661,6 +663,14 @@ Global
 		{7E3B7E45-A685-4D27-A647-E52F4C6E1E30}.Release|x64.Build.0 = Release|x64
 		{7E3B7E45-A685-4D27-A647-E52F4C6E1E30}.Release|x86.ActiveCfg = Release|Win32
 		{7E3B7E45-A685-4D27-A647-E52F4C6E1E30}.Release|x86.Build.0 = Release|Win32
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Debug|x64.ActiveCfg = Debug|x64
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Debug|x64.Build.0 = Debug|x64
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Debug|x86.ActiveCfg = Debug|Win32
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Debug|x86.Build.0 = Debug|Win32
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Release|x64.ActiveCfg = Release|x64
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Release|x64.Build.0 = Release|x64
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Release|x86.ActiveCfg = Release|Win32
+		{AD7EDE5E-CB99-4F56-AA2F-A7FA6E85EB09}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
