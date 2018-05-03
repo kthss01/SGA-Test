@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Util.h"
 
-
 Util::Util()
 {
 }
@@ -35,4 +34,13 @@ void Util::GetMousePos(Vector2 * out)
 	// 이렇게 하면 화면 중심이 0,0 왼쪽 -1 오른쪽 1 위 1 아래 -1임
 
 	*out = temp;
+}
+
+float Util::GetRandomSeed()
+{
+	int seed = rand() % 1001;
+	
+	float result = (float)seed / 1000.0f;
+	
+	return result;
 }

@@ -1,9 +1,14 @@
 #include "stdafx.h"
 #include "Program.h"
-
+#include "GameObject\Rect.h"
 
 Program::Program()
 {
+	srand(time(NULL));
+
+	rect = new Rect;
+	rect->Init();
+
 	vertices = new Vertex[2];
 
 	vertices[0].position = Vector2(25, -55);
@@ -26,10 +31,14 @@ Program::Program()
 Program::~Program()
 {
 	SAFE_DELETE_ARRAY(vertices);
+	rect->Release();
+	SAFE_DELETE(rect);
 }
 
 void Program::Update()
 {
+	rect->Update();
+
 	// 카메라 만드는거
 	Vector2 vLookAt(0, 0, 1);	// 바라보는 좌표값
 	vLookAt = vEye + Vector2(0, 0, 1);
@@ -129,4 +138,11 @@ void Program::Render()
 							// 점도 있음 D3DPT_POINTLIST
 		1, DrawRay, sizeof(Vertex)
 	);
+
+	for (int i = 0; i < 100; i++) {
+		Vector2 rands = Vector2(rand() % 1000, rand() % 1000);
+		rect->GetTransform()->SetWorldPosition(rands);
+		rect->Render();
+	}
+
 }

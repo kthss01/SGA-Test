@@ -20,5 +20,6 @@ public:
 	~Util();
 
 	static void GetMousePos(Vector2 * out);
+	static float GetRandomSeed();
 };
 

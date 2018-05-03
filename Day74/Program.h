@@ -22,6 +22,8 @@ private:
 	Ray ray;
 
 	float color[4];
+
+	class Rect* rect;
 public:
 	Program();
 	~Program();
