@@ -64,7 +64,7 @@ public:
 	// 부모 있을 경우 로컬 좌표로 세팅, 부모 없을 시 월드 좌표로 변환
 	void SetLocalPosition(Vector2 position);
 	// 방향대로 이동하는거, 자기 자신 축을 기준으로 움직이는거
-	void MovePositionSelf(Vector2 position);
+	void MovePositionSelf(Vector2 delta);
 	void MovePositionWorld(Vector2 delta);
 	void MovePositionLocal(Vector2 delta);
 
@@ -77,7 +77,7 @@ public:
 	// rotate
 	void RotateWorld(Vector2 angle);
 	// 자기 자신 축으로 회전
-	void RotateSelf(Vector2 angle);
+	void RotateSelf(float angle);
 	// 부모없을 경우 월드 기준 부모 있으면 부모 기준
 	void RotateLocal(Vector2 angle);
 
@@ -91,10 +91,21 @@ public:
 	// 특정 방향을 바라보게끔 회전
 	void LookPosition(Vector2 pos, Vector2 up = Vector2(0, 0, -1));
 
+	void DefaultControl2();
+
 	// Update()
 	void UpdateTransform();
 
 	// Get 
 	Matrix GetFinalMatrix() const;	// 월드 세 팅할때만 쓸 예정
+
+	Vector2 GetWorldPosition();
+
+	// axis 전부다 받아오는거
+	void GetUnitAxis(Vector2* pVecArr) const;
+	// 지정한 번호의 axis만 받아오는거
+	Vector2 GetUnitAxis(int axisNum) const;
+
+	void DrawInterface();
 };
 

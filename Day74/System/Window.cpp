@@ -32,6 +32,7 @@ WPARAM Window::Run()
 			ImGui_ImplDX9_NewFrame();
 			// 구분선은 깔끔하게 해주려는거
 			{
+				Frame::Get()->UpdateTime(60.0f);
 				program->Update();
 				// ImGui 한글은 안됨 좀 뜯어 고쳐야함
 				ImGui::Text("Hello, ImGui");
@@ -50,6 +51,8 @@ WPARAM Window::Run()
 		}
 	}
 
+	Input::Delete();
+	Frame::Delete();
 	ImGui_ImplDX9_Shutdown();
 
 	SAFE_DELETE(program);

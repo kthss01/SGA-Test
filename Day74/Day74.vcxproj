@@ -24,7 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Direct2D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day74-transform</ProjectName>
+    <ProjectName>Day74,75-transform, camera</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Common\Camera.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="GameObject\Rect.h" />
     <ClInclude Include="ImGui\imconfig.h" />
@@ -166,11 +167,14 @@
     <ClInclude Include="Program.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Math\Vector2.h" />
+    <ClInclude Include="System\Frame.h" />
+    <ClInclude Include="System\Input.h" />
     <ClInclude Include="System\Window.h" />
     <ClInclude Include="Common\Transform.h" />
     <ClInclude Include="Utilities\Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Common\Camera.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="GameObject\Rect.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
@@ -183,6 +187,8 @@
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
+    <ClCompile Include="System\Frame.cpp" />
+    <ClCompile Include="System\Input.cpp" />
     <ClCompile Include="System\Window.cpp" />
     <ClCompile Include="Common\Transform.cpp" />
     <ClCompile Include="Utilities\Util.cpp" />

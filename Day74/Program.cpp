@@ -97,11 +97,11 @@ void Program::Render()
 	// texture 로 사용할때
 	D2D::GetDevice()->SetFVF(D3DFVF_XYZ | D3DFVF_DIFFUSE);
 
-	D2D::GetDevice()->DrawPrimitiveUP(
-		D3DPT_LINELIST,		// 선임
-		// 점도 있음 D3DPT_POINTLIST
-		1, vertices, sizeof(Vertex)
-	);
+	//D2D::GetDevice()->DrawPrimitiveUP(
+	//	D3DPT_LINELIST,		// 선임
+	//	// 점도 있음 D3DPT_POINTLIST
+	//	1, vertices, sizeof(Vertex)
+	//);
 	/* lip 
 		vertex 들어간게 [0][1][2][3] -> [0][1], [1][2], [2][3]
 		ex) 삼각형 [0][1][2], [1][2][3] ...
@@ -111,38 +111,40 @@ void Program::Render()
 		ex) 삼각형 [0][1][2], [3][4][5] ...
 	*/
 
-	for (int i = 0; i < 10; i++) {
-		Matrix matWorld;
-		Vector2 move(i * 10, i * 10);
-		matWorld = Matrix::Translation(move);
+	//for (int i = 0; i < 10; i++) {
+	//	Matrix matWorld;
+	//	Vector2 move(i * 10, i * 10);
+	//	matWorld = Matrix::Translation(move);
 
-		D2D::GetDevice()->SetTransform(
-			D3DTS_WORLD, &matWorld.ToDXMatrix()
-		);
-		D2D::GetDevice()->DrawPrimitiveUP(
-			D3DPT_LINELIST,		// 선임
-								// 점도 있음 D3DPT_POINTLIST
-			1, vertices, sizeof(Vertex)
-		);
-	}
+	//	D2D::GetDevice()->SetTransform(
+	//		D3DTS_WORLD, &matWorld.ToDXMatrix()
+	//	);
+	//	D2D::GetDevice()->DrawPrimitiveUP(
+	//		D3DPT_LINELIST,		// 선임
+	//							// 점도 있음 D3DPT_POINTLIST
+	//		1, vertices, sizeof(Vertex)
+	//	);
+	//}
 
-	Vertex DrawRay[2];
-	DrawRay[0].position = ray.origin;
-	DrawRay[0].color = D3DXCOLOR(color);
-	
-	DrawRay[1].position = outPos;
-	DrawRay[1].color = D3DXCOLOR(color);
+	//Vertex DrawRay[2];
+	//DrawRay[0].position = ray.origin;
+	//DrawRay[0].color = D3DXCOLOR(color);
+	//
+	//DrawRay[1].position = outPos;
+	//DrawRay[1].color = D3DXCOLOR(color);
 
-	D2D::GetDevice()->DrawPrimitiveUP(
-		D3DPT_LINELIST,		// 선임
-							// 점도 있음 D3DPT_POINTLIST
-		1, DrawRay, sizeof(Vertex)
-	);
+	//D2D::GetDevice()->DrawPrimitiveUP(
+	//	D3DPT_LINELIST,		// 선임
+	//						// 점도 있음 D3DPT_POINTLIST
+	//	1, DrawRay, sizeof(Vertex)
+	//);
 
-	for (int i = 0; i < 100; i++) {
-		Vector2 rands = Vector2(rand() % 1000, rand() % 1000);
-		rect->GetTransform()->SetWorldPosition(rands);
-		rect->Render();
-	}
+	rect->Render();
+
+	//for (int i = 0; i < 100; i++) {
+	//	Vector2 rands = Vector2(rand() % 1000, rand() % 1000);
+	//	rect->GetTransform()->SetWorldPosition(rands);
+	//	rect->Render();
+	//}
 
 }

@@ -89,6 +89,9 @@ void Rect::Update()
 	memcpy(pVertex, vertice, stride * 4);
 	hr = vb->Unlock();
 	assert(SUCCEEDED(hr));
+
+	this->transform->DefaultControl2();
+	this->DrawInterface();
 }
 
 void Rect::Render()
@@ -101,4 +104,13 @@ void Rect::Render()
 	D2D::GetDevice()->DrawIndexedPrimitive(
 		D3DPT_TRIANGLELIST,
 		0, 0, 4, 0, 2);
+}
+
+void Rect::DrawInterface()
+{
+	ImGui::Begin("Interface");
+	{
+		transform->DrawInterface();
+	}
+	ImGui::End();
 }
