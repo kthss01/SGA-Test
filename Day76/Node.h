@@ -15,9 +15,19 @@ public:
 
 	// 노드 끝에 붙이는거 
 	void AddNode(Node* pNext);
+	// 중간 삽입 (몇번째)
+	void AddNode(int count, Node* pNode);
+
 	// 노드 다 지우는 함수
 	void Delete();
+	// 중간 삭제 (삭제 data or 몇번째)
+	void Delete(int data, Node** ppThis);
+
 	void Print();
+	// 리버스 (뒤집기)
+	void Reverse(Node* pPrev);
+	// 리버스에선 마지막 노드를 갖고 있어야함
+	Node* GetTail();
 };
 
 /*
