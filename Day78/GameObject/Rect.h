@@ -5,12 +5,16 @@ class Rect : public GameObject
 private:
 	struct Vertex {
 		Vector2 position;
-		Vector2 uv;
+		DWORD color;
 	};
 	Vertex vertice[4];
 
 	LPDIRECT3DTEXTURE9 pTex;
+
+	LPD3DXEFFECT pEffect;
 	float deltaTime;
+
+	class Camera* mainCamera;
 public:
 	Rect();
 	~Rect();
