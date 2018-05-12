@@ -5,7 +5,8 @@ class Rect : public GameObject
 private:
 	struct Vertex {
 		Vector2 position;
-		DWORD color;
+		//DWORD color;
+		Vector2 uv;
 	};
 	Vertex vertice[4];
 

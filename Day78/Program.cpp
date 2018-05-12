@@ -26,6 +26,8 @@ Program::Program()
 
 	vEye = Vector2(0, 0);	// 카메라의 위치
 	ray = Ray(Vector2(0, 0), Vector2(-1, 0));
+
+	CreateRenderTargetTexture();
 }
 
 Program::~Program()
@@ -87,4 +89,75 @@ void Program::Render()
 	D2D::GetDevice()->SetTransform(D3DTS_PROJECTION, &matProjection.ToDXMatrix());
 
 	rect->Render();
+
+	// 후면버퍼에 데이터를 보낼 녀석에 대한 정보값
+	LPDIRECT3DSURFACE9 pDeviceTargetSurface;
+	// stencil이랑 depth 저장할 녀석
+	LPDIRECT3DSURFACE9 pDeviceDepthAndStencilSuface;
+
+	D2D::GetDevice()->GetRenderTarget(0, &pDeviceTargetSurface);
+	D2D::GetDevice()->GetDepthStencilSurface(
+		&pDeviceDepthAndStencilSuface);
+
+	LPDIRECT3DSURFACE9 texSurface = NULL;
+	if (SUCCEEDED(this->pRenderTexture->
+		GetSurfaceLevel(0, &texSurface))) {
+		D2D::GetDevice()->SetRenderTarget(0, texSurface);
+		SAFE_RELEASE(texSurface);
+	}
+
+	D2D::GetDevice()->SetDepthStencilSurface(pRenderSurface);
+
+	D2D::GetDevice()->Clear(
+		0, NULL,
+		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,
+		0xFF00FF00,
+		1.0f, 0);
+
+	// beginScene endScene Present 안써도됨 텍스처에 바로 그리는거니
+	rect->Render();
+
+	D2D::GetDevice()->SetRenderTarget(0, pDeviceTargetSurface);
+	D2D::GetDevice()->SetDepthStencilSurface(pDeviceDepthAndStencilSuface);
+
+	SAFE_RELEASE(pDeviceDepthAndStencilSuface);
+	SAFE_RELEASE(pDeviceTargetSurface);
+
+	if (Input::Get()->GetKeyDown(VK_SPACE)) {
+		D3DXSaveTextureToFile(
+			L"Test.png",
+			D3DXIFF_PNG,
+			pRenderTexture,
+			NULL
+		);
+	}
+}
+
+void Program::CreateRenderTargetTexture()
+{
+	int width = 512;
+	int height = 512;
+
+	// 그냥 텍스처 변수 만드는거
+	D2D::GetDevice()->CreateTexture(
+		width, height,
+		1,
+		D3DUSAGE_RENDERTARGET, // 사용 용도
+		D3DFMT_A8R8G8B8,
+		D3DPOOL_DEFAULT,
+		&pRenderTexture,
+		NULL
+	);
+
+	// depth 와 stencil을 갖고 있는 surface 생성
+	// 두 크기 동일해야됨 texture랑 surface
+	D2D::GetDevice()->CreateDepthStencilSurface(
+		width, height,
+		D3DFMT_D24S8,
+		D3DMULTISAMPLE_NONE,
+		0,
+		TRUE,				// 버퍼를 교체할때 이전 교체 내용을 저장하지 않을 것이냐
+		&pRenderSurface,
+		NULL
+	);
 }
