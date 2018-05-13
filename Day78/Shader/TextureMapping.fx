@@ -26,11 +26,11 @@ VS_OUTPUT VS(VS_INPUT input) {
 	// float4 temp = float4(input.position, 1.0f);
 
 	// 계산이 지저분하게 나올 수 도 있음 그런경우 w값 초기화
-	input.position.w = 1.0f;
-	
-	output.position = mul(input.position, matWorld);
-	output.position = mul(input.position, matView);
-	output.position = mul(input.position, matProjection);
+    input.position.w = 1.0f;
+
+    output.position = mul(input.position, matWorld);
+    output.position = mul(output.position, matView);
+    output.position = mul(output.position, matProjection);
 
 	// uv 좌표는 픽셀 쉐이더에서 설정
 	output.uv = input.uv;
