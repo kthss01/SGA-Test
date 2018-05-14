@@ -16,6 +16,7 @@ private:
 	float deltaTime;
 
 	class Camera* mainCamera;
+	class AnimationClip* clips;
 public:
 	Rect();
 	~Rect();
@@ -26,4 +27,6 @@ public:
 	void Render();
 
 	void DrawInterface();
+	void WriteJsonData(wstring fileName, Json::Value* root);
+	void ReadJsonData(wstring fileName, Json::Value* root);
 };

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Rect.h"
 #include "./Common/Camera.h"
+#include "./Animation/AnimationClip.h"
 
 Rect::Rect() {
 
@@ -110,8 +111,8 @@ void Rect::Init()
 
 	hr = D3DXCreateTextureFromFile(
 		D2D::GetDevice(),
-		//L"Textures/mario_all.png",
-		L"Textures/Box.png",
+		L"Textures/mario_all.png",
+		//L"Textures/Box.png",
 		&pTex
 	);
 	assert(SUCCEEDED(hr));
@@ -119,6 +120,29 @@ void Rect::Init()
 	deltaTime = 0.0f;
 
 	mainCamera = new Camera;
+
+	AnimationData data;
+	clips = new AnimationClip;
+	Json::Value* root = new Json::Value();
+	
+	for (int i = 0; i < 4; i++) {
+		data.keyName = L"run_" + to_wstring(i);
+		data.maxFrame = Vector2(8.0f, 4.0f);
+		data.currentFrame = Vector2(float(i), 0.0f);
+		clips->PushAnimationData(data);
+		Json::SetValue(*root, "run_" + to_string(i), (float&)i);
+	}
+
+	WriteJsonData(L"Test.Json", root);
+
+	Json::Value* ReadJson = new Json::Value();
+	ReadJsonData(L"Test.Json", ReadJson);
+
+	float temp;
+	Json::GetValue(*ReadJson, "run_1", temp);
+	
+	// SAFE_RELEASE 는 함수 release가 있는 지 확인하면됨
+
 }
 
 void Rect::Release()
@@ -130,6 +154,10 @@ void Rect::Release()
 
 	SAFE_DELETE(transform);
 	SAFE_DELETE(mainCamera);
+	SAFE_DELETE(clips);
+
+	SAFE_DELETE(ReadJson);
+	SAFE_DELETE(root);
 }
 
 void Rect::Update()
@@ -137,25 +165,37 @@ void Rect::Update()
 	this->mainCamera->UpdateCamToDevice();
 	this->transform->DefaultControl2();
 	this->DrawInterface();
+	clips->Update(AniRepeatType_Loop);
 }
 
 void Rect::Render()
 {
 	// 알파블렌더 쓰겠다 설정값
 	// 알파 테스트 블렌더도 있음
-	//D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
-	//// SRCALPHA 텍스처 한장 쓰는거 
-	//// ~dest 텍스처 여러장쓰고 여러장의 알파블렌더 쓸때
-	//D2D::GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	//// dest 화면 나타내는거
-	//D2D::GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
-	//// 이 방법은 텍스처에 알파 채널 값이라 전체화면에 알파 값 곱한거?
+	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	// SRCALPHA 텍스처 한장 쓰는거 
+	// ~dest 텍스처 여러장쓰고 여러장의 알파블렌더 쓸때
+	D2D::GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	// dest 화면 나타내는거
+	D2D::GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	// 이 방법은 텍스처에 알파 채널 값이라 전체화면에 알파 값 곱한거?
 
 	//D2D::GetDevice()->SetTransform(D3DTS_WORLD, &transform->GetFinalMatrix().ToDXMatrix());
 
 	this->pEffect->SetMatrix("matWorld", &transform->GetFinalMatrix().ToDXMatrix());
 	this->pEffect->SetMatrix("matView", &mainCamera->GetViewMatrix().ToDXMatrix());
 	this->pEffect->SetMatrix("matProjection", &mainCamera->GetProjection().ToDXMatrix());
+
+	this->pEffect->SetVector("maxFrame", 
+		&D3DXVECTOR4(
+			clips->GetCurrentData().maxFrame.x, 
+			clips->GetCurrentData().maxFrame.y, 
+			0.0f, 0.0f));
+	this->pEffect->SetVector("currentFrame", 
+		&D3DXVECTOR4(
+			clips->GetCurrentData().currentFrame.x, 
+			clips->GetCurrentData().currentFrame.y,
+			0.0f, 0.0f));
 
 	this->pEffect->SetTexture("tex", pTex);
 
@@ -200,4 +240,27 @@ void Rect::DrawInterface()
 		transform->DrawInterface();
 	}
 	ImGui::End();
+}
+
+void Rect::WriteJsonData(wstring fileName, Json::Value * root)
+{
+	ofstream stream;
+	string temp = String::WStringToString(fileName);
+	stream.open(temp); 
+	{
+		Json::StyledWriter writer;
+		stream << writer.write(*root);
+	}
+	stream.close();
+}
+
+void Rect::ReadJsonData(wstring fileName, Json::Value * root)
+{
+	ifstream stream;
+	stream.open(fileName);
+	{
+		Json::Reader reader;
+		reader.parse(stream, *root);
+	}
+	stream.close();
 }
