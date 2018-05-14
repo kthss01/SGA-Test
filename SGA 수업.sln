@@ -139,7 +139,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day76-SingleLinkedList", "D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day77-UV Animation", "Day77\Day77.vcxproj", "{093B8D46-C594-4521-8795-AE7498F19F44}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day78", "Day78\Day78.vcxproj", "{B7E5E369-AF36-49A1-A673-D2C7D4E45794}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day78,79-Shader, 알파블렌드, 텍스처 저장", "Day78\Day78.vcxproj", "{B7E5E369-AF36-49A1-A673-D2C7D4E45794}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day80", "Day80\Day80.vcxproj", "{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -701,6 +703,14 @@ Global
 		{B7E5E369-AF36-49A1-A673-D2C7D4E45794}.Release|x64.Build.0 = Release|x64
 		{B7E5E369-AF36-49A1-A673-D2C7D4E45794}.Release|x86.ActiveCfg = Release|Win32
 		{B7E5E369-AF36-49A1-A673-D2C7D4E45794}.Release|x86.Build.0 = Release|Win32
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Debug|x64.ActiveCfg = Debug|x64
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Debug|x64.Build.0 = Debug|x64
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Debug|x86.ActiveCfg = Debug|Win32
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Debug|x86.Build.0 = Debug|Win32
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Release|x64.ActiveCfg = Release|x64
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Release|x64.Build.0 = Release|x64
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Release|x86.ActiveCfg = Release|Win32
+		{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

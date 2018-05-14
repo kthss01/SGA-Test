@@ -20,11 +20,11 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{B7E5E369-AF36-49A1-A673-D2C7D4E45794}</ProjectGuid>
+    <ProjectGuid>{5778E8A9-C2F5-4C5F-8F8D-2975F83BD860}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Direct2D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>Day78,79-Shader, 알파블렌드, 텍스처 저장</ProjectName>
+    <ProjectName>Day80</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
