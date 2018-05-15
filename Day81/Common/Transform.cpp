@@ -13,8 +13,48 @@ Transform::~Transform()
 {
 }
 
-void Transform::AddChild(Transform * pChild)
+void Transform::AddChild(Transform * pNewChild)
 {
+	// 새로들어간 자식의 부모가 나면 리턴
+	if (pNewChild->pParent == this)
+		return;
+
+	// 이전 부모와 연결을 끊는다.
+	pNewChild->ReleaseParent();
+
+	// 부모의 상대적인 좌표값으로 갱신하기 위해서 
+	// 부모의 final 역행렬 값
+	Matrix matInvFinal;
+	float temp;
+
+	matInvFinal = this->matFinal.Inverse(temp);
+	pNewChild->position = 
+		pNewChild->position.TransformCoord(matInvFinal);
+
+	for (int i = 0; i < 2; i++)
+		pNewChild->axis[i] = 
+			pNewChild->axis[i].TransformNormal(matInvFinal);
+
+	pNewChild->scale.x = pNewChild->right.Length();
+	pNewChild->scale.y = pNewChild->up.Length();
+
+	pNewChild->pParent = this;
+
+	Transform* pChild = this->pFirstChild;
+
+	if (pChild == NULL) {
+		this->pFirstChild = pNewChild;
+	}
+	else {
+		while (pChild != NULL) {
+			if (pChild->pNextSibling == NULL) {
+				pChild->pNextSibling = pNewChild;
+				break;
+			}
+			pChild = pChild->pNextSibling;
+		}
+	}
+	this->UpdateTransform();
 }
 
 void Transform::AttachTo(Transform * pParent)
@@ -90,6 +130,9 @@ void Transform::MovePositionSelf(Vector2 delta)
 
 void Transform::MovePositionWorld(Vector2 delta)
 {
+	Vector2 nowWorldPos = this->GetWorldPosition();
+	
+	this->SetWorldPosition(nowWorldPos + delta);
 }
 
 void Transform::MovePositionLocal(Vector2 delta)
@@ -193,6 +236,15 @@ void Transform::UpdateTransform()
 
 	if (this->pParent == NULL) {
 		this->matFinal = matLocal;
+	}
+	else {
+		this->matFinal = matLocal * this->pParent->matFinal;
+	}
+
+	Transform* pChild = this->pFirstChild;
+	while (pChild != NULL) {
+		pChild->UpdateTransform();
+		pChild = pChild->pNextSibling;
 	}
 }
 

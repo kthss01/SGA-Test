@@ -29,7 +29,8 @@ void Rect::Init()
 	D3DXCreateEffectFromFile(
 		D2D::GetDevice(),			// 디바이스
 		//L"./Shader/BaseColor.fx",	// 셰이더 파일
-		L"./Shader/TextureMapping.fx",
+		//L"./Shader/TextureMapping.fx",
+		L"./Shader/MultiTexture.fx",
 		NULL,						// 셰이더 컴파일시 추가 #define
 		NULL,						// 셰이더 컴파일시 추가 #include
 		// include를 쓸 수 있는거
@@ -111,9 +112,17 @@ void Rect::Init()
 
 	hr = D3DXCreateTextureFromFile(
 		D2D::GetDevice(),
-		L"Textures/mario_all.png",
+		L"Textures/1.png",
 		//L"Textures/Box.png",
 		&pTex
+	);
+	assert(SUCCEEDED(hr));
+
+	hr = D3DXCreateTextureFromFile(
+		D2D::GetDevice(),
+		L"Textures/2.png",
+		//L"Textures/Box.png",
+		&pTex2
 	);
 	assert(SUCCEEDED(hr));
 
@@ -144,6 +153,13 @@ void Rect::Init()
 	// SAFE_RELEASE 는 함수 release가 있는 지 확인하면됨
 	SAFE_DELETE(ReadJson);
 	SAFE_DELETE(root);
+
+	for (int i = 0; i < 4; i++) {
+		child[i] = new Transform;
+		Vector2 position = Vector2(i * 100, 0);
+		child[i]->SetWorldPosition(position);
+		transform->AddChild(child[i]);
+	}
 }
 
 void Rect::Release()
@@ -152,10 +168,14 @@ void Rect::Release()
 	SAFE_RELEASE(vb);
 	SAFE_RELEASE(pEffect);
 	SAFE_RELEASE(pTex);
+	SAFE_RELEASE(pTex2);
 
 	SAFE_DELETE(transform);
 	SAFE_DELETE(mainCamera);
 	SAFE_DELETE(clips);
+
+	for (int i = 0; i < 4; i++)
+		SAFE_DELETE(child[i]);
 }
 
 void Rect::Update()
@@ -164,6 +184,13 @@ void Rect::Update()
 	this->transform->DefaultControl2();
 	this->DrawInterface();
 	clips->Update(AniRepeatType_Loop);
+
+	if (Input::Get()->GetKey(VK_UP)) {
+		this->transform->MovePositionWorld(Vector2(0, -10));
+	}
+	if (Input::Get()->GetKey(VK_DOWN)) {
+		this->transform->MovePositionWorld(Vector2(0, 10));
+	}
 }
 
 void Rect::Render()
@@ -180,7 +207,6 @@ void Rect::Render()
 
 	//D2D::GetDevice()->SetTransform(D3DTS_WORLD, &transform->GetFinalMatrix().ToDXMatrix());
 
-	this->pEffect->SetMatrix("matWorld", &transform->GetFinalMatrix().ToDXMatrix());
 	this->pEffect->SetMatrix("matView", &mainCamera->GetViewMatrix().ToDXMatrix());
 	this->pEffect->SetMatrix("matProjection", &mainCamera->GetProjection().ToDXMatrix());
 
@@ -194,11 +220,24 @@ void Rect::Render()
 			clips->GetCurrentData().currentFrame.x, 
 			clips->GetCurrentData().currentFrame.y,
 			0.0f, 0.0f));
-
-	this->pEffect->SetTexture("tex", pTex);
+	this->pEffect->SetTexture("tex1", pTex);
+	this->pEffect->SetTexture("tex2", pTex2);
 
 	this->pEffect->SetTechnique("MyShader");
 
+	this->pEffect->SetMatrix("matWorld", &transform->GetFinalMatrix().ToDXMatrix());
+	this->RenderRect();
+
+	for (int i = 0; i < 4; i++) {
+		this->pEffect->SetMatrix("matWorld", &child[i]->GetFinalMatrix().ToDXMatrix());
+		this->RenderRect();
+	}
+
+	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+}
+
+void Rect::RenderRect()
+{
 	// 셰이더로 렌더
 	UINT iPassNum = 0;
 
@@ -225,10 +264,6 @@ void Rect::Render()
 	}
 
 	this->pEffect->End();
-
-	
-
-	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }
 
 void Rect::DrawInterface()

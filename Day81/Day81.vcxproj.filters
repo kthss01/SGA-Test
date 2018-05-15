@@ -164,5 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\TextureMapping.fx" />
+    <None Include="Shader\MultiTexture.fx" />
   </ItemGroup>
 </Project>

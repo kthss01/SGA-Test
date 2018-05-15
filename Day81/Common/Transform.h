@@ -47,7 +47,7 @@ public:
 
 	// Parents
 	// 내 자식으로 Transform 붙이는거
-	void AddChild(Transform* pChild);
+	void AddChild(Transform* pNewChild);
 
 	// 부모 설정해주는 녀석
 	void AttachTo(Transform* pParent);
