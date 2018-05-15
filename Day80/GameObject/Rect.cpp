@@ -142,7 +142,8 @@ void Rect::Init()
 	Json::GetValue(*ReadJson, "run_1", temp);
 	
 	// SAFE_RELEASE 는 함수 release가 있는 지 확인하면됨
-
+	SAFE_DELETE(ReadJson);
+	SAFE_DELETE(root);
 }
 
 void Rect::Release()
@@ -155,9 +156,6 @@ void Rect::Release()
 	SAFE_DELETE(transform);
 	SAFE_DELETE(mainCamera);
 	SAFE_DELETE(clips);
-
-	SAFE_DELETE(ReadJson);
-	SAFE_DELETE(root);
 }
 
 void Rect::Update()
