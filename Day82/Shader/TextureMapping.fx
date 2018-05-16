@@ -5,11 +5,6 @@ float4x4 matWorld;
 float4x4 matView;
 float4x4 matProjection;
 
-// 쉐이더 자체에서 계산해도 됨
-// 외부값은 사실 flaot4로 들어가게됨
-float2 maxFrame;
-float2 currentFrame;
-
 struct VS_INPUT {
 	float4 position : POSITION;
 	float2 uv : TEXCOORD0;
@@ -68,13 +63,9 @@ struct PS_INPUT {
 
 // 반환되는 값은 무조건 color 텍스처에 대한 컬러값이 반환되야되서
 float4 PS(PS_INPUT input) : COLOR0
-{
-	float2 temp;
-	temp.x = input.uv.x / maxFrame.x + currentFrame.x / maxFrame.x;
-	temp.y = input.uv.y / maxFrame.y + currentFrame.y / maxFrame.y;
-	
+{	
 	// 자체 내에서 컬러값 수정해도 됨 RGBA 순
-    return tex2D(tex_sampler, temp) * float4(1.0f, 0, 0, 0.5f);
+    return tex2D(tex_sampler, input.uv);
 }
 
 technique MyShader {

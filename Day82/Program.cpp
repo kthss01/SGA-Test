@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "Program.h"
+
 #include "GameObject\Rect.h"
+#include "Common\Camera.h"
 
 Program::Program()
 {
 	srand(time(NULL));
-
-	rect = new Rect;
-	rect->Init();
 
 	vertices = new Vertex[2];
 
@@ -28,109 +27,75 @@ Program::Program()
 	ray = Ray(Vector2(0, 0), Vector2(-1, 0));
 
 	CreateRenderTargetTexture();
+
+	wstring fileName = L"Textures/Robot/A2D Robot_";
+
+	for (int i = 1; i <= 16; i++) {
+		wstring fileNum = L"";
+		if (i < 10) 
+			fileNum += L"0" + to_wstring(i);
+		else
+			fileNum += to_wstring(i);
+
+		wstring filePath = fileName + fileNum + L".png";
+
+		LPDIRECT3DTEXTURE9 temp;
+		D3DXIMAGE_INFO tempInfo;
+
+		// imageinfo 사용하려면 필요
+		D3DXCreateTextureFromFileEx(
+			D2D::GetDevice(),
+			filePath.c_str(),
+			D3DX_DEFAULT,	// 기본값으로 설정하고 싶으면 default나 0이면 원본 사이즈
+			0,
+			0,
+			D3DUSAGE_DYNAMIC,
+			D3DFMT_UNKNOWN,
+			D3DPOOL_DEFAULT, // usage dynamic으로 설정 시
+			D3DX_DEFAULT,
+			D3DX_DEFAULT,
+			NULL,
+			&tempInfo,
+			NULL, // 색상값을 나타내는 팔렛트 256인지 32비트인지 모르면 null
+			&temp 
+		);
+
+		vecImage.push_back(make_pair(temp, tempInfo));
+	}
+
+	mainCamera = new Camera;
+
+	head = new Rect();
+	head->Init(L"./Shader/TextureMapping.fx", Vector2(1,1), Vector2(0,-50));
+	head->SetTexture(vecImage[0].first);
+	head->GetTransform()->SetScale(Vector2(
+			vecImage[0].second.Width / 100.0f, 
+			vecImage[0].second.Height / 100.0f));
 }
 
 Program::~Program()
 {
 	SAFE_DELETE_ARRAY(vertices);
-	rect->Release();
-	SAFE_DELETE(rect);
+	head->Release();
+	SAFE_DELETE(head);
+
+	SAFE_DELETE(mainCamera);
+
+	for (int i = 0; i < vecImage.size(); i++)
+		SAFE_RELEASE(vecImage[i].first);
 }
 
 void Program::Update()
 {
-	rect->Update();
-
-	// 카메라 만드는거
-	Vector2 vLookAt(0, 0, 1);	// 바라보는 좌표값
-	vLookAt = vEye + Vector2(0, 0, 1);
-	Vector2 vUp(0, 1, 0);
-	matView = Matrix::View(vEye, vLookAt, vUp);
-	matProjection = Matrix::Ortho(0, WINSIZE_X, WINSIZE_Y, 0, 0.0, 1.0f);
-
-	if (GetKeyState(VK_UP) & 0x8000) { ray.direction.y += 0.1f; }
-	if (GetKeyState(VK_DOWN) & 0x8000) { ray.direction.y -= 0.1f; }
-	if (GetKeyState(VK_RIGHT) & 0x8000) { ray.direction.x += 0.1f; }
-	if (GetKeyState(VK_LEFT) & 0x8000) { ray.direction.x -= 0.1f; }
-
-	// 방향으로 지정해야되기 때문에 normalize 한번 해줘야함
-	ray.direction = ray.direction.Normalize();
-
-	Vector2 position[2];
-
-	Matrix matViewProj = matView * matProjection;
-
-	for (int i = 0; i < 2; i++) {
-		// world view projection 곱해줘야함 근데 월드는 identity라 안곱해도 됨
-		position[i] = vertices[i].position.TransformCoord(matViewProj);
-	}
-
-	// outPos 화면 좌표에서 2D좌표로 다시 바꿔주기위해 
-	// matVieProj에 역행렬을 곱해주는 거
-	if (Collision::IntersectRayToLine(
-		ray,
-		position[0],
-		position[1],
-		&outPos
-	)) {
-		float temp;
-		Matrix invMatrix = matViewProj.Inverse(temp);
-
-		outPos = outPos.TransformCoord(invMatrix);
-	}
-
-	ImGui::ColorEdit3("RayColor", color);
+	head->GetTransform()->DefaultControl2();
+	// Shader 사용할 때 굳이 안사용해도 됨
+	mainCamera->UpdateCamToDevice();
+	head->Update();
 }
 
 void Program::Render()
 {
-	// 실질적으로 계산하는건 Device로 넘겨주게됨
-	D2D::GetDevice()->SetTransform(D3DTS_VIEW, &matView.ToDXMatrix());
-	D2D::GetDevice()->SetTransform(D3DTS_PROJECTION, &matProjection.ToDXMatrix());
-
-	rect->Render();
-
-	// 후면버퍼에 데이터를 보낼 녀석에 대한 정보값
-	LPDIRECT3DSURFACE9 pDeviceTargetSurface;
-	// stencil이랑 depth 저장할 녀석
-	LPDIRECT3DSURFACE9 pDeviceDepthAndStencilSuface;
-
-	D2D::GetDevice()->GetRenderTarget(0, &pDeviceTargetSurface);
-	D2D::GetDevice()->GetDepthStencilSurface(
-		&pDeviceDepthAndStencilSuface);
-
-	LPDIRECT3DSURFACE9 texSurface = NULL;
-	if (SUCCEEDED(this->pRenderTexture->
-		GetSurfaceLevel(0, &texSurface))) {
-		D2D::GetDevice()->SetRenderTarget(0, texSurface);
-		SAFE_RELEASE(texSurface);
-	}
-
-	D2D::GetDevice()->SetDepthStencilSurface(pRenderSurface);
-
-	D2D::GetDevice()->Clear(
-		0, NULL,
-		D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,
-		0xFF00FF00,
-		1.0f, 0);
-
-	// beginScene endScene Present 안써도됨 텍스처에 바로 그리는거니
-	rect->Render();
-
-	D2D::GetDevice()->SetRenderTarget(0, pDeviceTargetSurface);
-	D2D::GetDevice()->SetDepthStencilSurface(pDeviceDepthAndStencilSuface);
-
-	SAFE_RELEASE(pDeviceDepthAndStencilSuface);
-	SAFE_RELEASE(pDeviceTargetSurface);
-
-	if (Input::Get()->GetKeyDown(VK_SPACE)) {
-		D3DXSaveTextureToFile(
-			L"Test.png",
-			D3DXIFF_PNG,
-			pRenderTexture,
-			NULL
-		);
-	}
+	head->Render(mainCamera);
 }
 
 void Program::CreateRenderTargetTexture()

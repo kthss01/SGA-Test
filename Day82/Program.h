@@ -23,12 +23,21 @@ private:
 
 	float color[4];
 
-	class Rect* rect;
+	class Rect* head;
+	class Rect* body;
+	class Rect* lArm;
+	class Rect* rArm;
+	class Rect* lLeg;
+	class Rect* rLeg;
 
 	// 텍스에 대한 정보를 저장할 곳
 	LPDIRECT3DTEXTURE9 pRenderTexture;
 	// 텍스에 대한 표면 (색상값 설정)
 	LPDIRECT3DSURFACE9 pRenderSurface;
+
+	vector< pair<LPDIRECT3DTEXTURE9, D3DXIMAGE_INFO> > vecImage;
+
+	class Camera* mainCamera;
 public:
 	Program();
 	~Program();

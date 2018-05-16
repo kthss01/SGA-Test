@@ -11,7 +11,7 @@ Rect::~Rect() {
 
 }
 
-void Rect::Init()
+void Rect::Init(wstring shaderFile, const Vector2 uv, const Vector2 pivot)
 {
 	// 쉐이더 초기화
 	// 에러값 확인이 어려우므로 
@@ -30,7 +30,8 @@ void Rect::Init()
 		D2D::GetDevice(),			// 디바이스
 		//L"./Shader/BaseColor.fx",	// 셰이더 파일
 		//L"./Shader/TextureMapping.fx",
-		L"./Shader/MultiTexture.fx",
+		//L"./Shader/MultiTexture.fx",
+		shaderFile.c_str(),
 		NULL,						// 셰이더 컴파일시 추가 #define
 		NULL,						// 셰이더 컴파일시 추가 #include
 		// include를 쓸 수 있는거
@@ -50,19 +51,19 @@ void Rect::Init()
 		SAFE_RELEASE(pError);
 	}
 
-	vertice[0].position = Vector2(-50, 50);
-	vertice[1].position = Vector2(-50, -50);
-	vertice[2].position = Vector2(50, -50);
-	vertice[3].position = Vector2(50, 50);
+	vertice[0].position = Vector2(-50 + pivot.x,  50 + pivot.y);
+	vertice[1].position = Vector2(-50 + pivot.x, -50 + pivot.y);
+	vertice[2].position = Vector2( 50 + pivot.x, -50 + pivot.y);
+	vertice[3].position = Vector2( 50 + pivot.x,  50 + pivot.y);
 
 	//vertice[0].color = 0xffff0000;
 	//vertice[1].color = 0xffffff00;
 	//vertice[2].color = 0xff00ff00;
 	//vertice[3].color = 0xff0000ff;
-	vertice[0].uv = Vector2(0,1);
+	vertice[0].uv = Vector2(0,uv.y);
 	vertice[1].uv = Vector2(0,0);
-	vertice[2].uv = Vector2(1,0);
-	vertice[3].uv = Vector2(1,1);
+	vertice[2].uv = Vector2(uv.x,0);
+	vertice[3].uv = uv;
 
 	stride = sizeof(Vertex);
 	//FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
@@ -110,56 +111,7 @@ void Rect::Init()
 	transform = new Transform;
 	transform->UpdateTransform();
 
-	hr = D3DXCreateTextureFromFile(
-		D2D::GetDevice(),
-		L"Textures/1.png",
-		//L"Textures/Box.png",
-		&pTex
-	);
-	assert(SUCCEEDED(hr));
-
-	hr = D3DXCreateTextureFromFile(
-		D2D::GetDevice(),
-		L"Textures/2.png",
-		//L"Textures/Box.png",
-		&pTex2
-	);
-	assert(SUCCEEDED(hr));
-
-	deltaTime = 0.0f;
-
-	mainCamera = new Camera;
-
-	AnimationData data;
-	clips = new AnimationClip;
-	Json::Value* root = new Json::Value();
-	
-	for (int i = 0; i < 4; i++) {
-		data.keyName = L"run_" + to_wstring(i);
-		data.maxFrame = Vector2(8.0f, 4.0f);
-		data.currentFrame = Vector2(float(i), 0.0f);
-		clips->PushAnimationData(data);
-		Json::SetValue(*root, "run_" + to_string(i), (float&)i);
-	}
-
-	WriteJsonData(L"Test.Json", root);
-
-	Json::Value* ReadJson = new Json::Value();
-	ReadJsonData(L"Test.Json", ReadJson);
-
-	float temp;
-	Json::GetValue(*ReadJson, "run_1", temp);
-	
-	// SAFE_RELEASE 는 함수 release가 있는 지 확인하면됨
-	SAFE_DELETE(ReadJson);
-	SAFE_DELETE(root);
-
-	for (int i = 0; i < 4; i++) {
-		child[i] = new Transform;
-		Vector2 position = Vector2(i * 100, 0);
-		child[i]->SetWorldPosition(position);
-		transform->AddChild(child[i]);
-	}
+	pTexture = NULL;
 }
 
 void Rect::Release()
@@ -167,33 +119,17 @@ void Rect::Release()
 	SAFE_RELEASE(ib);
 	SAFE_RELEASE(vb);
 	SAFE_RELEASE(pEffect);
-	SAFE_RELEASE(pTex);
-	SAFE_RELEASE(pTex2);
 
 	SAFE_DELETE(transform);
-	SAFE_DELETE(mainCamera);
-	SAFE_DELETE(clips);
-
-	for (int i = 0; i < 4; i++)
-		SAFE_DELETE(child[i]);
 }
 
 void Rect::Update()
 {
-	this->mainCamera->UpdateCamToDevice();
 	this->transform->DefaultControl2();
 	this->DrawInterface();
-	clips->Update(AniRepeatType_Loop);
-
-	if (Input::Get()->GetKey(VK_UP)) {
-		this->transform->MovePositionWorld(Vector2(0, -10));
-	}
-	if (Input::Get()->GetKey(VK_DOWN)) {
-		this->transform->MovePositionWorld(Vector2(0, 10));
-	}
 }
 
-void Rect::Render()
+void Rect::Render(class Camera * mainCamera)
 {
 	// 알파블렌더 쓰겠다 설정값
 	// 알파 테스트 블렌더도 있음
@@ -210,28 +146,13 @@ void Rect::Render()
 	this->pEffect->SetMatrix("matView", &mainCamera->GetViewMatrix().ToDXMatrix());
 	this->pEffect->SetMatrix("matProjection", &mainCamera->GetProjection().ToDXMatrix());
 
-	this->pEffect->SetVector("maxFrame", 
-		&D3DXVECTOR4(
-			clips->GetCurrentData().maxFrame.x, 
-			clips->GetCurrentData().maxFrame.y, 
-			0.0f, 0.0f));
-	this->pEffect->SetVector("currentFrame", 
-		&D3DXVECTOR4(
-			clips->GetCurrentData().currentFrame.x, 
-			clips->GetCurrentData().currentFrame.y,
-			0.0f, 0.0f));
-	this->pEffect->SetTexture("tex1", pTex);
-	this->pEffect->SetTexture("tex2", pTex2);
+	if(pTexture != NULL)
+		this->pEffect->SetTexture("tex", pTexture);
 
 	this->pEffect->SetTechnique("MyShader");
 
 	this->pEffect->SetMatrix("matWorld", &transform->GetFinalMatrix().ToDXMatrix());
 	this->RenderRect();
-
-	for (int i = 0; i < 4; i++) {
-		this->pEffect->SetMatrix("matWorld", &child[i]->GetFinalMatrix().ToDXMatrix());
-		this->RenderRect();
-	}
 
 	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }
@@ -264,6 +185,11 @@ void Rect::RenderRect()
 	}
 
 	this->pEffect->End();
+}
+
+void Rect::SetTexture(LPDIRECT3DTEXTURE9 tex)
+{
+	this->pTexture = tex;
 }
 
 void Rect::DrawInterface()

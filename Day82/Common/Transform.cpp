@@ -157,6 +157,7 @@ void Transform::SetScaling(Vector2 deltaScale)
 		this->UpdateTransform();
 }
 
+// axis를 world 축으로 설정해주어햐함
 void Transform::RotateWorld(Vector2 angle)
 {
 }
@@ -177,10 +178,12 @@ void Transform::RotateSelf(float angle)
 
 void Transform::RotateLocal(Vector2 angle)
 {
+
 }
 
 void Transform::SetRotateWorld(const Matrix matWorldRotate)
 {
+
 }
 
 void Transform::SetRotateLocal(const Matrix matLocalRotate)

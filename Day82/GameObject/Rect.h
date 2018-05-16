@@ -10,25 +10,20 @@ private:
 	};
 	Vertex vertice[4];
 
-	LPDIRECT3DTEXTURE9 pTex;
-	LPDIRECT3DTEXTURE9 pTex2;
-
 	LPD3DXEFFECT pEffect;
-	float deltaTime;
 
-	class Camera* mainCamera;
-	class AnimationClip* clips;
-
-	Transform* child[4];
+	LPDIRECT3DTEXTURE9 pTexture;
 public:
 	Rect();
 	~Rect();
 
-	void Init();
+	void Init(wstring shaderFile, const Vector2 uv, const Vector2 pivot = Vector2(0, 0));
 	void Release();
 	void Update();
-	void Render();
+	void Render(class Camera * mainCamera);
 	void RenderRect();
+
+	void SetTexture(LPDIRECT3DTEXTURE9 tex);
 
 	void DrawInterface();
 	void WriteJsonData(wstring fileName, Json::Value* root);

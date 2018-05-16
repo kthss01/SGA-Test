@@ -101,6 +101,8 @@ public:
 
 	Vector2 GetWorldPosition();
 
+	// world 축은 위로가면 y축이 1 오른쪽으로가면 x축이 1
+
 	// axis 전부다 받아오는거
 	void GetUnitAxis(Vector2* pVecArr) const;
 	// 지정한 번호의 axis만 받아오는거
