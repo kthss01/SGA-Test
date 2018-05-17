@@ -44,3 +44,16 @@ float Util::GetRandomSeed()
 	
 	return result;
 }
+
+float Util::Clamp(float value, float min, float max)
+{
+	if (value < min) return min;
+	else if (value > max) return max;
+
+	return value;
+}
+
+float Util::Clamp01(float value)
+{
+	return Util::Clamp(value, 0.0f, 1.0f);
+}

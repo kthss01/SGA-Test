@@ -94,4 +94,8 @@ namespace MyDirectX
 		v.z = mat[0][2] * x + mat[1][2] * y + mat[2][2] * z;
 		return v;
 	}
+	D3DXVECTOR3 Vector2::ToDXVector3()
+	{
+		return D3DXVECTOR3(x, y, z);
+	}
 }

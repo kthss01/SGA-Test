@@ -30,6 +30,7 @@ namespace MyDirectX
 	public:
 		Matrix() {}
 		Matrix(int nDimension);
+		Matrix(D3DXMATRIX matrix);
 
 		Row& operator[](int nIndex);
 		bool operator==(Matrix& mat);

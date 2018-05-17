@@ -75,14 +75,15 @@ public:
 	void SetScaling(Vector2 deltaScale);
 
 	// rotate
-	void RotateWorld(Vector2 angle);
+	void RotateWorld(float angle);
 	// 자기 자신 축으로 회전
 	void RotateSelf(float angle);
 	// 부모없을 경우 월드 기준 부모 있으면 부모 기준
-	void RotateLocal(Vector2 angle);
+	void RotateLocal(float angle);
 
 	// 월드 행렬을 넣어서 회전이 될 녀석
 	void SetRotateWorld(const Matrix matWorldRotate);
+	void SetRotateWorld(D3DXQUATERNION& worldRotate);
 	void SetRotateLocal(const Matrix matLocalRotate);
 
 	// Rotation (사원수 회전 == QUATERNION)
@@ -90,6 +91,15 @@ public:
 	// etc...
 	// 특정 방향을 바라보게끔 회전
 	void LookPosition(Vector2 pos, Vector2 up = Vector2(0, 0, -1));
+	
+	// 자신의 회전값을 from과 to 사이의 회전량 만큼 회전보간(구면 보간) 적용
+	void RotateSlerp(Transform* from, Transform* to, float t);
+
+	// 자신의 위치값을 from과 to 사이의 값만큼 보간(선형 보간)
+	void PositionLerp(Transform* from, Transform* to, float t);
+
+	// 모든 정보를 보간
+	void Interpolate(Transform* from, Transform* to, float t);
 
 	void DefaultControl2();
 
@@ -107,6 +117,8 @@ public:
 	void GetUnitAxis(Vector2* pVecArr) const;
 	// 지정한 번호의 axis만 받아오는거
 	Vector2 GetUnitAxis(int axisNum) const;
+	
+	D3DXQUATERNION GetWorldRotateQuaternion();
 
 	void DrawInterface();
 };

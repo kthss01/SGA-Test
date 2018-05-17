@@ -112,6 +112,10 @@ void Rect::Init(wstring shaderFile, const Vector2 uv, const Vector2 pivot)
 	transform->UpdateTransform();
 
 	pTexture = NULL;
+
+	for (int i = 0; i < 100; i++) {
+		tempTrans[i] = new Transform;
+	}
 }
 
 void Rect::Release()
@@ -121,12 +125,35 @@ void Rect::Release()
 	SAFE_RELEASE(pEffect);
 
 	SAFE_DELETE(transform);
+
+	for (int i = 0; i < 100; i++)
+		SAFE_DELETE(tempTrans[i]);
 }
 
 void Rect::Update()
 {
 	this->transform->DefaultControl2();
 	this->DrawInterface();
+
+	//tempTrans[0]->PositionLerp(this->tempTrans[0], 
+	//	transform, Frame::Get()->GetFrameDeltaSec() * 10.0f);
+	//for (int i = 1; i < 100; i++) {
+	//	tempTrans[i]->PositionLerp(
+	//		this->tempTrans[i],
+	//		tempTrans[i - 1], 
+	//		// 이 값이 1에 가까우면 붙어서 움직임
+	//		Frame::Get()->GetFrameDeltaSec() * 10.0f);
+	//}
+
+	tempTrans[0]->RotateSlerp(this->tempTrans[0],
+		transform, Frame::Get()->GetFrameDeltaSec() * 10.0f);
+	for (int i = 1; i < 100; i++) {
+		tempTrans[i]->RotateSlerp(
+			this->tempTrans[i],
+			tempTrans[i - 1],
+			// 이 값이 1에 가까우면 붙어서 움직임
+			Frame::Get()->GetFrameDeltaSec() * 10.0f);
+	}
 }
 
 void Rect::Render(class Camera * mainCamera)
@@ -153,6 +180,11 @@ void Rect::Render(class Camera * mainCamera)
 
 	this->pEffect->SetMatrix("matWorld", &transform->GetFinalMatrix().ToDXMatrix());
 	this->RenderRect();
+
+	for (int i = 0; i < 100; i++) {
+		this->pEffect->SetMatrix("matWorld", &tempTrans[i]->GetFinalMatrix().ToDXMatrix());
+		this->RenderRect();
+	}
 
 	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }

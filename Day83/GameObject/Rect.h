@@ -13,6 +13,8 @@ private:
 	LPD3DXEFFECT pEffect;
 
 	LPDIRECT3DTEXTURE9 pTexture;
+
+	Transform* tempTrans[100];
 public:
 	Rect();
 	~Rect();

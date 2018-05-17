@@ -68,9 +68,9 @@ Program::Program()
 	head = new Rect();
 	head->Init(L"./Shader/TextureMapping.fx", Vector2(1,1), Vector2(0,-50));
 	head->SetTexture(vecImage[0].first);
-	head->GetTransform()->SetScale(Vector2(
-			vecImage[0].second.Width / 100.0f, 
-			vecImage[0].second.Height / 100.0f));
+	//head->GetTransform()->SetScale(Vector2(
+	//		vecImage[0].second.Width / 100.0f / 10.0f, 
+	//		vecImage[0].second.Height / 100.0f / 10.0f));
 }
 
 Program::~Program()

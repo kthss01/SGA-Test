@@ -24,5 +24,7 @@ namespace MyDirectX
 
 		Vector2 TransformCoord(struct Matrix& mat);
 		Vector2 TransformNormal(struct Matrix& mat);
+
+		D3DXVECTOR3 ToDXVector3();
 	};
 }
