@@ -145,7 +145,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day80-AnimationClip, Json",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day81-Transform 부모 자식, Shader MultiTexture", "Day81\Day81.vcxproj", "{B755106F-7B9F-418D-B7B2-49B9AF5E2E5E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day82", "Day82\Day82.vcxproj", "{412B408F-7E50-4D1A-954F-240927FEC115}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day82-Bone Animation 풀이, pivot 회전", "Day82\Day82.vcxproj", "{412B408F-7E50-4D1A-954F-240927FEC115}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day83", "Day83\Day83.vcxproj", "{3B93E33B-C364-4A80-A9D5-84657D572B72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -731,6 +733,14 @@ Global
 		{412B408F-7E50-4D1A-954F-240927FEC115}.Release|x64.Build.0 = Release|x64
 		{412B408F-7E50-4D1A-954F-240927FEC115}.Release|x86.ActiveCfg = Release|Win32
 		{412B408F-7E50-4D1A-954F-240927FEC115}.Release|x86.Build.0 = Release|Win32
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Debug|x64.ActiveCfg = Debug|x64
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Debug|x64.Build.0 = Debug|x64
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Debug|x86.ActiveCfg = Debug|Win32
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Debug|x86.Build.0 = Debug|Win32
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Release|x64.ActiveCfg = Release|x64
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Release|x64.Build.0 = Release|x64
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Release|x86.ActiveCfg = Release|Win32
+		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
