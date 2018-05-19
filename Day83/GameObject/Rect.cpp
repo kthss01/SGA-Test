@@ -145,10 +145,10 @@ void Rect::Update()
 	//		Frame::Get()->GetFrameDeltaSec() * 10.0f);
 	//}
 
-	tempTrans[0]->RotateSlerp(this->tempTrans[0],
+	tempTrans[0]->Interpolate(this->tempTrans[0],
 		transform, Frame::Get()->GetFrameDeltaSec() * 10.0f);
 	for (int i = 1; i < 100; i++) {
-		tempTrans[i]->RotateSlerp(
+		tempTrans[i]->Interpolate(
 			this->tempTrans[i],
 			tempTrans[i - 1],
 			// 이 값이 1에 가까우면 붙어서 움직임

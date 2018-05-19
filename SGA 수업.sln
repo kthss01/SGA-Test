@@ -147,7 +147,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day81-Transform 부모 자�
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day82-Bone Animation 풀이, pivot 회전", "Day82\Day82.vcxproj", "{412B408F-7E50-4D1A-954F-240927FEC115}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day83", "Day83\Day83.vcxproj", "{3B93E33B-C364-4A80-A9D5-84657D572B72}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day83-Interpolation", "Day83\Day83.vcxproj", "{3B93E33B-C364-4A80-A9D5-84657D572B72}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day84", "Day84\Day84.vcxproj", "{F7781AE4-4A34-4172-88CD-3A8709CC46AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -741,6 +743,14 @@ Global
 		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Release|x64.Build.0 = Release|x64
 		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Release|x86.ActiveCfg = Release|Win32
 		{3B93E33B-C364-4A80-A9D5-84657D572B72}.Release|x86.Build.0 = Release|Win32
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Debug|x64.ActiveCfg = Debug|x64
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Debug|x64.Build.0 = Debug|x64
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Debug|x86.ActiveCfg = Debug|Win32
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Debug|x86.Build.0 = Debug|Win32
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Release|x64.ActiveCfg = Release|x64
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Release|x64.Build.0 = Release|x64
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Release|x86.ActiveCfg = Release|Win32
+		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -91,7 +91,9 @@ public:
 	// etc...
 	// 특정 방향을 바라보게끔 회전
 	void LookPosition(Vector2 pos, Vector2 up = Vector2(0, 0, -1));
-	
+
+	void ScaleLerp(Transform* from, Transform* to, float t);
+
 	// 자신의 회전값을 from과 to 사이의 회전량 만큼 회전보간(구면 보간) 적용
 	void RotateSlerp(Transform* from, Transform* to, float t);
 

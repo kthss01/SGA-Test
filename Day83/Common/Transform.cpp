@@ -253,6 +253,29 @@ void Transform::LookPosition(Vector2 pos, Vector2 up)
 {
 }
 
+void Transform::ScaleLerp(Transform * from, Transform * to, float t)
+{
+
+	t = Util::Clamp01(t);
+
+	D3DXVECTOR3 fromScale = from->scale.ToDXVector3();
+	D3DXVECTOR3 toScale = to->scale.ToDXVector3();
+
+	if (FLOATZERO(t)) {
+		this->SetScale(Vector2(from->scale.x, from->scale.y));
+	}
+	else if (FLOATEQUAL(t, 1.0f)) {
+		this->SetScale(Vector2(to->scale.x, to->scale.y));
+	}
+	else {
+		D3DXVECTOR3 result;
+		D3DXVec3Lerp(&result, &fromScale, &toScale, t);
+
+		Vector2 vec = Vector2(result.x, result.y);
+		this->SetScale(vec);
+	}
+}
+
 void Transform::RotateSlerp(Transform * from, Transform * to, float t)
 {
 	// t 보간값 
@@ -315,6 +338,10 @@ void Transform::Interpolate(Transform * from, Transform * to, float t)
 	bool bPrevAutoUpdate = this->bAutoUpdate;
 	bAutoUpdate = false;
 
+	PositionLerp(from, to, t);
+	RotateSlerp(from, to, t);
+	ScaleLerp(from, to, t);
+
 	// -> SetScale
 	// -> SetWorldPosition
 	// -> SetRotateWorld
@@ -346,6 +373,11 @@ void Transform::DefaultControl2()
 			this->RotateSelf(-deltaAngle);
 		else if (Input::Get()->GetKey('E'))
 			this->RotateSelf(deltaAngle);
+
+		if (Input::Get()->GetKey('Z'))
+			this->SetScaling(Vector2(0.1f, 0.1f));
+		if (Input::Get()->GetKey('X'))
+			this->SetScaling(Vector2(-0.1f, -0.1f));
 	}
 
 }
@@ -431,9 +463,24 @@ D3DXQUATERNION Transform::GetWorldRotateQuaternion()
 	D3DXQUATERNION quat;
 
 	// 월드 축으로 받아오는 녀석으로 해야됨
-	// GetUnitAxis()를 월드축을 받아와서 행렬로 변환 시켜서
-	// 그녀석을 matWorld라는 녀석으로 집어넣어야함
-	D3DXMATRIX matWorld = matFinal.ToDXMatrix();
+	// GetUnitAxis()를 월드축으로 받아와서 행렬로 변환 시켜서
+	// 그녀석을 matWorld라는 녀석에 집어넣어야함
+
+	Vector2 tempAxis[2];
+	GetUnitAxis(tempAxis);
+	tempAxis[0] = tempAxis[0].Normalize();
+	tempAxis[1] = tempAxis[1].Normalize();
+
+	Matrix temp = Matrix::Identity(4);
+
+	temp[0][0] = tempAxis[0].x;
+	temp[0][1] = tempAxis[0].y;
+	temp[1][0] = tempAxis[1].x;
+	temp[1][1] = tempAxis[1].y;
+	
+	D3DXMATRIX matWorld = temp.ToDXMatrix();
+
+	//D3DXMATRIX matWorld = this->matFinal.ToDXMatrix();
 
 	// quat 값으로 변환됨 (행렬중 회전값만 반환됨)
 	D3DXQuaternionRotationMatrix(&quat, &matWorld);
