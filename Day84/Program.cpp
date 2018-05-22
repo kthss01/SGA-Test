@@ -66,7 +66,8 @@ Program::Program()
 	mainCamera = new Camera;
 
 	head = new Rect();
-	head->Init(L"./Shader/TextureMapping.fx", Vector2(1,1), Vector2(0,-50));
+	//head->Init(L"./Shader/TextureMapping.fx", Vector2(1,1), Vector2(0,-50));
+	head->Init(L"./Shader/TextureMapping.fx", Vector2(1,1));
 	head->SetTexture(vecImage[0].first);
 	//head->GetTransform()->SetScale(Vector2(
 	//		vecImage[0].second.Width / 100.0f / 10.0f, 

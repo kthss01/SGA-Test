@@ -16,10 +16,9 @@ public:
 		class Transform* pTransA, class CircleCollider* pBoundA,
 		class Transform* pTransB, class CircleCollider* pBoundB);
 
-	// 내용 채워야함
-	//static bool IsOverlap(
-	//	class Transform* pTransA, class RectCollider* pBoundA,
-	//	class Transform* pTransB, class RectCollider* pBoundB);
+	static bool IsOverlap(
+		class Transform* pTransA, class RectCollider* pBoundA,
+		class Transform* pTransB, class RectCollider* pBoundB);
 		
 };
 

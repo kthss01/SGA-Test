@@ -3,6 +3,7 @@
 
 #include "./Common/Transform.h"
 #include "./Physics/CircleCollider.h"
+#include "./Physics/RectCollider.h"
 
 Collision::Collision()
 {
@@ -251,7 +252,18 @@ bool Collision::IsOverlap(Transform * pTransA, CircleCollider * pBoundA, Transfo
 	return true;
 }
 
-//bool Collision::IsOverlap(Transform * pTransA, RectCollider * pBoundA, Transform * pTransB, RectCollider * pBoundB)
-//{
-//	return false;
-//}
+bool Collision::IsOverlap(Transform * pTransA, RectCollider * pBoundA, Transform * pTransB, RectCollider * pBoundB)
+{
+	Vector2 minA, maxA;
+	Vector2 minB, maxB;
+
+	pBoundA->GetWorldAABBMinMax(pTransA, &minA, &maxA);
+	pBoundB->GetWorldAABBMinMax(pTransB, &minB, &maxB);
+
+	if (minA.x <= maxB.x && minA.y <= maxB.y && 
+		maxA.x >= minB.x && maxA.y >= minB.y) {
+		return true;
+	}
+
+	return false;
+}
