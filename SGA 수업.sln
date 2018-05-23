@@ -149,7 +149,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day82-Bone Animation 풀이
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day83-Interpolation", "Day83\Day83.vcxproj", "{3B93E33B-C364-4A80-A9D5-84657D572B72}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day84", "Day84\Day84.vcxproj", "{F7781AE4-4A34-4172-88CD-3A8709CC46AF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day84-Interpolation 풀이, Collider", "Day84\Day84.vcxproj", "{F7781AE4-4A34-4172-88CD-3A8709CC46AF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day85", "Day85\Day85.vcxproj", "{2939B172-E55D-4189-BA4F-51B93809D4D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -751,6 +753,14 @@ Global
 		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Release|x64.Build.0 = Release|x64
 		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Release|x86.ActiveCfg = Release|Win32
 		{F7781AE4-4A34-4172-88CD-3A8709CC46AF}.Release|x86.Build.0 = Release|Win32
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Debug|x64.ActiveCfg = Debug|x64
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Debug|x64.Build.0 = Debug|x64
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Debug|x86.ActiveCfg = Debug|Win32
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Debug|x86.Build.0 = Debug|Win32
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Release|x64.ActiveCfg = Release|x64
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Release|x64.Build.0 = Release|x64
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Release|x86.ActiveCfg = Release|Win32
+		{2939B172-E55D-4189-BA4F-51B93809D4D5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
