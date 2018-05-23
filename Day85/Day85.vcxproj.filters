@@ -96,6 +96,9 @@
     <ClInclude Include="Physics\CircleCollider.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Manager\Gizmo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\Matrix.cpp">
@@ -168,6 +171,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Physics\CircleCollider.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Gizmo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

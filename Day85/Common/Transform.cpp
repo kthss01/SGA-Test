@@ -563,3 +563,22 @@ void Transform::DrawInterface()
 	}
 	ImGui::End();
 }
+
+void Transform::RenderGizmo(bool applyScale)
+{
+	Vector2 worldPos = this->GetWorldPosition();
+
+	Vector2 axis[2];
+	// GetUnitAxis에서 normalize만 안하면됨
+	if (applyScale) {
+
+	}
+	else {
+		this->GetUnitAxis(axis);
+	}
+	Vector2 xAxis = worldPos + axis[0] * 100;
+	Vector2 yAxis = worldPos - axis[1] * 100;
+
+	GIZMO->Line(worldPos, xAxis, 0xffff0000);
+	GIZMO->Line(worldPos, yAxis, 0xff00ff00);
+}

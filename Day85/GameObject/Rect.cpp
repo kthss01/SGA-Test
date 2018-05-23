@@ -120,7 +120,7 @@ void Rect::Init(wstring shaderFile, const Vector2 uv, const Vector2 pivot)
 	tempTrans[0]->SetWorldPosition(Vector2(200, 100));
 
 	Vector2 center = Vector2(0, 0);
-	Vector2 halfSize = center - vertice[0].position;
+	Vector2 halfSize = center - (vertice[0].position - pivot);
 
 	this->collider = new RectCollider;
 	this->collider->SetBound(&center, &halfSize);
@@ -219,6 +219,9 @@ void Rect::Render(class Camera * mainCamera)
 	}
 
 	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+
+	transform->RenderGizmo();
+	collider->RenderGizmo(transform);
 }
 
 void Rect::RenderRect()

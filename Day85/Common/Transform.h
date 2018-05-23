@@ -126,5 +126,9 @@ public:
 	D3DXQUATERNION GetWorldRotateQuaternion();
 
 	void DrawInterface();
+
+	// apply 기즈모에 scale 값 먹여서 렌더해야 할지 정하는는거
+	// 3d에선 기즈모가 작아서 파고들 수 있어서
+	void RenderGizmo(bool applyScale = false);
 };
 
