@@ -122,8 +122,7 @@ void Rect::Init(wstring shaderFile, const Vector2 uv, const Vector2 pivot)
 	Vector2 center = Vector2(0, 0);
 	Vector2 halfSize = center - (vertice[0].position - pivot);
 
-	//this->collider = new RectCollider;
-	this->collider = new CircleCollider;
+	this->collider = new RectCollider;
 	this->collider->SetBound(&center, &halfSize);
 
 	tempCollider = new RectCollider;

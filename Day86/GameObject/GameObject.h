@@ -8,8 +8,7 @@ class GameObject
 {
 protected:
 	class Transform* transform;
-	//class RectCollider* collider;
-	class CircleCollider* collider;
+	class RectCollider* collider;
 
 	int stride;	// 한 사이즈
 	DWORD FVF;

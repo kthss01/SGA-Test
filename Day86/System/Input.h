@@ -24,3 +24,5 @@ public:
 	bool GetKeyDown( int nVKey );
 	bool GetKeyUp( int nVKey );
 };
+
+#define INPUT Input::Get()

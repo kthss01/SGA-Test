@@ -72,6 +72,59 @@ Program::Program()
 	//head->GetTransform()->SetScale(Vector2(
 	//		vecImage[0].second.Width / 100.0f / 10.0f, 
 	//		vecImage[0].second.Height / 100.0f / 10.0f));
+
+	radius = 0;
+	isCheck = false;
+
+	D3DXCreateTextureFromFile(
+		D2D::GetDevice(),
+		L"./Textures/Box.png",
+		&texture
+	);
+
+	// 빈 텍스처 만들기
+	D2D::GetDevice()->CreateTexture(
+		256, 256, 0, D3DUSAGE_DYNAMIC, D3DFMT_A8R8G8B8, 
+		D3DPOOL_DEFAULT, &tempTex, NULL
+	);
+
+	// LockRect 이용해서 텍스처가 가지고 있는 색상값 뽑아 쓸거
+	// 실제 데이터 들어가는건 한줄로 들어가 있음
+	// 이녀석의 총길이값 pitch 128 x 128 * 4 argb 순으로 쭉 들어감 
+	// (텍스처에 따라 rgba일 수도 있음)
+	D3DLOCKED_RECT lockRect;
+	D3DLOCKED_RECT lockRect2;
+	// pBits 실질적인 데이터, pitch 길이값이라고 보면됨 
+	// texture를 읽는 용도로만 쓰는거
+	texture->LockRect(0, &lockRect,
+		NULL, // 이미지에서 가져올 width, height 설정하면됨 전체
+		NULL); // NULL로하면 수정도 가능 read only는 읽기만
+
+	D3DXCOLOR* color = (D3DXCOLOR*)lockRect.pBits;
+
+	// data값 집어 넣는 용도
+	tempTex->LockRect(0, &lockRect2, NULL, NULL);
+
+	D3DXCOLOR* tempColor = (D3DXCOLOR*)lockRect2.pBits;
+
+	D3DXCOLOR destColor;
+	int index = 0;
+	for (int i = 0; i < lockRect.Pitch; i++) {
+		destColor = color[i];
+		tempColor[i].a = destColor.a;
+		tempColor[i].r = destColor.r;
+		tempColor[i].g = destColor.g;
+		tempColor[i].b = destColor.b;
+	}
+
+	tempTex->UnlockRect(0);
+
+	texture->UnlockRect(0);
+
+	D3DXCreateSprite(
+		D2D::GetDevice(),
+		&sprite
+	);
 }
 
 Program::~Program()
@@ -84,6 +137,10 @@ Program::~Program()
 
 	for (int i = 0; i < vecImage.size(); i++)
 		SAFE_RELEASE(vecImage[i].first);
+
+	SAFE_RELEASE(texture);
+	SAFE_RELEASE(tempTex);
+	SAFE_RELEASE(sprite);
 }
 
 void Program::Update()
@@ -92,11 +149,49 @@ void Program::Update()
 	// Shader 사용할 때 굳이 안사용해도 됨
 	mainCamera->UpdateCamToDevice();
 	head->Update();
+
+	if (INPUT->GetKey(VK_LBUTTON)) {
+		Util::GetMousePosWithScreen(&mousePosWithScreen);
+		isCheck = true;
+		radius = 0;
+	}
 }
 
 void Program::Render()
 {
 	head->Render(mainCamera);
+
+	Vector2 center = Vector2(0, 0);
+
+	GIZMO->Circle(
+		center, 100.0f, 0xFF808000
+	);
+
+	if (isCheck) {
+		radius += 5.0f;
+		for (int i = 0; i < 100; i+=10) {
+			if (radius - i > 0) {
+				GIZMO->Circle(
+					mousePosWithScreen, radius - i, 0xffff0000
+				);
+			}
+		}
+		if (radius > 50.0f)
+			isCheck = false;
+	}
+
+	// 알파블렌드 제거하고 출력
+	// sprite 카메라 행렬 영향 안받음
+	sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	{
+		RECT rc = { 0, 0, 200, 200 };
+		sprite->Draw(tempTex,
+			&rc, // 출력하고 싶은 크기 및 영역)
+			&D3DXVECTOR3(100, 100, 0), // 회전이 일어나는 중심점
+			&D3DXVECTOR3(WINSIZE_X / 2, WINSIZE_Y / 2, 0), // 그려지는 위치
+			0xffffffff);// 컬러값
+	}
+	sprite->End();
 }
 
 void Program::CreateRenderTargetTexture()

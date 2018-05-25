@@ -36,6 +36,18 @@ void Util::GetMousePos(Vector2 * out)
 	*out = temp;
 }
 
+void Util::GetMousePosWithScreen(Vector2 * out)
+{
+	POINT mousePos;
+
+	GetCursorPos(&mousePos);
+
+	ScreenToClient(g_hWnd, &mousePos);
+
+	out->x = mousePos.x - WINSIZE_X / 2;
+	out->y = mousePos.y - WINSIZE_Y / 2;
+}
+
 float Util::GetRandomSeed()
 {
 	int seed = rand() % 1001;

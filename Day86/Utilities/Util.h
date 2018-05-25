@@ -19,7 +19,10 @@ public:
 	Util();
 	~Util();
 
+	// view matrix 행렬 거쳐서 -1 ~ 1 사이값 받는 거
 	static void GetMousePos(Vector2 * out);
+	// 스크린 값 받는거
+	static void GetMousePosWithScreen(Vector2 * out);
 	static float GetRandomSeed();
 	// value-계산할 값, 계산할 값이 min 보다 작으면 min으로 max보다 크면 max로 해주는
 	// min max 사이값으로 반환

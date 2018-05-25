@@ -18,6 +18,8 @@ private:
 
 private:
 	static Gizmo* instance;
+	// +1 하는 이유는 for문 돌릴 때 마지막 하나가 연결이 안되서 한번 더 하는거
+	Vector2 circlePos[CIRCLEGIZMO_SEGMENTS + 1];
 
 	Gizmo();
 	~Gizmo();

@@ -38,6 +38,15 @@ private:
 	vector< pair<LPDIRECT3DTEXTURE9, D3DXIMAGE_INFO> > vecImage;
 
 	class Camera* mainCamera;
+
+	Vector2 mousePosWithScreen;
+	float radius;
+	bool isCheck;
+
+	LPDIRECT3DTEXTURE9 texture;
+	LPDIRECT3DTEXTURE9 tempTex;
+
+	LPD3DXSPRITE sprite;
 public:
 	Program();
 	~Program();
