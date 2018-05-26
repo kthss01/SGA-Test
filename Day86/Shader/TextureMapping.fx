@@ -64,8 +64,18 @@ struct PS_INPUT {
 // 반환되는 값은 무조건 color 텍스처에 대한 컬러값이 반환되야되서
 float4 PS(PS_INPUT input) : COLOR0
 {	
+    float4 color = tex2D(tex_sampler, input.uv);
+    float gray = (color.x + color.y + color.z) / 3;
+    
+    float4 finalColor;
+
+    finalColor.r = gray;
+    finalColor.g = gray;
+    finalColor.b = gray;
+    finalColor.w = color.w;
+
 	// 자체 내에서 컬러값 수정해도 됨 RGBA 순
-    return tex2D(tex_sampler, input.uv);
+    return finalColor;
 }
 
 technique MyShader {

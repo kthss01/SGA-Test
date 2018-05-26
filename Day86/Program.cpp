@@ -68,7 +68,6 @@ Program::Program()
 	head = new Rect();
 	//head->Init(L"./Shader/TextureMapping.fx", Vector2(1,1), Vector2(0,-50));
 	head->Init(L"./Shader/TextureMapping.fx", Vector2(1,1));
-	head->SetTexture(vecImage[0].first);
 	//head->GetTransform()->SetScale(Vector2(
 	//		vecImage[0].second.Width / 100.0f / 10.0f, 
 	//		vecImage[0].second.Height / 100.0f / 10.0f));
@@ -76,12 +75,28 @@ Program::Program()
 	radius = 0;
 	isCheck = false;
 
-	D3DXCreateTextureFromFile(
+	D3DXIMAGE_INFO info;
+	D3DXCreateTextureFromFileEx(
 		D2D::GetDevice(),
-		L"./Textures/Box.png",
+		L"./Textures/Box.png", // 원본 이미지 사이즈가 256 x 256
+		NULL,
+		NULL,
+		NULL,
+		D3DUSAGE_DYNAMIC,	// 읽어서 사용하려면 dynamic으로 써야함
+		D3DFMT_UNKNOWN,
+		D3DPOOL_DEFAULT,
+		//D3DX_DEFAULT,	// 이 두개 때문에 픽셀 사이에 처리가 이상해진거
+		D3DX_FILTER_LINEAR,
+		//D3DX_DEFAULT,	// 
+		D3DX_FILTER_LINEAR,
+		0xff000000,
+		&info,
+		NULL,
 		&texture
 	);
+	// D3DXCreateTextureFromFile 함수로 텍스처 불러오면 이미지 크기가 4분의 1로 줄어듬
 
+	head->SetTexture(texture);
 	// 빈 텍스처 만들기
 	D2D::GetDevice()->CreateTexture(
 		256, 256, 0, D3DUSAGE_DYNAMIC, D3DFMT_A8R8G8B8, 
@@ -98,27 +113,38 @@ Program::Program()
 	// texture를 읽는 용도로만 쓰는거
 	texture->LockRect(0, &lockRect,
 		NULL, // 이미지에서 가져올 width, height 설정하면됨 전체
-		NULL); // NULL로하면 수정도 가능 read only는 읽기만
+		D3DLOCK_DISCARD); // NULL로하면 수정도 가능 read only는 읽기만
 
-	D3DXCOLOR* color = (D3DXCOLOR*)lockRect.pBits;
+	DWORD* color = (DWORD*)lockRect.pBits;
 
 	// data값 집어 넣는 용도
-	tempTex->LockRect(0, &lockRect2, NULL, NULL);
+	//tempTex->LockRect(0, &lockRect2, NULL, D3DLOCK_DISCARD);
 
-	D3DXCOLOR* tempColor = (D3DXCOLOR*)lockRect2.pBits;
+	//D3DXCOLOR* tempColor = (D3DXCOLOR*)lockRect2.pBits;
 
 	D3DXCOLOR destColor;
 	int index = 0;
-	for (int i = 0; i < lockRect.Pitch; i++) {
-		destColor = color[i];
-		tempColor[i].a = destColor.a;
-		tempColor[i].r = destColor.r;
-		tempColor[i].g = destColor.g;
-		tempColor[i].b = destColor.b;
+	for (int i = 0; i < info.Width; i++) {
+		for (int j = 0; j < info.Height; j++) {
+			index = i * 256 + j;
+			destColor = color[index];
+
+			D3DXCOLOR sourColor;
+			float gray = (destColor.r + destColor.g + destColor.b) / 3;
+
+			sourColor.a = destColor.a;
+			//sourColor.r = gray;
+			//sourColor.g = gray;
+			//sourColor.b = gray;
+			sourColor.r = 1 - destColor.r;
+			sourColor.g = 1 - destColor.g;
+			sourColor.b = 1 - destColor.b;
+
+			color[index] = sourColor;
+		}
 	}
 
-	tempTex->UnlockRect(0);
-
+	//tempTex->UnlockRect(0);
 	texture->UnlockRect(0);
 
 	D3DXCreateSprite(
@@ -182,16 +208,16 @@ void Program::Render()
 
 	// 알파블렌드 제거하고 출력
 	// sprite 카메라 행렬 영향 안받음
-	sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	{
-		RECT rc = { 0, 0, 200, 200 };
-		sprite->Draw(tempTex,
-			&rc, // 출력하고 싶은 크기 및 영역)
-			&D3DXVECTOR3(100, 100, 0), // 회전이 일어나는 중심점
-			&D3DXVECTOR3(WINSIZE_X / 2, WINSIZE_Y / 2, 0), // 그려지는 위치
-			0xffffffff);// 컬러값
-	}
-	sprite->End();
+	//sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	//{
+	//	RECT rc = { 0, 0, 256, 256 };
+	//	sprite->Draw(texture,
+	//		&rc, // 출력하고 싶은 크기 및 영역)
+	//		&D3DXVECTOR3(100, 100, 0), // 회전이 일어나는 중심점
+	//		&D3DXVECTOR3(WINSIZE_X / 2, WINSIZE_Y / 2, 0), // 그려지는 위치
+	//		0xffffffff);// 컬러값
+	//}
+	//sprite->End();
 }
 
 void Program::CreateRenderTargetTexture()

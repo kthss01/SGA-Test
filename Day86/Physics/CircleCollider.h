@@ -23,5 +23,8 @@ public:
 	// 외부에서 세팅하는 용도
 	virtual void SetBound(
 		const Vector2* pCenter, const Vector2* pHalfSize);
+
+public:
+	Vector2 GetHalfSize() { return halfSize; }
 };
 

@@ -122,10 +122,15 @@ void Rect::Init(wstring shaderFile, const Vector2 uv, const Vector2 pivot)
 	Vector2 center = Vector2(0, 0);
 	Vector2 halfSize = center - (vertice[0].position - pivot);
 
+	halfSize.x = abs(halfSize.x);
+	halfSize.y = abs(halfSize.y);
+
 	this->collider = new RectCollider;
+	//this->collider = new CircleCollider;
 	this->collider->SetBound(&center, &halfSize);
 
 	tempCollider = new RectCollider;
+	//tempCollider = new CircleCollider;
 	tempCollider->SetBound(&center, &halfSize);
 }
 
@@ -192,12 +197,12 @@ void Rect::Render(class Camera * mainCamera)
 {
 	// 알파블렌더 쓰겠다 설정값
 	// 알파 테스트 블렌더도 있음
-	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
-	// SRCALPHA 텍스처 한장 쓰는거 
-	// ~dest 텍스처 여러장쓰고 여러장의 알파블렌더 쓸때
-	D2D::GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	// dest 화면 나타내는거
-	D2D::GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	//D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	//// SRCALPHA 텍스처 한장 쓰는거 
+	//// ~dest 텍스처 여러장쓰고 여러장의 알파블렌더 쓸때
+	//D2D::GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	//// dest 화면 나타내는거
+	//D2D::GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 	// 이 방법은 텍스처에 알파 채널 값이라 전체화면에 알파 값 곱한거?
 
 	//D2D::GetDevice()->SetTransform(D3DTS_WORLD, &transform->GetFinalMatrix().ToDXMatrix());
@@ -222,6 +227,7 @@ void Rect::Render(class Camera * mainCamera)
 
 	transform->RenderGizmo(true);
 	collider->RenderGizmo(transform);
+	tempCollider->RenderGizmo(tempTrans[0]);
 }
 
 void Rect::RenderRect()

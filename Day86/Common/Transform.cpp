@@ -497,6 +497,16 @@ Vector2 Transform::GetUnitAxis(int axisNum) const
 	return result;
 }
 
+Vector2 Transform::GetUp() const
+{
+	return this->GetUnitAxis(AXIS_Y);
+}
+
+Vector2 Transform::GetRight() const
+{
+	return this->GetUnitAxis(AXIS_X);
+}
+
 Vector2 Transform::GetScale() const
 {
 	return this->scale;

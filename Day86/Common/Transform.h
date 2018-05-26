@@ -4,6 +4,10 @@
 #define RESET_ROTATION 2
 #define RESET_SCALE 4
 
+#define AXIS_X 0
+#define AXIS_Y 1
+//#define AXIS_Z 2
+
 class Transform
 {
 protected:
@@ -119,6 +123,9 @@ public:
 	void GetUnitAxis(Vector2* pVecArr) const;
 	// 지정한 번호의 axis만 받아오는거
 	Vector2 GetUnitAxis(int axisNum) const;
+
+	Vector2 GetUp() const;
+	Vector2 GetRight() const;
 	
 	Vector2 GetScale() const;
 	Matrix GetWorldRotateMatrix();
