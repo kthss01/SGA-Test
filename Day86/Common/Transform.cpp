@@ -567,6 +567,11 @@ void Transform::DrawInterface()
 		ImGui::InputFloat("X", &scale.x, 1.0f);
 		ImGui::InputFloat("Y", &scale.y, 1.0f);
 
+		//float radian = acos(axis[0].x) + acos(axis[1].y);
+		//if (radian >= 2 * D3DX_PI) radian -= 2 * D3DX_PI;
+
+		//ImGui::Text(("Z Radian : " + to_string(radian)).c_str());
+
 		if (ImGui::Button("Reset"))
 			this->Reset();
 		this->UpdateTransform();

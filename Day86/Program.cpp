@@ -46,9 +46,9 @@ Program::Program()
 		D3DXCreateTextureFromFileEx(
 			D2D::GetDevice(),
 			filePath.c_str(),
+			0,
+			0,
 			D3DX_DEFAULT,	// 기본값으로 설정하고 싶으면 default나 0이면 원본 사이즈
-			0,
-			0,
 			D3DUSAGE_DYNAMIC,
 			D3DFMT_UNKNOWN,
 			D3DPOOL_DEFAULT, // usage dynamic으로 설정 시
