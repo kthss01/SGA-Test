@@ -1,59 +1,61 @@
 #pragma once
 
-#include "GameObject/GameObject.h"
+struct Particle_Vertex {
+	Vector2 position;
+	Vector2 uv;
+	DWORD color;
 
-// 방사 타입, 어떤 도형으로 만들 것인지
-enum PARTICLE_EMISSION_TYPE {
-	PZERO,	// 정점
-	CIRCLE, // 구 내부의 랜덤하게
-	CIRCLE_OUTLINE, // 원 외부에서만 (원 라인만)
-	RECT,
+	enum { FVF = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_DIFFUSE };
 };
 
-class Particle : public GameObject
+typedef vector<D3DXCOLOR> VEC_COLOR;
+typedef vector<float> VEC_SCALE;
+
+// 입자 하나
+class Particle
 {
 private:
-	struct Particle_Vertex {
-		Vector2 position;
-		Vector2 uv;
-		DWORD color;
-
-		enum { FVF = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_DIFFUSE };
-	};
-	typedef vector<D3DXCOLOR> VEC_COLOR;
-	typedef vector<float> VEC_SCALE;
-
+	class Transform* transform;
 private:
-	DWORD particleNum; // 파티클의 총 입자 수
-	Particle_Vertex* particleVertex; // 파티클 정점 정보
+	bool bLive; // 활성화 여부
+	float fTotalLiveTime; // 최종 시간
+	float fDeltaLiveTime; // 몇초까지 진행되었는지
+	// 색깔값이나 크기값 변경할 때 사용할꺼
+	float fNormalizeLiveTime; // 활성화 비율 시간 (0 ~ 1) 1이면 사라지게
 
-	float emissionPerSec; // 초당 입자 몇개를 발사한 건지
+	Vector2 velocity; // 방향 및 속도값
+	Vector2 accelation; // 가속도
+	float rotate; // 처음 축 + 회전값 degree 값으로 들어갈꺼
+	float rotateAccel; // 회전 가속도
 
-	DWORD particleCount; // 총 몇개가 화면에 렌더가 되는지
-
-	// 변할 색깔 및 크기 값 일정 시간에 따라 해당 값으로 변하게 끔 하기 위해서
-	VEC_COLOR color;
-	VEC_SCALE scale;
+	float fScale; // 기본 스케일 값
 public:
 	Particle();
 	~Particle();
 
-	void Init(
-		DWORD particleNum,
-		float emission,
-		float liveTimeMin,	// 화면에 보여주는 시간
-		float liveTimeMax,
-		const Vector2& velocityMin,
-		const Vector2& velocityMax,
-		const Vector2& accelMin, // 가속도
-		const Vector2& accelMan, // 가속도
+	// 입자 하나를 생성
+	void Start(
+		float liveTime, // 얼마만큼 화면에 띄울 것인지
+		const Vector2* pos, // 시작 위치, 항상 시작 위치가 이미터가 아닐 수도 있음
+		const Vector2* velo, // 시작 속도
+		const Vector2* accel, // 가속도
+		float rotate, // 시작할때 회전값
+		float rotateAccel, // 회전 증감값
+		float scale // 기본 스케일 값
+	);
+
+	void Update();
+
+	// 렌더는 이미터에서 해줄꺼
+	// 버퍼 사용하지 않고 렌더할꺼
+	void GetParticleVertex(
+		Particle_Vertex* pOut, // vertex buffer 배열
+		DWORD* pIndex, // index buffer 배열
 		const VEC_COLOR& colors,
 		const VEC_SCALE& scales,
-		float scaleMin,	// 맨 처음 생성되는 입자의 크기
-		float scaleMax,
-		LPDIRECT3DTEXTURE9 pParticleTexture,
-		bool bLocal = false // 독립해서 움직일 것이냐 (완전하게 랜덤하게 
-		// 처음 녀석에 영향을 받아서 움직일 것이냐
-	);
+		DWORD particleNum // 현재 파티클이 몇개 발생되었는지 
+		);
+
+	bool IsLive() { return bLive; }
 };
 
