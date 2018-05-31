@@ -24,6 +24,7 @@ public:
 	// 스크린 값 받는거
 	static void GetMousePosWithScreen(Vector2 * out);
 	static float GetRandomSeed();
+	static float RandomFloatRange(float min, float max);
 	// value-계산할 값, 계산할 값이 min 보다 작으면 min으로 max보다 크면 max로 해주는
 	// min max 사이값으로 반환
 	static float Clamp(float value, float min, float max);

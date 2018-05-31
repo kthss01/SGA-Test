@@ -57,6 +57,16 @@ float Util::GetRandomSeed()
 	return result;
 }
 
+float Util::RandomFloatRange(float min, float max)
+{
+	// 0 ~ 1000까지 받아와야 해서 1001로 설정
+	float factor = (rand() % 1001) * 0.001f;
+	float delta = (max - min);
+	float result = (delta * factor) + min;
+
+	return result;
+}
+
 float Util::Clamp(float value, float min, float max)
 {
 	if (value < min) return min;
