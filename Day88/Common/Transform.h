@@ -89,6 +89,7 @@ public:
 	void SetRotateWorld(const Matrix matWorldRotate);
 	void SetRotateWorld(D3DXQUATERNION& worldRotate);
 	void SetRotateLocal(const Matrix matLocalRotate);
+	void SetRotateLocal(float angle);
 
 	// Rotation (사원수 회전 == QUATERNION)
 	

@@ -2,10 +2,10 @@
 
 struct Particle_Vertex {
 	Vector2 position;
-	Vector2 uv;
 	DWORD color;
+	Vector2 uv;
 
-	enum { FVF = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_DIFFUSE };
+	enum { FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1 };
 };
 
 typedef vector<D3DXCOLOR> VEC_COLOR;
@@ -14,7 +14,7 @@ typedef vector<float> VEC_SCALE;
 // 입자 하나
 class Particle
 {
-private:
+public:
 	class Transform* transform;
 private:
 	bool bLive; // 활성화 여부

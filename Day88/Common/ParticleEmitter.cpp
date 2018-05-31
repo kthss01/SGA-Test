@@ -35,8 +35,11 @@ void ParticleEmitter::Init(DWORD particleNum, float emission, float liveTimeMin,
 		this->scales.push_back(scales[i]);
 	}
 
+	this->fStartLiveTimeMin = liveTimeMin;
+	this->fStartLiveTimeMax = liveTimeMax;
+
 	this->startVelocityMin = velocityMin;
-	this->startAccelateMax = velocityMax;
+	this->startVelocityMax = velocityMax;
 
 	this->startAccelateMin = accelMin;
 	this->startAccelateMax = accelMax;
@@ -96,7 +99,7 @@ void ParticleEmitter::Render()
 	// 오른쪽 방향으로 돌아가는건 렌더 아닌건 렌더 X 가 CULL MODE, D3DCULL_NONE 하면 무조건 그리는거
 	D2D::GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-	// 알파블렌드 설정
+	//// 알파블렌드 설정
 	D2D::GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
 
 	D2D::GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -156,16 +159,60 @@ void ParticleEmitter::StopEmission()
 
 void ParticleEmitter::StartOneParticle()
 {
-	Vector2 position = transform->GetWorldPosition();
+	// 라이브 타임 랜덤
+	float liveTime = Util::RandomFloatRange(
+		fStartLiveTimeMin, fStartLiveTimeMax);
 
+	// 포지션도 랜덤하게 하고 싶으면 랜덤 값 받음 됨
+	Vector2 position = transform->GetWorldPosition();
 	if (this->bLocal == true) {
 		position = Vector2(0, 0, 0);
 	}
 
+	Vector2 velocity;
+	velocity.x = Util::RandomFloatRange(
+		startVelocityMin.x, startVelocityMax.x);
+	velocity.y = Util::RandomFloatRange(
+		startVelocityMin.y, startVelocityMax.y);
+
+	Vector2 accelation;
+	accelation.x = Util::RandomFloatRange(
+		startAccelateMin.x, startAccelateMax.x);
+	accelation.y = Util::RandomFloatRange(
+		startAccelateMin.y, startAccelateMax.y);
+
+	float setRotate;
+	setRotate = Util::RandomFloatRange(
+		startSetRotateMin, startSetRotateMax);
+
+	float rotate = Util::RandomFloatRange(
+		startRotateMin, startRotateMax);
+
+	float rotateAccel = Util::RandomFloatRange(
+		startRotateAccelateMin, startRotateAccelateMax);
+
+	if (bLocal == false) {
+		Matrix matWorld = transform->GetFinalMatrix();
+
+		velocity = velocity.TransformNormal(matWorld);
+		accelation = accelation.TransformNormal(matWorld);
+	}
+
+	float scale = Util::RandomFloatRange(
+		fStartScaleMin, fStartScaleMax);
+
+	particles[dwParticleCount].transform->SetRotateLocal(setRotate);
+
 	particles[dwParticleCount].Start(
-		,
-		&position
+		liveTime, 
+		&position,
+		&velocity,
+		&accelation,
+		rotate,
+		rotateAccel,
+		scale
 	);
+
 	dwParticleCount++;
 	if (dwParticleCount == this->particleNum)
 		dwParticleCount = 0;

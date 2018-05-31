@@ -6,6 +6,7 @@
 Particle::Particle()
 {
 	transform = new Transform;
+	bLive = false;
 }
 
 

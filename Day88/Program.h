@@ -4,22 +4,27 @@
 
 class Program
 {
-private:
-	// 기본적으로 도형 만들려면 vertex 필요
-	struct Vertex {
-		Vector2 position;
-		float size;	// 정점이 가지는 사이즈
-		//Vector2 uv;
-		DWORD color;
+//private:
+//	// 기본적으로 도형 만들려면 vertex 필요
+//	struct Vertex {
+//		Vector2 position;
+//		float size;	// 정점이 가지는 사이즈
+//		//Vector2 uv;
+//		DWORD color;
+//
+//		// PSIZE = point size
+//		enum { FVF = D3DFVF_XYZ | D3DFVF_PSIZE | D3DFVF_DIFFUSE };
+//	};
+//
+//private:
+//	Vertex vertices[100];
+//	LPDIRECT3DTEXTURE9 pTex;
 
-		// PSIZE = point size
-		enum { FVF = D3DFVF_XYZ | D3DFVF_PSIZE | D3DFVF_DIFFUSE };
-	};
-
 private:
-	Vertex vertices[100];
+
 	LPDIRECT3DTEXTURE9 pTex;
 
+	class ParticleEmitter* particle;
 	class Camera* mainCamera;
 public:
 	Program();
@@ -30,13 +35,26 @@ public:
 };
 
 /*
-	과제1
-	텍스처 읽어와서 픽셀 단위로 체크해서 배경색이 아닌거 윈도우 화면에 출력
+	과제1 
+	스택 구현
 
 	과제2
-	하늘에서 사각형 뿌림 랜덤한 크기 방향 회전 해서 떨어짐
-	쌓여야함 회전한 방향이면 그방향으로 떨어져야함
-	바닥에 닿거나 다른녀석에 닿으면 멈추게끔
-	공중에서는 영향 안받으면됨
-	멈춰잇는 애들만 충돌하게끔
+	중위 표기법 -> 후기 표기법으로 변경 (스택 이용)
+
+	과제3 
+	후위 표기법 스택으로 계산해 오기
+
+	중위 표기법
+	ex) 2 + 3 * (5 + 4 * 2) - 3 + 6
+
+	후위 표기법 
+	23542*+*+3-6+
+
+	(4 * 2 + 5) * 3 + 2 - 3 + 6
+	
+	스택 (자료 구조) 계산기 만들어 오기
+
+	과제
+	중위 표기법 받아서
+	후위 표기법으로 변경후 결과값 출력하기
 */

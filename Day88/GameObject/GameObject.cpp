@@ -4,11 +4,13 @@
 
 GameObject::GameObject()
 {
+	transform = new Transform;
 }
 
 
 GameObject::~GameObject()
 {
+	SAFE_DELETE(transform);
 }
 
 void GameObject::Init()

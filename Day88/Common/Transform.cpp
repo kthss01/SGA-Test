@@ -249,6 +249,33 @@ void Transform::SetRotateLocal(const Matrix matLocalRotate)
 {
 }
 
+void Transform::SetRotateLocal(float angle)
+{
+	// 사원수로 행렬값 만들꺼
+	D3DXQUATERNION quatRot;
+	// y, x, z 순임
+	D3DXQuaternionRotationYawPitchRoll(&quatRot, 0, 0, angle);
+
+	// 사원수에 의한 행렬 계산
+	D3DXMATRIX matRotate;
+	//D3DXMATRIXA16 이건 동일한 녀석 이름이 다를 뿐인거
+	// D3DMATRIX 이건 좀 다름
+	D3DXMatrixRotationQuaternion(&matRotate, &quatRot);
+
+	Matrix rot = Matrix(matRotate);
+
+	// 축 리셋 (초기화)
+	this->right = Vector2(1, 0);
+	this->up = Vector2(0, 1);
+
+	for (int i = 0; i < 2; i++) {
+		this->axis[i] = this->axis[i].TransformNormal(rot);
+	}
+
+	if (this->bAutoUpdate)
+		this->UpdateTransform();
+}
+
 void Transform::LookPosition(Vector2 pos, Vector2 up)
 {
 }
