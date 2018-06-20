@@ -102,8 +102,7 @@ void MainGame::Render()
 			this->pSkyDomeEffect->BeginPass(i);
 			{
 				pMeshSphere->DrawSubset(0);
-			}
-			this->pSkyDomeEffect->EndPass();
+			}			this->pSkyDomeEffect->EndPass();
 		}
 	}
 	this->pSkyDomeEffect->End();
