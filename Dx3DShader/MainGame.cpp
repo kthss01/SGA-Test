@@ -12,9 +12,12 @@ MainGame::~MainGame()
 void MainGame::Init()
 {
 	// 디테일 면을 얼마만큼 사용하는지 면의 갯수라고 보면 됨
+	// 디테일 많아지면 라이트 처리 부드러워짐
+	// -> 버텍스 많아지고 노멀이 많아져서 계산을 더 많이하게되서 
+	// 곡선에 대한 처리가 정확해짐
 	D3DXCreateSphere(
 		Util::Device,
-		1.0f, // 구 반지름
+		3.0f, // 구 반지름
 		60, // 세로 디테일 값 
 		60, // 가로 디테일 값
 		&pMeshSphere,
@@ -48,7 +51,8 @@ void MainGame::Init()
 
 	D3DXCreateEffectFromFile(
 		Util::Device,
-		L"Shaders/VertexSpecular.fx",
+		L"Shaders/Phong.fx",
+		//L"Shaders/VertexSpecular.fx",
 		//L"Shaders/LambertLight.fx",
 		NULL,
 		NULL,
@@ -65,9 +69,10 @@ void MainGame::Init()
 		pError = 0;
 	}
 
-	vLightDir = D3DXVECTOR3(1, 0, 0); // 오른쪽에서 왼쪽으로 비추는 거
+	vLightDir = D3DXVECTOR3(1, 1, -1); // 오른쪽에서 왼쪽으로 비추는 거
 	// 만약에 빛의 방향을 바꾸고 싶다면 normalize 해줘야함
-	
+	D3DXVec3Normalize(&vLightDir, &vLightDir);
+
 	fAngleX = fAngleY = 0;
 }
 
@@ -131,8 +136,8 @@ void MainGame::Render()
 	D3DXMATRIX view;
 	D3DXMatrixLookAtLH(
 		&view,
-		&D3DXVECTOR3(0, 0, -2), // 눈의 위치
-		&D3DXVECTOR3(0, 0, 1), // 바라보는 방향
+		&D3DXVECTOR3(0, 1, -3.5f), // 눈의 위치
+		&D3DXVECTOR3(0, 0, 0), // 바라보는 방향
 		&D3DXVECTOR3(0, 1, 0) // 윗 방향
 	);
 
@@ -173,6 +178,8 @@ void MainGame::Render()
 	this->pSkyDomeEffect->SetVector("vCenterColor",
 		&D3DXVECTOR4(0.81f, 0.38f, 0.66f, 1.0f));
 
+	this->pSkyDomeEffect->SetTechnique("SkyDome");
+
 	// 스카이돔 렌더
 	Util::Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	Util::Device->SetRenderState(D3DRS_ZENABLE, FALSE);
@@ -198,11 +205,15 @@ void MainGame::Render()
 	pLightShader->SetMatrix("matView", &view);
 	pLightShader->SetMatrix("matProjection", &projection);
 
-	pLightShader->SetVector("vColor", &D3DXVECTOR4(1, 0, 0, 1));
+	pLightShader->SetVector("vDiffuseColor", &D3DXVECTOR4(1, 0, 0, 1));
+	pLightShader->SetVector("vSpecularColor", &D3DXVECTOR4(1, 1, 1, 1));
 	pLightShader->SetVector("vLightDir", &D3DXVECTOR4(vLightDir, 1.0f));
-	pLightShader->SetVector("vEyePos", &D3DXVECTOR4(0, 0, -2, 0));
+	pLightShader->SetVector("vEyePos", &D3DXVECTOR4(0, 1, -3.5f, 1));
+	pLightShader->SetFloat("fPower", 30.0f);
 
 	//pLightShader->SetMatrix("matInvWorld", &world);
+
+	pLightShader->SetTechnique("LightShader");
 
 	pLightShader->Begin(&iPassNum, NULL);
 	{
