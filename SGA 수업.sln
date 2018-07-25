@@ -165,9 +165,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day93-Queue", "Day93-Queue\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day95-함수 포인터", "Day95-함수 포인터\Day95-함수 포인터.vcxproj", "{11A5F143-1857-4A1C-A938-8682FF7DB664}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day99, 101-Dx3DShader", "Dx3DShader\Dx3DShader.vcxproj", "{343EB736-C996-414B-8524-C63102DE8BD0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day99,101,103,104,105-Dx3DShader", "Dx3DShader\Dx3DShader.vcxproj", "{343EB736-C996-414B-8524-C63102DE8BD0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day102-Thread", "Day102-Thread\Day102-Thread.vcxproj", "{8EE21A52-F6A1-4F6B-9D68-85850B15783C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day113", "Day113\Day113.vcxproj", "{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -841,6 +843,14 @@ Global
 		{8EE21A52-F6A1-4F6B-9D68-85850B15783C}.Release|x64.Build.0 = Release|x64
 		{8EE21A52-F6A1-4F6B-9D68-85850B15783C}.Release|x86.ActiveCfg = Release|Win32
 		{8EE21A52-F6A1-4F6B-9D68-85850B15783C}.Release|x86.Build.0 = Release|Win32
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Debug|x64.ActiveCfg = Debug|x64
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Debug|x64.Build.0 = Debug|x64
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Debug|x86.ActiveCfg = Debug|Win32
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Debug|x86.Build.0 = Debug|Win32
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Release|x64.ActiveCfg = Release|x64
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Release|x64.Build.0 = Release|x64
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Release|x86.ActiveCfg = Release|Win32
+		{4843A0CA-5FE3-48C4-B580-F2048EDDE3C9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
